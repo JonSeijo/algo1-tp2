@@ -1,37 +1,28 @@
 #include "campo.h"
 
-Campo::Campo()
-{
+Campo::Campo(){
+
 }
 
-Campo::Campo(const Posicion &posG, const Posicion &posC)
-{
+Campo::Campo(const Posicion &posG, const Posicion &posC){
+
 }
 
-Dimension Campo::dimensiones() const
-{
-	return Dimension();
+Dimension Campo::dimensiones() const{
+	return _dimension;
 }
 
-Parcela Campo::contenido(const Posicion & p) const
-{
-	return Parcela();
+Parcela Campo::contenido(const Posicion & p) const{
+	return _grilla.parcelas.at(p.x).at(p.y);
 }
 
-void Campo::mostrar(std::ostream & os) const
-{
-}
+void Campo::mostrar(std::ostream & os) const{}
 
-void Campo::guardar(std::ostream & os) const
-{
-}
+void Campo::guardar(std::ostream & os) const{}
 
-void Campo::cargar(std::istream & is)
-{
-}
+void Campo::cargar(std::istream & is){}
 
-bool Campo::operator==(const Campo & otroCampo) const
-{
+bool Campo::operator==(const Campo & otroCampo) const{
 	return false;
 }
 

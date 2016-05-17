@@ -1,81 +1,63 @@
 #include "sistema.h"
 #include <algorithm>
 
-Sistema::Sistema()
-{
+Sistema::Sistema(){
 }
 
-Sistema::Sistema(const Campo & c, const Secuencia<Drone>& ds)
-{
+Sistema::Sistema(const Campo & c, const Secuencia<Drone>& ds){
 }
 
-const Campo & Sistema::campo() const
-{
-	return Campo();
+const Campo & Sistema::campo() const{
+	return _campo;
 }
 
-EstadoCultivo Sistema::estadoDelCultivo(const Posicion & p) const
-{
-	return EstadoCultivo();
+EstadoCultivo Sistema::estadoDelCultivo(const Posicion & p) const{
+	return _estado.parcelas.at(p.x).at(p.y);
 }
 
-const Secuencia<Drone>& Sistema::enjambreDrones() const
-{
-	return Secuencia<Drone>();
+const Secuencia<Drone>& Sistema::enjambreDrones() const{
+	return _enjambre;
 }
 
-void Sistema::crecer()
-{
+void Sistema::crecer(){
 }
 
-void Sistema::seVinoLaMaleza(const Secuencia<Posicion>& ps)
-{
+void Sistema::seVinoLaMaleza(const Secuencia<Posicion>& ps){
 }
 
-void Sistema::seExpandePlaga()
-{
+void Sistema::seExpandePlaga(){
 }
 
-void Sistema::despegar(const Drone & d)
-{
+void Sistema::despegar(const Drone & d){
 }
 
-bool Sistema::listoParaCosechar() const
-{
+bool Sistema::listoParaCosechar() const{
 	return false;
 }
 
-void Sistema::aterrizarYCargarBaterias(Carga b)
-{
+void Sistema::aterrizarYCargarBaterias(Carga b){
 }
 
-void Sistema::fertilizarPorFilas()
-{
+void Sistema::fertilizarPorFilas(){
 }
 
-void Sistema::volarYSensar(const Drone & d)
-{
+void Sistema::volarYSensar(const Drone & d){
 }
 
-void Sistema::mostrar(std::ostream & os) const
-{
+void Sistema::mostrar(std::ostream & os) const{
 }
 
-void Sistema::guardar(std::ostream & os) const
-{
+void Sistema::guardar(std::ostream & os) const{
 }
 
-void Sistema::cargar(std::istream & is)
-{
+void Sistema::cargar(std::istream & is){
 }
 
-bool Sistema::operator==(const Sistema & otroSistema) const
-{
+bool Sistema::operator==(const Sistema & otroSistema) const{
 	return false;
 }
 
-std::ostream & operator<<(std::ostream & os, const Sistema & s)
-{
+std::ostream & operator<<(std::ostream & os, const Sistema & s){
 	// TODO: insert return statement here
 	return os;
 }
