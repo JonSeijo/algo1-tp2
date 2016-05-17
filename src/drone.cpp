@@ -23,11 +23,7 @@ const Secuencia<Posicion>& Drone::vueloRealizado() const{
 }
 
 Posicion Drone::posicionActual() const{
-	/*
-	* No me acuerdo que pasa cuando no esta volando.
-	* Habria que devolver la posicion del granero pero no tenemos acceso desde el drone.
-	*/
-	return _trayectoria.back();
+	return _posicionActual;
 }
 
 const Secuencia<Producto>& Drone::productosDisponibles() const{

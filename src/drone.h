@@ -31,6 +31,7 @@ class Drone{
 		Secuencia<Posicion> _trayectoria;
 		Secuencia<Producto> _productos;
 		bool _enVuelo;
+		Posicion _posicionActual;
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.
