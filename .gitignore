@@ -26,6 +26,7 @@
 *.exe
 *.out
 *.app
+main
 
 
 # copypasta de ignore para QTcreator
@@ -58,7 +59,10 @@ Makefile*
 *build-*
 
 # QtCreator
-
+*.config
+*.creator
+*.files
+*.includes
 *.autosave
 
 # QtCtreator Qml
