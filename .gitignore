@@ -67,3 +67,9 @@ Makefile*
 
 # QtCtreator CMake
 CMakeLists.txt.user
+
+src/algo1-tp2.config
+src/algo1-tp2.creator
+src/algo1-tp2.files
+src/algo1-tp2.includes
+
