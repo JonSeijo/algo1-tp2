@@ -4,6 +4,10 @@ Drone::Drone(){
 }
 
 Drone::Drone(ID i, const std::vector<Producto>& ps){
+	_id = i;
+	_productos = ps;
+	_bateria = 100;
+	_enVuelo = false;
 }
 
 ID Drone::id() const{

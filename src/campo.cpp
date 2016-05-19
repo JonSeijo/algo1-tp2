@@ -26,22 +26,18 @@ bool Campo::operator==(const Campo & otroCampo) const{
 	return false;
 }
 
-std::ostream & operator<<(std::ostream & os, const Campo & c)
-{
+std::ostream & operator<<(std::ostream & os, const Campo & c){
 	return os;
 }
 
-std::ostream & operator<<(std::ostream & os, const Parcela & p)
-{
+std::ostream & operator<<(std::ostream & os, const Parcela & p){
 	return os;
 }
 
-std::ostream & operator<<(std::ostream & os, const Producto & p)
-{
+std::ostream & operator<<(std::ostream & os, const Producto & p){
 	return os;
 }
 
-std::ostream & operator<<(std::ostream & os, const EstadoCultivo & e)
-{
+std::ostream & operator<<(std::ostream & os, const EstadoCultivo & e){
 	return os;
 }

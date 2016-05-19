@@ -1,10 +1,14 @@
 #include "sistema.h"
+#include "tipos.h"
 #include <algorithm>
 
 Sistema::Sistema(){
 }
 
-Sistema::Sistema(const Campo & c, const Secuencia<Drone>& ds){
+Sistema::Sistema(const Campo &c, const Secuencia<Drone> &ds){
+	_campo = c;
+	_enjambre = ds;
+	initEstados();
 }
 
 const Campo & Sistema::campo() const{
@@ -60,4 +64,16 @@ bool Sistema::operator==(const Sistema & otroSistema) const{
 std::ostream & operator<<(std::ostream & os, const Sistema & s){
 	// TODO: insert return statement here
 	return os;
+}
+
+void Sistema::initEstados(){
+	unsigned int i = 0;
+	while(i < _estado.parcelas.size()){
+		unsigned int j = 0;
+		while(j < _estado.parcelas.at(i).size()){
+			_estado.parcelas.at(i).at(j) = NoSensado;
+			j++;
+		}
+		i++;
+	}
 }
