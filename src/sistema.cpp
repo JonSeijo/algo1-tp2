@@ -66,7 +66,7 @@ std::ostream & operator<<(std::ostream & os, const Sistema & s){
 	return os;
 }
 
-void Sistema::initEstados(){
+/*void Sistema::initEstados(){
 	unsigned int i = 0;
 	while(i < _estado.parcelas.size()){
 		unsigned int j = 0;
@@ -74,6 +74,15 @@ void Sistema::initEstados(){
 			_estado.parcelas.at(i).at(j) = NoSensado;
 			j++;
 		}
+		i++;
+	}
+}*/
+
+
+void Sistema::initEstados(){
+	unsigned int i = 0;
+	while(i < _estado.parcelas.size()){
+		std::fill(_estado.parcelas.at(i).begin(), _estado.parcelas.at(i).end(), NoSensado);		
 		i++;
 	}
 }

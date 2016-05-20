@@ -32,6 +32,7 @@ class Sistema {
 
 	private:
 		void initEstados();
+		
         Campo _campo;
 		Secuencia<Drone> _enjambre;
         Grilla<EstadoCultivo> _estado;
