@@ -64,6 +64,7 @@ Makefile*
 *.files
 *.includes
 *.autosave
+*.user
 
 # QtCtreator Qml
 *.qmlproject.user
