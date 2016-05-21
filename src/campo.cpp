@@ -18,6 +18,14 @@ Campo::Campo(const Posicion &posG, const Posicion &posC){
     _dimension.ancho = std::max(posG.x, posC.x) + 1;
     _dimension.largo = std::max(posG.y, posC.y) + 1;
 
+    // Si las dimensiones son 2x1, no va a haber espacio para cultivos.
+    // Para solucionarlo, lo convierto en un 2x2
+    if ((_dimension.ancho == 1 && _dimension.largo == 2)
+            || (_dimension.ancho == 2 && _dimension.largo == 1)){
+        _dimension.ancho = 2;
+        _dimension.largo = 2;
+    }
+
     // Esto hace que la grilla tenga dimensiones _dimension
     // Y que TODAS las posiciones se seteen con Cultivo
     _grilla.parcelas.resize(_dimension.ancho, std::vector<Parcela>(_dimension.largo, Cultivo));
@@ -102,7 +110,9 @@ void Campo::guardar(std::ostream & os) const{
     os << "]}";
 }
 
-void Campo::cargar(std::istream & is){}
+void Campo::cargar(std::istream & is){
+    //std::cout << "pepe";
+}
 
 bool Campo::operator==(const Campo & otroCampo) const{
 	return false;
