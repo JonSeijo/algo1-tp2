@@ -8,6 +8,7 @@ Sistema::Sistema(){
 Sistema::Sistema(const Campo &c, const Secuencia<Drone> &ds){
 	_campo = c;
 	_enjambre = ds;
+	_estado.parcelas.resize(c.dimensiones().ancho, std::vector<EstadoCultivo>(c.dimensiones().largo, NoSensado));
 	initEstados();
 }
 
