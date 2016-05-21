@@ -31,6 +31,10 @@ struct Grilla {
 	Grilla(Dimension d)	{
 		parcelas.resize(d.ancho, std::vector<T>(d.largo, Cultivo));
 	}
+
+    inline bool operator == (const Grilla<T>& otra) const {
+        return this->parcelas == otra.parcelas;
+    }
     std::vector< std::vector<T> > parcelas;
 };
 

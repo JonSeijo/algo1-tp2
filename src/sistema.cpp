@@ -58,7 +58,9 @@ void Sistema::cargar(std::istream & is){
 }
 
 bool Sistema::operator==(const Sistema & otroSistema) const{
-	return false;
+	return this->_campo == otroSistema._campo 
+			&& this->_estado == otroSistema._estado
+			/*&& std::is_permutation(_enjambre.begin(), _enjambre.end(), otroSistema._enjambre.begin())*/;
 }
 
 std::ostream & operator<<(std::ostream & os, const Sistema & s){
