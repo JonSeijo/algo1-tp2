@@ -62,10 +62,6 @@ double Campo::_norma(const Posicion &v){
     return std::sqrt(std::pow(v.x, 2) + std::pow(v.y, 2));
 }
 
-bool Campo::_posicionIgual(int i, int j, const Posicion &v){
-    return i == v.x && j == v.y;
-}
-
 Dimension Campo::dimensiones() const{
 	return _dimension;
 }
