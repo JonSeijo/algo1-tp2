@@ -21,6 +21,8 @@ class Campo {
 		Dimension _dimension;
 		Grilla<Parcela> _grilla;
         void _leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela> &grilla);
+        std::string _dameStringConDato(std::string &datos, bool objetoCompuesto);
+
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.

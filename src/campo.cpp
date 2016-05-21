@@ -126,7 +126,6 @@ void Campo::cargar(std::istream & is){
         }
     }
     std::cout << infoDelCampo << std::endl;
-
     _leerYCargarDatos(infoDelCampo, _dimension, _grilla);
 
 }
@@ -134,34 +133,12 @@ void Campo::cargar(std::istream & is){
 // Recibe el string de datos SIN LAS LLAVES
 // NO TOCAR PORQUE ESTO LO USA EL CARGAR
 void Campo::_leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela> &grilla){
-    _cargarDimension(datos, dim);
-
+    std::string datoDimension = _dameStringConDato(datos, false);
+    std::string datoContenido = _dameStringConDato(datos, true);
+   // std::cout << " dd" << datoDimension;
 }
 
-void Campo::_cargarDimension(std::string datos, Dimension &dim){
-    bool terminado = false;
-    bool leer = false;
-    std::string loQueQuiero = "";
-    int i = 0;
-    while (!terminado){
-        if (datos[i] == '['){
-            leer = true;
-        }
-        if (leer){
-            loQueQuiero += datos[i];
-        }
-        if (datos[i] == ']'){
-            terminado = true;
-        }
-        i++;
-    }
-
-    std::cout << loQueQuiero << std::endl;
-    datos = datos.substr(i, datos.npos);
-    std::cout << datos << std::endl;
-}
-
-std::string Campo::_dameStringConDato(std::string &datos){
+std::string Campo::_dameStringConDato(std::string &datos, bool objetoCompuesto){
     bool terminado = false;
     bool leer = false;
     char charAnterior;
@@ -176,17 +153,25 @@ std::string Campo::_dameStringConDato(std::string &datos){
                 charAnterior = datos[i-1];
             stringConDato += datos[i];
         }
-        if (datos[i] == ']'){
-            if (charAnterior == ']'){
+        if (objetoCompuesto){
+            // Objeto termina con "]]" si es compuesto
+            if (datos[i] == ']'){
+                if (charAnterior == ']'){
+                    terminado = true;
+                }
+            }
+        }else{
+            // Objeto termina con un solo ']' si es simple
+            if (datos[i] == ']'){
                 terminado = true;
             }
         }
         i++;
     }
 
-    std::cout << stringConDato << std::endl;
+    //std::cout << stringConDato << std::endl;
     datos = datos.substr(i, datos.npos);
-    return stringConDato
+    return stringConDato;
 }
 
 bool Campo::operator==(const Campo & otroCampo) const{
