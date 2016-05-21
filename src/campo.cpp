@@ -2,7 +2,11 @@
 #include <cmath>
 
 Campo::Campo(){
-
+    _dimension.ancho = 3;
+    _dimension.largo = 1;
+    _grilla.parcelas.resize(_dimension.ancho, std::vector<Parcela>(_dimension.largo, Cultivo));
+    _grilla.parcelas.at(0).at(0) = Granero;
+    _grilla.parcelas.at(0).at(1) = Casa;
 }
 
 // Propiedad de jonathan
@@ -10,8 +14,8 @@ Campo::Campo(const Posicion &posG, const Posicion &posC){
    // La dimension es +1 porque vendria a ser "el largo de la lista"
    // Si el mas lejano esta en el 0, no quiero dimension 0 porque no podria entrar
    // quiero dimension +1
-    _dimension.ancho = _vectorMasLejano(posG, posC).x + 1;
-    _dimension.largo = _vectorMasLejano(posG, posC).y + 1;
+    _dimension.ancho = std::max(posG.x, posC.x) + 1;
+    _dimension.largo = std::max(posG.y, posC.y) + 1;
 
     // Esto hace que la grilla tenga dimensiones _dimensiones
     // Y que TODAS las posiciones se seteen con Cultivo
@@ -43,23 +47,6 @@ Campo::Campo(const Posicion &posG, const Posicion &posC){
         i++;
     }
 
-}
-
-/* Por el invariante tienen posiciones positivas,
- * entonces el mas alejado es el que tiene mayor norma*/
-Posicion Campo::_vectorMasLejano(const Posicion &v1, const Posicion &v2){
-    Posicion elMasLejano;
-    if (_norma(v1) > _norma(v2)){
-        elMasLejano = v1;
-    }else{
-        elMasLejano = v2;
-    }
-
-    return elMasLejano;
-}
-
-double Campo::_norma(const Posicion &v){
-    return std::sqrt(std::pow(v.x, 2) + std::pow(v.y, 2));
 }
 
 Dimension Campo::dimensiones() const{
