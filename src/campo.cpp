@@ -1,5 +1,6 @@
 #include "campo.h"
 #include <cmath>
+#include <fstream>
 
 Campo::Campo(){
     _dimension.ancho = 3;
@@ -59,7 +60,38 @@ Parcela Campo::contenido(const Posicion & p) const{
 
 void Campo::mostrar(std::ostream & os) const{}
 
-void Campo::guardar(std::ostream & os) const{}
+void Campo::guardar(std::ostream & os) const{
+    os << "{ C ";
+    os << "[" << _dimension.ancho << "," << _dimension.largo << "] ";
+
+    os << "[";
+    int i = 0;
+    while (i < _dimension.ancho){
+        os << "[";
+        int j = 0;
+        while (j < _dimension.largo){
+
+            // ACA VA EL CODIGO PARA MOSTRAR CONTENIDO DE PARCELA
+            os << _grilla.parcelas.at(i).at(j);
+
+            j++;
+            if (j < _dimension.largo){
+                os << ",";
+            }
+
+        }
+
+        i++;
+
+        if (i < _dimension.ancho){
+            os << "], ";
+        }else{
+            os << "]";
+        }
+    }
+
+    os << "}";
+}
 
 void Campo::cargar(std::istream & is){}
 
