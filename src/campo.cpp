@@ -147,11 +147,40 @@ void Campo::_leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela>
 
     std::cout << datoContenido << std::endl;
 
-    // resize todo con cultivo
+    // Resize todo con cultivo. Lo pongo en 0 primero para borrar granero y casa viejas
     grilla.parcelas.resize(0, std::vector<Parcela>(0, Cultivo));
     grilla.parcelas.resize(dim.ancho, std::vector<Parcela>(dim.largo, Cultivo));
 
+    int indexGranero = datoContenido.find("Granero");
+    int indexCasa = datoContenido.find("Casa");
 
+    // String con lo anterior excepto el [ de apertura inicial
+    std::string textoAnteriorGranero = datoContenido.substr(1, indexGranero - 1);
+    _setearParcelaEnCarga(textoAnteriorGranero, grilla, dim.ancho, Granero);
+
+    std::string textoAnteriorCasa = datoContenido.substr(1, indexCasa - 1);
+
+    std::cout << textoAnteriorCasa << std::endl;
+    _setearParcelaEnCarga(textoAnteriorCasa, grilla, dim.ancho, Casa);
+}
+
+void Campo::_setearParcelaEnCarga(std::string textoAnterior, Grilla<Parcela> &grilla, int elementosPorFila, Parcela parcelaCorrespondiente){
+    int y = _contarOcurrencias(textoAnterior, ']');
+    int x = _contarOcurrencias(textoAnterior, ',') - elementosPorFila*y;
+    grilla.parcelas.at(x).at(y) = parcelaCorrespondiente;
+}
+
+int Campo::_contarOcurrencias(std::string cadena, char aBuscar){
+    int contador = 0;
+    int i = 0;
+    while (i < cadena.length()){
+        if (cadena[i] == aBuscar){
+            contador++;
+        }
+        i++;
+    }
+
+    return contador;
 }
 
 // _dameStringConDato devuelve el primer objeto como string, Y LO ELIMINA del dato original

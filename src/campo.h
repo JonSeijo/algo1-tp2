@@ -22,7 +22,8 @@ class Campo {
 		Grilla<Parcela> _grilla;
         void _leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela> &grilla);
         std::string _dameStringConDato(std::string &datos, bool objetoCompuesto);
-
+        int _contarOcurrencias(std::string cadena, char aBuscar);
+        void _setearParcelaEnCarga(std::string textoAnterior, Grilla<Parcela> &grilla, int elementosPorFila, Parcela parcelaCorrespondiente);
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.
