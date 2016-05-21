@@ -17,16 +17,25 @@ int main(){
     posC.y = 0;
 
     Campo c(posG, posC);
-    /*std::ofstream archivoCampo("campo.txt");
+    /*
+    Prueba de guardado
+    std::ofstream archivoCampo("campo.txt");
     c.guardar(archivoCampo);
     archivoCampo.close();
     */
-    cout << c;
+    //cout << c;
 
+    Campo c2(posG, posC);
+
+    /*
+    Prueba de cargado
     std::ifstream archivoLecturaCampo("campo.txt");
     c.cargar(archivoLecturaCampo);
     archivoLecturaCampo.close();
-    cout << c;
+  */
+
+    // Prueba igualdad
+    cout << (c == c2) << endl;
 
     return 0;
 }

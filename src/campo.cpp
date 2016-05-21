@@ -219,8 +219,31 @@ std::string Campo::_dameStringConDato(std::string &datos, bool objetoCompuesto){
     return stringConDato;
 }
 
+bool Campo::_grillaIgual(const Campo &c) const{
+    bool iguales = true;
+    int i = 0;
+    int j = 0;
+    while (i < _dimension.ancho){
+        while (j < _dimension.largo){
+            Posicion p;
+            p.x = i;
+            p.y = j;
+            if (contenido(p) != c.contenido(p)){
+                iguales = false;
+            }
+            j++;
+        }
+        i++;
+    }
+
+    return iguales;
+}
+
+
 bool Campo::operator==(const Campo & otroCampo) const{
-    return false;
+    return _dimension.ancho == otroCampo.dimensiones().ancho
+            && _dimension.largo == otroCampo.dimensiones().largo
+            && _grillaIgual(otroCampo);
 }
 
 std::ostream & operator<<(std::ostream & os, const Campo & c){
