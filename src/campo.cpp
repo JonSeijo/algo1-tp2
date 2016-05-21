@@ -126,7 +126,7 @@ void Campo::cargar(std::istream & is){
             break;
         }
     }
-    std::cout << infoDelCampo << std::endl;
+    // std::cout << infoDelCampo << std::endl;
     _leerYCargarDatos(infoDelCampo, _dimension, _grilla);
 
 }
@@ -137,7 +137,7 @@ void Campo::_leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela>
     std::string datoDimension = _dameStringConDato(datos, false);
     std::string datoContenido = _dameStringConDato(datos, true);
 
-    // Como ahora tengo los datos separados, y se que forma tienen
+    // Como ahora tengo los datos separados, y se que forma tienen,
     // A mano rescato los valores y los asigno
 
     // Para dimension hago substrings quitando corchetes y separando con la coma
@@ -145,6 +145,11 @@ void Campo::_leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela>
     dim.ancho = atoi(datoDimension.substr(1, posSeparador - 1).c_str());
     dim.largo = atoi(datoDimension.substr(posSeparador + 1, datoDimension.length() - posSeparador - 2).c_str());
 
+    std::cout << datoContenido << std::endl;
+
+    // resize todo con cultivo
+    grilla.parcelas.resize(0, std::vector<Parcela>(0, Cultivo));
+    grilla.parcelas.resize(dim.ancho, std::vector<Parcela>(dim.largo, Cultivo));
 
 
 }
