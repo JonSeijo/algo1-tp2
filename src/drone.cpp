@@ -1,5 +1,6 @@
 #include "drone.h"
 #include <algorithm>
+#include <sstream>
 
 Drone::Drone(){
 }
@@ -9,7 +10,17 @@ Drone::Drone(ID i, const std::vector<Producto>& ps){
 	_productos = ps;
 	_bateria = 100;
 	_enVuelo = false;
-    _trayectoria = Secuencia<Posicion>();
+    Posicion p1;
+    p1.x = 0;
+    p1.y = 0;
+
+    Posicion p2;
+    p2.x = 1;
+    p2.y = 0;
+
+    _trayectoria.push_back(p1);
+    _trayectoria.push_back(p2);
+
 }
 
 ID Drone::id() const{
@@ -84,7 +95,13 @@ std::string Drone::_dameStringVueloRealizado() const{
 
 std::string Drone::_dameStringPosicion(Posicion p) const{
     std::string cadena = "";
-    cadena += '[' + p.x + ',' + p.y + ']';
+
+    std::stringstream sx;
+    sx << p.x;
+    std::stringstream sy;
+    sy << p.y;
+
+    cadena += '[' + sx.str() + ',' + sy.str() + ']';
     return cadena;
 }
 
