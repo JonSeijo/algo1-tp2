@@ -253,6 +253,12 @@ std::ostream & operator<<(std::ostream & os, const Parcela & p){
 	return os;
 }
 
+/*
+ * DISCLAIMER (jonathan), estoy casi seguro que estan mal aca,
+ * Porque son necesarias en drone y en sistema.
+ * Producto no tiene nada que ver con campo, las pasteo donde me parece
+ *
+
 std::ostream & operator<<(std::ostream & os, const Producto & p){
 	return os;
 }
@@ -260,3 +266,4 @@ std::ostream & operator<<(std::ostream & os, const Producto & p){
 std::ostream & operator<<(std::ostream & os, const EstadoCultivo & e){
 	return os;
 }
+*/

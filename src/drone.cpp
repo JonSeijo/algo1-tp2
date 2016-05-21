@@ -9,6 +9,7 @@ Drone::Drone(ID i, const std::vector<Producto>& ps){
 	_productos = ps;
 	_bateria = 100;
 	_enVuelo = false;
+    _trayectoria = Secuencia<Posicion>();
 }
 
 ID Drone::id() const{
@@ -51,12 +52,68 @@ Secuencia<InfoVueloCruzado> Drone::vuelosCruzados(const Secuencia<Drone>& ds){
 }
 
 void Drone::mostrar(std::ostream & os) const{
+
 }
 
 void Drone::guardar(std::ostream & os) const{
+    os << "{ D ";
+    os << _id << " ";
+    os << _bateria << " ";
+    os << _dameStringVueloRealizado() << " ";
+    os << _dameStringProductos();
+    os << "}";
 }
 
 void Drone::cargar(std::istream & is){
+}
+
+std::string Drone::_dameStringVueloRealizado() const{
+    std::string cadenaVuelo = "";
+    cadenaVuelo += '[';
+    unsigned int i = 0;
+    while (i < _trayectoria.size()){
+        cadenaVuelo += _dameStringPosicion(_trayectoria.at(i));
+        i++;
+        if (i < _trayectoria.size()){
+            cadenaVuelo += ',';
+        }
+    }
+    cadenaVuelo += ']';
+    return cadenaVuelo;
+}
+
+std::string Drone::_dameStringPosicion(Posicion p) const{
+    std::string cadena = "";
+    cadena += '[' + p.x + ',' + p.y + ']';
+    return cadena;
+}
+
+std::string Drone::_dameStringProductos() const{
+    std::string cadenaProductos = "";
+    cadenaProductos += '[';
+
+    unsigned int i = 0;
+    while (i < _productos.size()){
+        cadenaProductos += _dameStringProd(_productos.at(i));
+        i++;
+        if (i < _productos.size()){
+            cadenaProductos += ", ";
+        }
+    }
+
+    cadenaProductos += ']';
+    return cadenaProductos;
+}
+
+std::string Drone::_dameStringProd(Producto p) const{
+    std::string res = "";
+    if (p == Fertilizante) res = "Fertilizante";
+    if (p == Plaguicida) res = "Plaguicida";
+    if (p == PlaguicidaBajoConsumo) res = "PlaguicidaBajoConsumo";
+    if (p == Herbicida) res = "Herbicida";
+    if (p == HerbicidaLargoAlcance) res = "HerbicidaLargoAlcance";
+
+    return res;
 }
 
 bool Drone::operator==(const Drone & otroDrone) const{
@@ -129,4 +186,14 @@ bool Drone::ordenada(const Secuencia<int> xs) const{
 	Secuencia<int> r = xs;
 	std::sort(r.begin(), r.end());
 	return r == xs;
+}
+
+std::ostream & operator<<(std::ostream & os, const Producto & p){
+    if (p == Fertilizante) os << "Fertilizante";
+    if (p == Plaguicida) os << "Plaguicida";
+    if (p == PlaguicidaBajoConsumo) os << "PlaguicidaBajoConsumo";
+    if (p == Herbicida) os << "Herbicida";
+    if (p == HerbicidaLargoAlcance) os << "HerbicidaLargoAlcance";
+
+    return os;
 }
