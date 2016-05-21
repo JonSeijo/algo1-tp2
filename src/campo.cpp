@@ -134,17 +134,11 @@ void Campo::cargar(std::istream & is){
 // Recibe el string de datos SIN LAS LLAVES
 // NO TOCAR PORQUE ESTO LO USA EL CARGAR
 void Campo::_leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela> &grilla){
-   /*
-    // Quiero que mi variable que apunta comience en la C
-    // Puede haber un espacio inicial, tenerlo en cuenta
-    int i = 0;
-    if (datos[1] == 'C'){
-        i = 1;
-    }
+    _cargarDimension(datos, dim);
 
-    datos = datos.substr(i, datos.npos);
-    std::cout << datos << std::endl;
-*/
+}
+
+void Campo::_cargarDimension(std::string datos, Dimension &dim){
     bool terminado = false;
     bool leer = false;
     std::string loQueQuiero = "";
@@ -163,22 +157,37 @@ void Campo::_leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela>
     }
 
     std::cout << loQueQuiero << std::endl;
-
-  //  dim.ancho = datos[3];
-  //  dim.largo = datos[5];
-
-  //  std::cout
-
-//    datos = datos.substr(7, datos.npos);
-
-    //_cargarDimension(i, datos, dim);
+    datos = datos.substr(i, datos.npos);
+    std::cout << datos << std::endl;
 }
 
-/*void Campo::_cargarDimension(int &i, std::string datos, Dimension &dim){
-    datosDimension = datos.substr(i + 3, 3);
-    dim.ancho = datos[3];
-    dim.largo = datos[5];
-}*/
+std::string Campo::_dameStringConDato(std::string &datos){
+    bool terminado = false;
+    bool leer = false;
+    char charAnterior;
+    std::string stringConDato = "";
+    int i = 0;
+    while (!terminado){
+        if (datos[i] == '['){
+            leer = true;
+        }
+        if (leer){
+            if (i > 0)
+                charAnterior = datos[i-1];
+            stringConDato += datos[i];
+        }
+        if (datos[i] == ']'){
+            if (charAnterior == ']'){
+                terminado = true;
+            }
+        }
+        i++;
+    }
+
+    std::cout << stringConDato << std::endl;
+    datos = datos.substr(i, datos.npos);
+    return stringConDato
+}
 
 bool Campo::operator==(const Campo & otroCampo) const{
 	return false;
