@@ -25,30 +25,6 @@ Campo::Campo(const Posicion &posG, const Posicion &posC){
     // Manualmente seteo las otras dos posiciones
     _grilla.parcelas.at(posG.x).at(posG.y) = Granero;
     _grilla.parcelas.at(posC.x).at(posC.y) = Casa;
-
-    // TEST PARA VER CONTENIDOS DE PARCELAS. BORRAR LUEGO.
-/*
-    int i = 0;
-    while (i < _dimension.ancho){
-        int j = 0;
-        while (j < _dimension.largo){
-            std::cout << "i " << i << " j " << j << std::endl;
-            if (_grilla.parcelas.at(i).at(j) == Cultivo){
-                std::cout << "Cultivo" << std::endl;
-            }
-            if (_grilla.parcelas.at(i).at(j) == Granero){
-                std::cout << "Granero" << std::endl;
-            }
-            if (_grilla.parcelas.at(i).at(j) == Casa){
-                std::cout << "Casa" << std::endl;
-            }
-
-            j++;
-        }
-        i++;
-    }
-   */
-
 }
 
 Dimension Campo::dimensiones() const{
@@ -60,7 +36,33 @@ Parcela Campo::contenido(const Posicion & p) const{
 }
 
 void Campo::mostrar(std::ostream & os) const{
-    os << "esto es un campo, papá";
+    os << "Campo" << std::endl;
+    os << "Dimensiones: " << std::endl;
+    os << "    " << "Largo: " << _dimension.largo << std::endl;
+    os << "    " << "Ancho: " << _dimension.ancho << std::endl;
+    os << "Contenidos: " << std::endl;
+
+    int i = 0;
+    while (i < _dimension.ancho){
+        os << "    ";
+        int j = 0;
+        while (j < _dimension.largo){
+            // Muestro contenido de parcela
+            Posicion p;
+            p.x = i;
+            p.y = j;
+            os << contenido(p);
+
+            j++;
+            if (j < _dimension.largo){
+                os << " ";
+            }else{
+                os << std::endl;
+            }
+        }
+
+        i++;
+    }
 }
 
 void Campo::guardar(std::ostream & os) const{
