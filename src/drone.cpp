@@ -125,8 +125,8 @@ bool Drone::dosOMenos(const Secuencia<int> xs) const{
 * n = xs.size()
 * O( n * log n )
 */
-bool Drone::ordenada(Secuencia<int> xs) const{
+bool Drone::ordenada(const Secuencia<int> xs) const{
 	Secuencia<int> r = xs;
-	std::sort(xs.begin(), xs.end());
+	std::sort(r.begin(), r.end());
 	return r == xs;
 }

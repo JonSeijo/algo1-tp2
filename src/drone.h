@@ -27,7 +27,7 @@ class Drone{
 
 	private:
 		bool dosOMenos(const Secuencia<int>) const;
-		bool ordenada(Secuencia<int>) const;
+		bool ordenada(const Secuencia<int>) const;
 		Secuencia<int> damePrimeros(const Secuencia<Posicion> ps) const;
 		Secuencia<int> dameSegundos(const Secuencia<Posicion> ps) const;
 
