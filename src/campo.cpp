@@ -1,6 +1,7 @@
 #include "campo.h"
 #include <cmath>
 #include <fstream>
+#include <cstdlib>
 
 Campo::Campo(){
     _dimension.ancho = 3;
@@ -135,9 +136,22 @@ void Campo::cargar(std::istream & is){
 void Campo::_leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela> &grilla){
     std::string datoDimension = _dameStringConDato(datos, false);
     std::string datoContenido = _dameStringConDato(datos, true);
-   // std::cout << " dd" << datoDimension;
+
+    // Como ahora tengo los datos separados, y se que forma tienen
+    // A mano rescato los valores y los asigno
+
+    // Para dimension hago substrings quitando corchetes y separando con la coma
+    int posSeparador = datoDimension.find(',');
+    dim.ancho = atoi(datoDimension.substr(1, posSeparador - 1).c_str());
+    dim.largo = atoi(datoDimension.substr(posSeparador + 1, datoDimension.length() - posSeparador - 2).c_str());
+
+
+
 }
 
+// _dameStringConDato devuelve el primer objeto como string, Y LO ELIMINA del dato original
+// Objeto simple: [x,x,x,x]
+// Objeto compuesto: [ [x,x,x], [x,x,xx] ]
 std::string Campo::_dameStringConDato(std::string &datos, bool objetoCompuesto){
     bool terminado = false;
     bool leer = false;
