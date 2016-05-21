@@ -20,6 +20,7 @@ class Campo {
 	private:
 		Dimension _dimension;
 		Grilla<Parcela> _grilla;
+        void _leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela> &grilla);
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.

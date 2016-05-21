@@ -13,12 +13,19 @@ int main(){
     posG.y = 0;
 
     Posicion posC;
-    posC.x = 3;
-    posC.y = 2;
+    posC.x = 1;
+    posC.y = 0;
 
     Campo c(posG, posC);
-    std::ofstream archivoCampo("campo.txt");
+    /*std::ofstream archivoCampo("campo.txt");
     c.guardar(archivoCampo);
+    archivoCampo.close();
+    */
+    cout << c;
+
+    std::ifstream archivoLecturaCampo("campo.txt");
+    c.cargar(archivoLecturaCampo);
+    archivoLecturaCampo.close();
     cout << c;
 
     return 0;

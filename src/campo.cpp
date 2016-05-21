@@ -75,6 +75,8 @@ void Campo::mostrar(std::ostream & os) const{
     os << std::endl;
 }
 
+// NO MODIFICAR ESPACIOS NI NADA PORQUE ROMPE EL 'CARGAR'
+// SI SE TOCA, HAY TABLA
 void Campo::guardar(std::ostream & os) const{
     os << "{ C ";
     os << "[" << _dimension.ancho << "," << _dimension.largo << "] ";
@@ -110,9 +112,73 @@ void Campo::guardar(std::ostream & os) const{
     os << "]}";
 }
 
+// NO MODIFICAR NI TOCAR NADA PORQUE ESTA HECHO EN BASE AL 'GUARDAR'
+// SI SE TOCA, HAY TABLA
 void Campo::cargar(std::istream & is){
-    //std::cout << "pepe";
+    // Obtiene todo lo del tipo entre '{' y '}'.
+    // Aca no es tan util, puede servir mucho hacer algo asi en el de sistema
+    std::string infoDelCampo;
+    char var;
+    while (is >> var){
+        if (var == '{'){
+            getline(is, infoDelCampo,'}');
+            break;
+        }
+    }
+    std::cout << infoDelCampo << std::endl;
+
+    _leerYCargarDatos(infoDelCampo, _dimension, _grilla);
+
 }
+
+// Recibe el string de datos SIN LAS LLAVES
+// NO TOCAR PORQUE ESTO LO USA EL CARGAR
+void Campo::_leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela> &grilla){
+   /*
+    // Quiero que mi variable que apunta comience en la C
+    // Puede haber un espacio inicial, tenerlo en cuenta
+    int i = 0;
+    if (datos[1] == 'C'){
+        i = 1;
+    }
+
+    datos = datos.substr(i, datos.npos);
+    std::cout << datos << std::endl;
+*/
+    bool terminado = false;
+    bool leer = false;
+    std::string loQueQuiero = "";
+    int i = 0;
+    while (!terminado){
+        if (datos[i] == '['){
+            leer = true;
+        }
+        if (leer){
+            loQueQuiero += datos[i];
+        }
+        if (datos[i] == ']'){
+            terminado = true;
+        }
+        i++;
+    }
+
+    std::cout << loQueQuiero << std::endl;
+
+  //  dim.ancho = datos[3];
+  //  dim.largo = datos[5];
+
+  //  std::cout
+
+//    datos = datos.substr(7, datos.npos);
+
+    //_cargarDimension(i, datos, dim);
+}
+
+/*void Campo::_cargarDimension(int &i, std::string datos, Dimension &dim){
+    datosDimension = datos.substr(i + 3, 3);
+    dim.ancho = datos[3];
+    dim.largo = datos[5];
+}*/
 
 bool Campo::operator==(const Campo & otroCampo) const{
 	return false;
