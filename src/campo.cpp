@@ -145,8 +145,6 @@ void Campo::_leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela>
     dim.ancho = atoi(datoDimension.substr(1, posSeparador - 1).c_str());
     dim.largo = atoi(datoDimension.substr(posSeparador + 1, datoDimension.length() - posSeparador - 2).c_str());
 
-    std::cout << datoContenido << std::endl;
-
     // Resize todo con cultivo. Lo pongo en 0 primero para borrar granero y casa viejas
     grilla.parcelas.resize(0, std::vector<Parcela>(0, Cultivo));
     grilla.parcelas.resize(dim.ancho, std::vector<Parcela>(dim.largo, Cultivo));
@@ -154,13 +152,12 @@ void Campo::_leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela>
     int indexGranero = datoContenido.find("Granero");
     int indexCasa = datoContenido.find("Casa");
 
-    // String con lo anterior excepto el [ de apertura inicial
+    // String con todo el texto anterior a lo que quiero ubicar
     std::string textoAnteriorGranero = datoContenido.substr(1, indexGranero - 1);
-    _setearParcelaEnCarga(textoAnteriorGranero, grilla, dim.ancho, Granero);
-
     std::string textoAnteriorCasa = datoContenido.substr(1, indexCasa - 1);
 
-    std::cout << textoAnteriorCasa << std::endl;
+    // Busca y ubica la parcela en la posicion correspondiente
+    _setearParcelaEnCarga(textoAnteriorGranero, grilla, dim.ancho, Granero);
     _setearParcelaEnCarga(textoAnteriorCasa, grilla, dim.ancho, Casa);
 }
 
@@ -223,7 +220,7 @@ std::string Campo::_dameStringConDato(std::string &datos, bool objetoCompuesto){
 }
 
 bool Campo::operator==(const Campo & otroCampo) const{
-	return false;
+    return false;
 }
 
 std::ostream & operator<<(std::ostream & os, const Campo & c){
