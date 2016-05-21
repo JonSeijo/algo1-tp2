@@ -27,15 +27,17 @@ int main(){
 
     Campo c2(posG, posC);
 
-    /*
-    Prueba de cargado
+
+    // Prueba de cargado
     std::ifstream archivoLecturaCampo("campo.txt");
     c.cargar(archivoLecturaCampo);
     archivoLecturaCampo.close();
-  */
+
+    cout << c;
+
 
     // Prueba igualdad
-    cout << (c == c2) << endl;
+    //cout << (c == c2) << endl;
 
     return 0;
 }

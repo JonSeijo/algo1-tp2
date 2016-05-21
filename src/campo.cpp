@@ -169,7 +169,7 @@ void Campo::_setearParcelaEnCarga(std::string textoAnterior, Grilla<Parcela> &gr
 
 int Campo::_contarOcurrencias(std::string cadena, char aBuscar){
     int contador = 0;
-    int i = 0;
+    unsigned int i = 0;
     while (i < cadena.length()){
         if (cadena[i] == aBuscar){
             contador++;
@@ -200,16 +200,10 @@ std::string Campo::_dameStringConDato(std::string &datos, bool objetoCompuesto){
         }
         if (objetoCompuesto){
             // Objeto termina con "]]" si es compuesto
-            if (datos[i] == ']'){
-                if (charAnterior == ']'){
-                    terminado = true;
-                }
-            }
+            terminado = (datos[i] == ']') && (charAnterior == ']');
         }else{
             // Objeto termina con un solo ']' si es simple
-            if (datos[i] == ']'){
-                terminado = true;
-            }
+            terminado = (datos[i] == ']');
         }
         i++;
     }
