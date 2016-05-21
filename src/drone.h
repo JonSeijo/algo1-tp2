@@ -26,6 +26,11 @@ class Drone{
         bool operator==(const Drone& otroDrone) const;
 
 	private:
+		bool dosOMenos(const Secuencia<int>) const;
+		bool ordenada(Secuencia<int>) const;
+		Secuencia<int> damePrimeros(const Secuencia<Posicion> ps) const;
+		Secuencia<int> dameSegundos(const Secuencia<Posicion> ps) const;
+
 		ID _id;
 		Carga _bateria;
 		Secuencia<Posicion> _trayectoria;

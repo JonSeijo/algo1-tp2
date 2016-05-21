@@ -1,4 +1,5 @@
 #include "drone.h"
+#include <algorithm>
 
 Drone::Drone(){
 }
@@ -35,7 +36,14 @@ const Secuencia<Producto>& Drone::productosDisponibles() const{
 }
 
 bool Drone::vueloEscalerado() const{
-	return false;
+	Secuencia<int> xs = damePrimeros(_trayectoria);
+	Secuencia<int> ys = dameSegundos(_trayectoria);
+
+	return _enVuelo 
+			&& ordenada(xs)
+			&& ordenada(ys)
+			&& dosOMenos(xs)
+			&& dosOMenos(ys);
 }
 
 Secuencia<InfoVueloCruzado> Drone::vuelosCruzados(const Secuencia<Drone>& ds){
@@ -57,4 +65,68 @@ bool Drone::operator==(const Drone & otroDrone) const{
 
 std::ostream & operator<<(std::ostream & os, const Drone & d){
 	return os;
+}
+
+/*
+* Toma un Secuencia<Posicion> y devuelve la secuencia de los elementos x
+* de cada posicion
+ * n = xs.size()
+ * O(n)
+*/
+Secuencia<int> Drone::damePrimeros(const Secuencia<Posicion> ps) const{
+	Secuencia<int> res;
+	unsigned int i = 0;
+	while(i < ps.size()){
+		res.at(i) = ps.at(i).x;
+		i++;
+	}
+	return res;
+}
+
+/*
+* Toma un Secuencia<Posicion> y devuelve la secuencia de los elementos y
+* de cada posicion
+ * n = xs.size()
+ * O(n²)
+*/
+Secuencia<int> Drone::dameSegundos(const Secuencia<Posicion> ps) const{
+	Secuencia<int> res;
+	unsigned int i = 0;
+	while(i < ps.size()){
+		res.at(i) = ps.at(i).y;
+		i++;
+	}
+	return res;
+
+}
+
+/*
+ * Toma un Secuencia<int> y devuelve true si ningun 
+ * elemento aparece mas de dos veces, false en caso contrario
+ * n = xs.size()
+ * O(n²)
+*/
+
+bool Drone::dosOMenos(const Secuencia<int> xs) const{
+	bool res = true;
+	unsigned int i = 0;
+	while(i < xs.size()){
+		int cuenta = std::count(xs.begin(), xs.end() - 1, xs.at(i));
+		if(cuenta > 2){
+			res = false;
+		}
+		i++;
+	}
+
+	return res;
+}
+/*
+* Toma un Secuencia<int> y devuelve un bool de si esta ordenada o no
+* n = xs.size()
+* O( n * log n )
+*/
+bool Drone::ordenada(Secuencia<int> xs) const{
+	Secuencia<int> r = xs;
+	std::sort(xs.begin(), xs.end());
+	return r == xs;
 }
