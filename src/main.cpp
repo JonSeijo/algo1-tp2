@@ -19,6 +19,7 @@ int main(){
     Campo c(posG, posC);
     std::ofstream archivoCampo("campo.txt");
     c.guardar(archivoCampo);
+    cout << c;
 
     return 0;
 }
