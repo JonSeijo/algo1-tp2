@@ -20,6 +20,10 @@ class Campo {
 	private:
 		Dimension _dimension;
 		Grilla<Parcela> _grilla;
+
+        Posicion _vectorMasLejano(const Posicion &v1, const Posicion &v2);
+        double _norma(const Posicion &v);
+        bool _posicionIgual(int i, int j, const Posicion &v);
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.
