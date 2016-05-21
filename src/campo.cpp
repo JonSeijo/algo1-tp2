@@ -38,59 +38,61 @@ Parcela Campo::contenido(const Posicion & p) const{
 void Campo::mostrar(std::ostream & os) const{
     os << "Campo" << std::endl;
     os << "Dimensiones: " << std::endl;
-    os << "    " << "Largo: " << _dimension.largo << std::endl;
     os << "    " << "Ancho: " << _dimension.ancho << std::endl;
+    os << "    " << "Largo: " << _dimension.largo << std::endl;
     os << "Contenidos: " << std::endl;
 
-    int i = 0;
-    while (i < _dimension.ancho){
+    int j = 0;
+    while (j < _dimension.largo){
+        // Muestro contenido de parcela
         os << "    ";
-        int j = 0;
-        while (j < _dimension.largo){
-            // Muestro contenido de parcela
+        int i = 0;
+        while (i < _dimension.ancho){
             Posicion p;
             p.x = i;
             p.y = j;
             os << contenido(p);
 
-            j++;
-            if (j < _dimension.largo){
+            i++;
+
+            if (i < _dimension.ancho){
                 os << " ";
             }else{
                 os << std::endl;
             }
         }
 
-        i++;
+        j++;
     }
+    os << std::endl;
 }
 
 void Campo::guardar(std::ostream & os) const{
     os << "{ C ";
     os << "[" << _dimension.ancho << "," << _dimension.largo << "] ";
 
+    int j = 0;
     os << "[";
-    int i = 0;
-    while (i < _dimension.ancho){
+    while (j < _dimension.largo){
         os << "[";
-        int j = 0;
-        while (j < _dimension.largo){
+        int i = 0;
+        while (i < _dimension.ancho){
             // Muestro contenido de parcela
             Posicion p;
             p.x = i;
             p.y = j;
             os << contenido(p);
 
-            j++;
-            if (j < _dimension.largo){
+            i++;
+
+            if (i < _dimension.ancho){
                 os << ",";
             }
 
         }
 
-        i++;
-
-        if (i < _dimension.ancho){
+        j++;
+        if (j < _dimension.largo){
             os << "], ";
         }else{
             os << "]";
