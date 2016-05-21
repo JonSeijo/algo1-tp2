@@ -10,6 +10,9 @@ Drone::Drone(ID i, const std::vector<Producto>& ps){
 	_productos = ps;
 	_bateria = 100;
 	_enVuelo = false;
+    /*
+    Trayectoria de prueba
+
     Posicion p1;
     p1.x = 0;
     p1.y = 0;
@@ -20,7 +23,7 @@ Drone::Drone(ID i, const std::vector<Producto>& ps){
 
     _trayectoria.push_back(p1);
     _trayectoria.push_back(p2);
-
+    */
 }
 
 ID Drone::id() const{
@@ -78,6 +81,7 @@ void Drone::guardar(std::ostream & os) const{
 void Drone::cargar(std::istream & is){
 }
 
+/* Devuelve un string con la trayectora del drone, de la forma [[x1,y1], [x2,y2]]*/
 std::string Drone::_dameStringVueloRealizado() const{
     std::string cadenaVuelo = "";
     cadenaVuelo += '[';
@@ -93,9 +97,9 @@ std::string Drone::_dameStringVueloRealizado() const{
     return cadenaVuelo;
 }
 
+/* Dado una posicion, devuelve una string en la forma [x, y] */
 std::string Drone::_dameStringPosicion(Posicion p) const{
     std::string cadena = "";
-
     std::stringstream sx;
     sx << p.x;
     std::stringstream sy;
@@ -105,6 +109,7 @@ std::string Drone::_dameStringPosicion(Posicion p) const{
     return cadena;
 }
 
+/* Devuelve un string de los productos del drone de la forma [prod1, prod2, prod3]*/
 std::string Drone::_dameStringProductos() const{
     std::string cadenaProductos = "";
     cadenaProductos += '[';
@@ -122,6 +127,7 @@ std::string Drone::_dameStringProductos() const{
     return cadenaProductos;
 }
 
+/* Dado un producto, devuelve su nombre como string*/
 std::string Drone::_dameStringProd(Producto p) const{
     std::string res = "";
     if (p == Fertilizante) res = "Fertilizante";
