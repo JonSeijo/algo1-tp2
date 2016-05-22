@@ -1,5 +1,6 @@
 #include "drone.h"
 #include <algorithm>
+#include <sstream>
 
 Drone::Drone(){
 }
@@ -9,6 +10,20 @@ Drone::Drone(ID i, const std::vector<Producto>& ps){
 	_productos = ps;
 	_bateria = 100;
 	_enVuelo = false;
+    /*
+    Trayectoria de prueba
+
+    Posicion p1;
+    p1.x = 0;
+    p1.y = 0;
+
+    Posicion p2;
+    p2.x = 1;
+    p2.y = 0;
+
+    _trayectoria.push_back(p1);
+    _trayectoria.push_back(p2);
+    */
 }
 
 ID Drone::id() const{
@@ -51,12 +66,77 @@ Secuencia<InfoVueloCruzado> Drone::vuelosCruzados(const Secuencia<Drone>& ds){
 }
 
 void Drone::mostrar(std::ostream & os) const{
+
 }
 
 void Drone::guardar(std::ostream & os) const{
+    os << "{ D ";
+    os << _id << " ";
+    os << _bateria << " ";
+    os << _dameStringVueloRealizado() << " ";
+    os << _dameStringProductos();
+    os << "}";
 }
 
 void Drone::cargar(std::istream & is){
+}
+
+/* Devuelve un string con la trayectora del drone, de la forma [[x1,y1], [x2,y2]]*/
+std::string Drone::_dameStringVueloRealizado() const{
+    std::string cadenaVuelo = "";
+    cadenaVuelo += '[';
+    unsigned int i = 0;
+    while (i < _trayectoria.size()){
+        cadenaVuelo += _dameStringPosicion(_trayectoria.at(i));
+        i++;
+        if (i < _trayectoria.size()){
+            cadenaVuelo += ',';
+        }
+    }
+    cadenaVuelo += ']';
+    return cadenaVuelo;
+}
+
+/* Dado una posicion, devuelve una string en la forma [x, y] */
+std::string Drone::_dameStringPosicion(Posicion p) const{
+    std::string cadena = "";
+    std::stringstream sx;
+    sx << p.x;
+    std::stringstream sy;
+    sy << p.y;
+
+    cadena += '[' + sx.str() + ',' + sy.str() + ']';
+    return cadena;
+}
+
+/* Devuelve un string de los productos del drone de la forma [prod1, prod2, prod3]*/
+std::string Drone::_dameStringProductos() const{
+    std::string cadenaProductos = "";
+    cadenaProductos += '[';
+
+    unsigned int i = 0;
+    while (i < _productos.size()){
+        cadenaProductos += _dameStringProd(_productos.at(i));
+        i++;
+        if (i < _productos.size()){
+            cadenaProductos += ", ";
+        }
+    }
+
+    cadenaProductos += ']';
+    return cadenaProductos;
+}
+
+/* Dado un producto, devuelve su nombre como string*/
+std::string Drone::_dameStringProd(Producto p) const{
+    std::string res = "";
+    if (p == Fertilizante) res = "Fertilizante";
+    if (p == Plaguicida) res = "Plaguicida";
+    if (p == PlaguicidaBajoConsumo) res = "PlaguicidaBajoConsumo";
+    if (p == Herbicida) res = "Herbicida";
+    if (p == HerbicidaLargoAlcance) res = "HerbicidaLargoAlcance";
+
+    return res;
 }
 
 bool Drone::operator==(const Drone & otroDrone) const{
@@ -129,4 +209,14 @@ bool Drone::ordenada(const Secuencia<int> xs) const{
 	Secuencia<int> r = xs;
 	std::sort(r.begin(), r.end());
 	return r == xs;
+}
+
+std::ostream & operator<<(std::ostream & os, const Producto & p){
+    if (p == Fertilizante) os << "Fertilizante";
+    if (p == Plaguicida) os << "Plaguicida";
+    if (p == PlaguicidaBajoConsumo) os << "PlaguicidaBajoConsumo";
+    if (p == Herbicida) os << "Herbicida";
+    if (p == HerbicidaLargoAlcance) os << "HerbicidaLargoAlcance";
+
+    return os;
 }

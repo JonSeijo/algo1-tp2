@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "campo.h"
+#include "drone.h"
 using namespace std;
 
 int main(){
@@ -26,18 +27,27 @@ int main(){
     //cout << c;
 
     Campo c2(posG, posC);
-
-
     // Prueba de cargado
-    std::ifstream archivoLecturaCampo("campo.txt");
-    c.cargar(archivoLecturaCampo);
-    archivoLecturaCampo.close();
+    //std::ifstream archivoLecturaCampo("campo.txt");
+    //c.cargar(archivoLecturaCampo);
+    //archivoLecturaCampo.close();
 
-    cout << c;
-
+    //cout << c;
 
     // Prueba igualdad
     //cout << (c == c2) << endl;
+
+    std::vector<Producto> productos;
+    productos.push_back(Herbicida);
+    productos.push_back(Plaguicida);
+
+    Drone d(12, productos);
+
+    // Prueba guardado Drone
+    std::ofstream archivoDrone("drone.txt");
+    d.guardar(archivoDrone);
+    archivoDrone.close();
+
 
     return 0;
 }
