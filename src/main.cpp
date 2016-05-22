@@ -39,9 +39,9 @@ int main(){
 
     std::vector<Producto> productos;
     productos.push_back(Herbicida);
-    productos.push_back(Plaguicida);
+    //productos.push_back(Plaguicida);
 
-    Drone d(12, productos);
+    Drone d(5, productos);
 
     /*
     // Prueba guardado Drone
@@ -54,6 +54,13 @@ int main(){
     std::ifstream archivoLecturaDrone("drone.txt");
     d.cargar(archivoLecturaDrone);
     archivoLecturaDrone.close();
+
+    cout << "id: " << d.id() << endl;
+    cout << "bat: " << d.bateria() << endl;
+    cout << "enVuelo: " << d.enVuelo() << endl;
+    cout << "posActual: " << d.posicionActual().x << " " << d.posicionActual().y << endl;
+    cout << "cant productos: " << d.productosDisponibles().size() << endl;
+
 
     return 0;
 }
