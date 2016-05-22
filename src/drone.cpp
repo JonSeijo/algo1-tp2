@@ -80,25 +80,46 @@ void Drone::guardar(std::ostream & os) const{
 
 void Drone::cargar(std::istream & is){
     std::string datosDrone;
-    std::string cadenaFinal = "";
+    std::string dId;
+    std::string dBateria;
+    std::string dTrayectoria;
+    std::string dProductos;
 
     // Uso getLine porque preserva los espacios
     getline(is, datosDrone,'}');
     // datosDrone:
     //{ D 12 100 [[0,0],[1,0]] [Herbicida, Plaguicida]
 
-    _leerCargarIdYBateria(datosDrone, cadenaFinal);
-    _leerCargarTrayectoriaYProductos(cadenaFinal);
+    _leerSepararDatos(datosDrone, dId, dBateria, dTrayectoria, dProductos);
 
 }
 
-void Drone::_leerCargarIdYBateria(std::string &datos, std::string &cadenaFinal){
-    std::string datosId = "";
-    std::string datosBateria = "";
+void Drone::_leerSepararDatos(std::string &datos, std::string &dId, std::string &dBateria,
+                              std::string &dTrayectoria, std::string &dProductos){
+    // Leo los datos y los separo
 
-}
+    bool terminado = false;
+    int cantEspacios = 0;
+    int i = 0;
+    while (!terminado){
+        if (datos[i] == ' ') cantEspacios++;
 
-void Drone::_leerCargarTrayectoriaYProductos(std::string &cadena){
+        if (cantEspacios == 2) dId += datos[i];
+
+        if (cantEspacios == 3) dBateria += datos[i];
+
+        if (cantEspacios == 4) dTrayectoria += datos[i];
+
+        if (cantEspacios == 5){
+            dProductos = datos.substr(i, datos.npos);
+            terminado = true;
+        }
+        i++;
+    }
+
+
+     std::cout << "id" << dId << "   bateria" << dBateria << std::endl;
+     std::cout << "trayectoria:" << dTrayectoria << "  productos:" << dProductos << std::endl;
 
 }
 

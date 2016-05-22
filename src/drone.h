@@ -42,8 +42,8 @@ class Drone{
         std::string _dameStringProductos() const;
         std::string _dameStringPosicion(Posicion p) const;
         std::string _dameStringProd(Producto p) const;
-        void _leerCargarIdYBateria(std::string &datos, std::string &cadenaFinal);
-        void _leerCargarTrayectoriaYProductos(std::string &cadena);
+        void _leerSepararDatos(std::string &datos, std::string &dId, std::string &dBateria,
+                                      std::string &dTrayectoria, std::string &dProductos);
 
 };
 
