@@ -31,11 +31,11 @@ class Sistema {
 		bool operator==(const Sistema& otroSistema) const;
 
 	private:
-		void initEstados();
-		
         Campo _campo;
 		Secuencia<Drone> _enjambre;
         Grilla<EstadoCultivo> _estado;
+
+        void _mostrarEstadosCultivos(std::ostream &os) const;
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.

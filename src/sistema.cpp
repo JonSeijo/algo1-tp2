@@ -65,6 +65,17 @@ void Sistema::mostrar(std::ostream & os) const{
 
     os << "\n        ----\nEstado de cultivos: \n        ----\n" << std::endl;
 
+    _mostrarEstadosCultivos(os);
+
+}
+
+void Sistema::guardar(std::ostream & os) const{
+}
+
+void Sistema::cargar(std::istream & is){
+}
+
+void Sistema::_mostrarEstadosCultivos(std::ostream &os) const{
     int j = 0;
     while (j < _campo.dimensiones().largo){
         // Muestro estado de cultivos
@@ -90,12 +101,6 @@ void Sistema::mostrar(std::ostream & os) const{
 
 }
 
-void Sistema::guardar(std::ostream & os) const{
-}
-
-void Sistema::cargar(std::istream & is){
-}
-
 bool Sistema::operator==(const Sistema & otroSistema) const{
     return false;
     //this->_campo == otroSistema._campo
@@ -119,25 +124,3 @@ std::ostream & operator<<(std::ostream & os, const Sistema & s){
     s.mostrar(os);
 	return os;
 }
-
-/*void Sistema::initEstados(){
-	unsigned int i = 0;
-	while(i < _estado.parcelas.size()){
-		unsigned int j = 0;
-		while(j < _estado.parcelas.at(i).size()){
-			_estado.parcelas.at(i).at(j) = NoSensado;
-			j++;
-		}
-		i++;
-	}
-}*/
-
-/*
-void Sistema::initEstados(){
-	unsigned int i = 0;
-	while(i < _estado.parcelas.size()){
-		std::fill(_estado.parcelas.at(i).begin(), _estado.parcelas.at(i).end(), NoSensado);		
-		i++;
-	}
-}
-*/
