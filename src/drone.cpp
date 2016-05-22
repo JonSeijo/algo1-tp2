@@ -70,8 +70,8 @@ std::ostream & operator<<(std::ostream & os, const Drone & d){
 /*
 * Toma un Secuencia<Posicion> y devuelve la secuencia de los elementos x
 * de cada posicion
- * n = xs.size()
- * O(n)
+* n = xs.size()
+* O(n)
 */
 Secuencia<int> Drone::damePrimeros(const Secuencia<Posicion> ps) const{
 	Secuencia<int> res;
