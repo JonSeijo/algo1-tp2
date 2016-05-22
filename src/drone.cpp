@@ -96,11 +96,54 @@ void Drone::cargar(std::istream & is){
     _cargarTrayectoria(dTrayectoria);
     _cargarProductos(dProductos);
 
+    int i = 0;
+    while (i < _productos.size()){
+        std::cout << _productos.at(i) << " ";
+        i++;
+    }
+    std::cout << "colaes " <<std::endl;
+    //std::cout << _productos;
+
 
 }
 
 void Drone::_cargarProductos(std::string dProductos){
     // Vaciar el vector de productos y cargar los nuevos
+    // dProductos:_[Herbicida,_Plaguicida]
+    _productos.resize(0);
+
+    // Separo los productos uno a uno y los voy cargando
+    std::string dActual;
+    bool terminar = false;
+    int i = 2;
+
+    while (!terminar){
+        if (dProductos[i] == ','){
+            _cargarProductoIndividual(dActual);
+            dActual = "";
+            i += 2;
+        }
+        if (dProductos[i] == ']'){
+            if(dActual != ""){
+                _cargarProductoIndividual(dActual);
+            }
+            terminar = true;
+
+        }else{
+            dActual += dProductos[i];
+            i++;
+        }
+    }
+
+}
+
+void Drone::_cargarProductoIndividual(std::string dProd){
+    // Fertilizante, Plaguicida, PlaguicidaBajoConsumo, Herbicida, HerbicidaLargoAlcance ;
+    if (dProd == "Herbicida") _productos.push_back(Herbicida);
+    if (dProd == "HerbicidaLargoAlcance") _productos.push_back(HerbicidaLargoAlcance);
+    if (dProd == "Plaguicida") _productos.push_back(Plaguicida);
+    if (dProd == "PlaguicidaBajoConsumo") _productos.push_back(PlaguicidaBajoConsumo);
+    if (dProd == "Fertilizante") _productos.push_back(Fertilizante);
 }
 
 void Drone::_cargarTrayectoria(std::string dTrayectoria){
@@ -128,6 +171,7 @@ void Drone::_cargarId(std::string dId){
     _id = newId;
 }
 
+/* Separa la string con todos los datos en las categorias correspondientes*/
 void Drone::_leerSepararDatos(std::string &datos, std::string &dId, std::string &dBateria,
                               std::string &dTrayectoria, std::string &dProductos){
     // Leo los datos y los separo

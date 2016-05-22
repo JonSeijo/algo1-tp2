@@ -49,6 +49,7 @@ class Drone{
         void _cargarId(std::string dId);
         void _cargarTrayectoria(std::string dTrayectoria);
         void _cargarProductos(std::string dProductos);
+        void _cargarProductoIndividual(std::string dProd);
 
 };
 
