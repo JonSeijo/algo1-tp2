@@ -18,7 +18,7 @@ const Campo & Sistema::campo() const{
 }
 
 EstadoCultivo Sistema::estadoDelCultivo(const Posicion & p) const{
-    return NoSensado;//_estado.parcelas.at(p.x).at(p.y);
+    return _estado.parcelas.at(p.x).at(p.y);
 }
 
 const Secuencia<Drone>& Sistema::enjambreDrones() const{
@@ -63,8 +63,30 @@ void Sistema::mostrar(std::ostream & os) const{
         i++;
     }
 
+    os << "\n        ----\nEstado de cultivos: \n        ----\n" << std::endl;
 
+    int j = 0;
+    while (j < _campo.dimensiones().largo){
+        // Muestro estado de cultivos
+        os << "    ";
+        int i = 0;
+        while (i < _campo.dimensiones().ancho){
+            Posicion p;
+            p.x = i;
+            p.y = j;
+            os << estadoDelCultivo(p);
 
+            i++;
+
+            if (i < _campo.dimensiones().ancho){
+                os << " ";
+            }else{
+                os << std::endl;
+            }
+        }
+        j++;
+    }
+    os << std::endl;
 
 }
 
@@ -80,6 +102,17 @@ bool Sistema::operator==(const Sistema & otroSistema) const{
     //		&& this->_estado == otroSistema._estado
 //			/*&& std::is_permutation(_enjambre.begin(), _enjambre.end(), otroSistema._enjambre.begin())*/;
 //*/
+}
+
+std::ostream & operator<<(std::ostream & os, const EstadoCultivo & e){
+    if (e == NoSensado) os << "NoSensado";
+    if (e == RecienSembrado) os << "RecienSembrado";
+    if (e == EnCrecimiento) os << "EnCrecimiento";
+    if (e == ListoParaCosechar) os << "ListoParaCosechar";
+    if (e == ConMaleza) os << "ConMaleza";
+    if (e == ConPlaga) os << "ConPlaga";
+
+    return os;
 }
 
 std::ostream & operator<<(std::ostream & os, const Sistema & s){
