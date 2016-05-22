@@ -95,16 +95,6 @@ void Drone::cargar(std::istream & is){
     _cargarBateria(dBateria);
     _cargarTrayectoria(dTrayectoria);
     _cargarProductos(dProductos);
-
-    int i = 0;
-    while (i < _productos.size()){
-        std::cout << _productos.at(i) << " ";
-        i++;
-    }
-    std::cout << "colaes " <<std::endl;
-    //std::cout << _productos;
-
-
 }
 
 void Drone::_cargarProductos(std::string dProductos){
@@ -147,12 +137,52 @@ void Drone::_cargarProductoIndividual(std::string dProd){
 }
 
 void Drone::_cargarTrayectoria(std::string dTrayectoria){
-    // Si es vacia, vaciar trayectoria
-    //              enVuelo true
 
-    // Si no es vacia, vaciar y poner las posiciones en ese orden
-    //                 posicionActual sea el ultimo de trayectoria
-    //                 enVuelo true
+    // Vacio la trayectoria antigua del drone
+    _trayectoria.resize(0);
+
+    if (dTrayectoria[1] == '[' && dTrayectoria[2] == ']'){
+        // La trayectoria es vacia
+        _enVuelo = false;
+    }else{
+        // La trayectoria NO es vacia
+        bool terminado = false;
+        std::string dActual = "";
+        int i = 2;
+
+        while (!terminado){
+            if ((dTrayectoria[i] == ',') && (dTrayectoria[i+1] == '[')){
+                _cargarPosicionIndividual(dActual);
+                dActual = "";
+                i++;
+            }
+
+            if((dTrayectoria[i] == ']') && (dTrayectoria[i-1] == ']')){
+                _cargarPosicionIndividual(dActual);
+                terminado = true;
+            }else{
+                dActual += dTrayectoria[i];
+                i++;
+            }
+        }
+
+        _enVuelo = true;
+        _posicionActual = _trayectoria.back();
+
+    }
+}
+
+void Drone::_cargarPosicionIndividual(std::string dPos){
+    int posSeparador = dPos.find(',');
+    int x = atoi(dPos.substr(1, posSeparador - 1).c_str());
+    int y = atoi(dPos.substr(posSeparador + 1, dPos.length() - posSeparador - 2).c_str());
+
+    Posicion p;
+    p.x = x;
+    p.y = y;
+
+    _trayectoria.push_back(p);
+    //std::cout << "x: " << x << " y: " << y << std::endl;
 }
 
 void Drone::_cargarBateria(std::string dBateria){
@@ -194,10 +224,6 @@ void Drone::_leerSepararDatos(std::string &datos, std::string &dId, std::string 
         }
         i++;
     }
-
-
-     std::cout << "id" << dId << "   bateria" << dBateria << std::endl;
-     std::cout << "trayectoria:" << dTrayectoria << "  productos:" << dProductos << std::endl;
 
 }
 
@@ -262,7 +288,7 @@ std::string Drone::_dameStringProd(Producto p) const{
 }
 
 bool Drone::operator==(const Drone & otroDrone) const{
-	return false;
+    return false;
 }
 
 std::ostream & operator<<(std::ostream & os, const Drone & d){
