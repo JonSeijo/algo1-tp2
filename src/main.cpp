@@ -42,45 +42,26 @@ int main(){
 
     std::vector<Producto> productos;
     productos.push_back(Herbicida);
-    //productos.push_back(Plaguicida);
+    productos.push_back(Plaguicida);
 
     Drone d(5, productos);
-
-    /*
-    // Prueba guardado Drone
-    std::ofstream archivoDrone("drone.txt");
-    d.guardar(archivoDrone);
-    archivoDrone.close();
-
-    */
 
     // Prueba de cargado Drone
     std::ifstream archivoLecturaDrone("drone.txt");
     d.cargar(archivoLecturaDrone);
     archivoLecturaDrone.close();
 
-    cout << "id: " << d.id() << endl;
-    cout << "bat: " << d.bateria() << endl;
-    cout << "enVuelo: " << d.enVuelo() << endl;
-    cout << "posActual: " << d.posicionActual().x << " " << d.posicionActual().y << endl;
-    cout << "cant productos: " << d.productosDisponibles().size() << endl;
-
-
     Drone d1(5, productos);
-    Drone d2(5, productos);
-
-    cout << "Iguales: " << (d1 == d1) << endl;
-
-    cout << "\n\n\n";
-    cout << d << "\n\n";
 
     Secuencia<Drone> sec;
-   // sec.resize(10);
-    sec.push_back(d1);
+    sec.push_back(d);
+    sec.push_back(d);
 
     Sistema sis(c, sec);
 
-    cout << sis;
+    ofstream archivoSistema("sistema.txt");
+    sis.guardar(archivoSistema);
+    // archivoSistema.close();
 
     return 0;
 }

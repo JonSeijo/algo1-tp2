@@ -70,6 +70,20 @@ void Sistema::mostrar(std::ostream & os) const{
 }
 
 void Sistema::guardar(std::ostream & os) const{
+    os << "{ S ";
+    _campo.guardar(os);
+    os << " [";
+    unsigned int i = 0;
+    while (i < _enjambre.size()){
+        _enjambre.at(i).guardar(os);
+        i++;
+        if (i < _enjambre.size()){
+            os << ",";
+        }
+    }
+    os << "] ";
+
+
 }
 
 void Sistema::cargar(std::istream & is){
