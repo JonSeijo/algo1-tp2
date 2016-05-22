@@ -79,7 +79,30 @@ void Drone::guardar(std::ostream & os) const{
 }
 
 void Drone::cargar(std::istream & is){
+    std::string datosDrone;
+    std::string cadenaFinal = "";
+
+    // Uso getLine porque preserva los espacios
+    getline(is, datosDrone,'}');
+    // datosDrone:
+    //{ D 12 100 [[0,0],[1,0]] [Herbicida, Plaguicida]
+
+    _leerCargarIdYBateria(datosDrone, cadenaFinal);
+    _leerCargarTrayectoriaYProductos(cadenaFinal);
+
 }
+
+void Drone::_leerCargarIdYBateria(std::string &datos, std::string &cadenaFinal){
+    std::string datosId = "";
+    std::string datosBateria = "";
+
+}
+
+void Drone::_leerCargarTrayectoriaYProductos(std::string &cadena){
+
+}
+
+
 
 /* Devuelve un string con la trayectora del drone, de la forma [[x1,y1], [x2,y2]]*/
 std::string Drone::_dameStringVueloRealizado() const{

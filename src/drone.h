@@ -42,6 +42,9 @@ class Drone{
         std::string _dameStringProductos() const;
         std::string _dameStringPosicion(Posicion p) const;
         std::string _dameStringProd(Producto p) const;
+        void _leerCargarIdYBateria(std::string &datos, std::string &cadenaFinal);
+        void _leerCargarTrayectoriaYProductos(std::string &cadena);
+
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.

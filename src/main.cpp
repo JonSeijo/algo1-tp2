@@ -43,11 +43,17 @@ int main(){
 
     Drone d(12, productos);
 
+    /*
     // Prueba guardado Drone
     std::ofstream archivoDrone("drone.txt");
     d.guardar(archivoDrone);
     archivoDrone.close();
+    */
 
+    // Prueba de cargado Drone
+    std::ifstream archivoLecturaDrone("drone.txt");
+    d.cargar(archivoLecturaDrone);
+    archivoLecturaDrone.close();
 
     return 0;
 }
