@@ -83,10 +83,48 @@ void Sistema::guardar(std::ostream & os) const{
     }
     os << "] ";
 
+    _guardarEstadosCultivos(os);
+
+    os << "}";
 
 }
 
 void Sistema::cargar(std::istream & is){
+}
+
+void Sistema::_guardarEstadosCultivos(std::ostream &os) const{
+
+    int j = 0;
+    os << "[";
+    while (j < _campo.dimensiones().largo){
+        os << "[";
+        int i = 0;
+        while (i < _campo.dimensiones().ancho){
+            // Muestro contenido de parcela
+            Posicion p;
+            p.x = i;
+            p.y = j;
+            os << estadoDelCultivo(p);
+
+            i++;
+
+            if (i < _campo.dimensiones().ancho){
+                os << ",";
+            }
+
+        }
+
+        j++;
+        if (j < _campo.dimensiones().largo){
+            os << "], ";
+        }else{
+            os << "]";
+        }
+    }
+
+    os << "]";
+
+
 }
 
 void Sistema::_mostrarEstadosCultivos(std::ostream &os) const{

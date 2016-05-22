@@ -61,7 +61,7 @@ int main(){
 
     ofstream archivoSistema("sistema.txt");
     sis.guardar(archivoSistema);
-    // archivoSistema.close();
+    archivoSistema.close();
 
     return 0;
 }

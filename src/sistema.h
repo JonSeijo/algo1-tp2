@@ -36,6 +36,7 @@ class Sistema {
         Grilla<EstadoCultivo> _estado;
 
         void _mostrarEstadosCultivos(std::ostream &os) const;
+        void _guardarEstadosCultivos(std::ostream &os) const;
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.
