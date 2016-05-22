@@ -45,6 +45,11 @@ class Drone{
         void _leerSepararDatos(std::string &datos, std::string &dId, std::string &dBateria,
                                       std::string &dTrayectoria, std::string &dProductos);
 
+        void _cargarBateria(std::string dBateria);
+        void _cargarId(std::string dId);
+        void _cargarTrayectoria(std::string dTrayectoria);
+        void _cargarProductos(std::string dProductos);
+
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.

@@ -91,7 +91,41 @@ void Drone::cargar(std::istream & is){
     //{ D 12 100 [[0,0],[1,0]] [Herbicida, Plaguicida]
 
     _leerSepararDatos(datosDrone, dId, dBateria, dTrayectoria, dProductos);
+    _cargarId(dId);
+    _cargarBateria(dBateria);
+    _cargarTrayectoria(dTrayectoria);
+    _cargarProductos(dProductos);
 
+
+}
+
+void Drone::_cargarProductos(std::string dProductos){
+    // Vaciar el vector de productos y cargar los nuevos
+}
+
+void Drone::_cargarTrayectoria(std::string dTrayectoria){
+    // Si es vacia, vaciar trayectoria
+    //              enVuelo true
+
+    // Si no es vacia, vaciar y poner las posiciones en ese orden
+    //                 posicionActual sea el ultimo de trayectoria
+    //                 enVuelo true
+}
+
+void Drone::_cargarBateria(std::string dBateria){
+    // bateria:_BATERIA
+    // Quito el espacio del principio
+    dBateria = dBateria.substr(1, dBateria.npos);
+    int newBateria = atoi(dBateria.c_str());
+    _bateria = newBateria;
+}
+
+void Drone::_cargarId(std::string dId){
+    // id:_ID
+    // Quito el espacio del principio
+    dId = dId.substr(1, dId.npos);
+    int newId = atoi(dId.c_str());
+    _id = newId;
 }
 
 void Drone::_leerSepararDatos(std::string &datos, std::string &dId, std::string &dBateria,
