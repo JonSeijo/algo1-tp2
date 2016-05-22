@@ -62,5 +62,10 @@ int main(){
     cout << "cant productos: " << d.productosDisponibles().size() << endl;
 
 
+    Drone d1(5, productos);
+    Drone d2(5, productos);
+
+    cout << "Iguales: " << (d1 == d1) << endl;
+
     return 0;
 }

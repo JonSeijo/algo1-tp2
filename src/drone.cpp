@@ -288,7 +288,60 @@ std::string Drone::_dameStringProd(Producto p) const{
 }
 
 bool Drone::operator==(const Drone & otroDrone) const{
-    return false;
+    return _id == otroDrone.id() &&
+           _bateria == otroDrone.bateria() &&
+           _enVuelo == otroDrone.enVuelo() &&
+           _igualTrayectoria(_trayectoria, otroDrone.vueloRealizado()) &&
+           _mismosProductos(_productos, otroDrone.productosDisponibles());
+}
+
+bool Drone::_igualTrayectoria(Secuencia<Posicion> trA, Secuencia<Posicion> trB) const{
+    Posicion posA;
+    Posicion posB;
+
+    bool iguales = true;
+    if (trA.size() == trB.size()){
+        unsigned int i = 0;
+        while (i < trA.size()){
+            posA.x = trA.at(i).x;
+            posA.y = trA.at(i).y;
+
+            posB.x = trB.at(i).x;
+            posB.y = trB.at(i).y;
+
+            if ((posA.x != posB.x) || (posA.y != posB.y)){
+                iguales = false;
+            }
+            i++;
+        }
+
+    }else{
+        iguales = false;
+    }
+
+    return iguales;
+}
+
+
+bool Drone::_mismosProductos(Secuencia<Producto> secuA, Secuencia<Producto> secuB) const{
+    bool tienenMismos = true;
+    if (secuA.size() == secuB.size()){
+        unsigned int i = 0;
+        int cuentaA;
+        int cuentaB;
+        while (i < secuA.size()){
+            cuentaA = std::count(secuA.begin(), secuA.end() - 1, secuA.at(i));
+            cuentaB = std::count(secuB.begin(), secuB.end() - 1, secuB.at(i));
+            if (cuentaA != cuentaB){
+                tienenMismos = false;
+            }
+            i++;
+        }
+    }else{
+        tienenMismos = false;
+    }
+
+    return tienenMismos;
 }
 
 std::ostream & operator<<(std::ostream & os, const Drone & d){

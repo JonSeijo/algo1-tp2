@@ -53,6 +53,8 @@ class Drone{
         void _cargarProductos(std::string dProductos);
         void _cargarProductoIndividual(std::string dProd);
 
+        bool _igualTrayectoria(Secuencia<Posicion> trA, Secuencia<Posicion> trB) const;
+        bool _mismosProductos(Secuencia<Producto> secuA, Secuencia<Producto> secuB) const;
 
 };
 
