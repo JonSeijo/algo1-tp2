@@ -8,7 +8,7 @@ Campo::Campo(){
     _dimension.largo = 1;
     _grilla.parcelas.resize(_dimension.ancho, std::vector<Parcela>(_dimension.largo, Cultivo));
     _grilla.parcelas.at(0).at(0) = Granero;
-    _grilla.parcelas.at(0).at(1) = Casa;
+    _grilla.parcelas.at(1).at(0) = Casa;
 }
 
 // Propiedad de jonathan
@@ -45,7 +45,7 @@ Parcela Campo::contenido(const Posicion & p) const{
 }
 
 void Campo::mostrar(std::ostream & os) const{
-    os << "Campo" << std::endl;
+   // os << "Campo" << std::endl;
     os << "Dimensiones: " << std::endl;
     os << "    " << "Ancho: " << _dimension.ancho << std::endl;
     os << "    " << "Largo: " << _dimension.largo << std::endl;

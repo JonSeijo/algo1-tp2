@@ -2,6 +2,9 @@
 #include <fstream>
 #include "campo.h"
 #include "drone.h"
+#include "sistema.h"
+#include "tipos.h"
+
 using namespace std;
 
 int main(){
@@ -48,6 +51,7 @@ int main(){
     std::ofstream archivoDrone("drone.txt");
     d.guardar(archivoDrone);
     archivoDrone.close();
+
     */
 
     // Prueba de cargado Drone
@@ -68,7 +72,15 @@ int main(){
     cout << "Iguales: " << (d1 == d1) << endl;
 
     cout << "\n\n\n";
-    cout << d;
+    cout << d << "\n\n";
+
+    Secuencia<Drone> sec;
+   // sec.resize(10);
+    sec.push_back(d1);
+
+    Sistema sis(c, sec);
+
+    cout << sis;
 
     return 0;
 }

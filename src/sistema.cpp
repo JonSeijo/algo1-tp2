@@ -1,15 +1,16 @@
 #include "sistema.h"
-#include "tipos.h"
 #include <algorithm>
 
 Sistema::Sistema(){
+    std::cout << "const vacio sistema" << std::endl;
+
 }
 
 Sistema::Sistema(const Campo &c, const Secuencia<Drone> &ds){
-	_campo = c;
+    _campo = c;
 	_enjambre = ds;
 	_estado.parcelas.resize(c.dimensiones().ancho, std::vector<EstadoCultivo>(c.dimensiones().largo, NoSensado));
-	initEstados();
+    //initEstados();
 }
 
 const Campo & Sistema::campo() const{
@@ -17,7 +18,7 @@ const Campo & Sistema::campo() const{
 }
 
 EstadoCultivo Sistema::estadoDelCultivo(const Posicion & p) const{
-	return _estado.parcelas.at(p.x).at(p.y);
+    return NoSensado;//_estado.parcelas.at(p.x).at(p.y);
 }
 
 const Secuencia<Drone>& Sistema::enjambreDrones() const{
@@ -50,6 +51,21 @@ void Sistema::volarYSensar(const Drone & d){
 }
 
 void Sistema::mostrar(std::ostream & os) const{
+    os << "---- SISTEMA ----\n-----------------" << std::endl;
+    os << "\nCampo del sistema:\n       ----" << std::endl;
+    os << _campo;
+
+    os << "       ----\nEnjambre de drones.\n       ----" << std::endl;
+    os << "Cant de drones: " << _enjambre.size() << "\n" << std::endl;
+    unsigned int i = 0;
+    while (i < _enjambre.size()){
+        os << _enjambre.at(i);
+        i++;
+    }
+
+
+
+
 }
 
 void Sistema::guardar(std::ostream & os) const{
@@ -59,13 +75,15 @@ void Sistema::cargar(std::istream & is){
 }
 
 bool Sistema::operator==(const Sistema & otroSistema) const{
-	return this->_campo == otroSistema._campo 
-			&& this->_estado == otroSistema._estado
-			/*&& std::is_permutation(_enjambre.begin(), _enjambre.end(), otroSistema._enjambre.begin())*/;
+    return false;
+    //this->_campo == otroSistema._campo
+    //		&& this->_estado == otroSistema._estado
+//			/*&& std::is_permutation(_enjambre.begin(), _enjambre.end(), otroSistema._enjambre.begin())*/;
+//*/
 }
 
 std::ostream & operator<<(std::ostream & os, const Sistema & s){
-	// TODO: insert return statement here
+    s.mostrar(os);
 	return os;
 }
 
@@ -81,7 +99,7 @@ std::ostream & operator<<(std::ostream & os, const Sistema & s){
 	}
 }*/
 
-
+/*
 void Sistema::initEstados(){
 	unsigned int i = 0;
 	while(i < _estado.parcelas.size()){
@@ -89,3 +107,4 @@ void Sistema::initEstados(){
 		i++;
 	}
 }
+*/
