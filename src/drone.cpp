@@ -3,6 +3,9 @@
 #include <sstream>
 
 Drone::Drone(){
+    _id = 0;
+    _bateria = 100;
+    _enVuelo = false;
 }
 
 Drone::Drone(ID i, const std::vector<Producto>& ps){
