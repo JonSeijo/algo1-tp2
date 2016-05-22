@@ -67,5 +67,8 @@ int main(){
 
     cout << "Iguales: " << (d1 == d1) << endl;
 
+    cout << "\n\n\n";
+    cout << d;
+
     return 0;
 }

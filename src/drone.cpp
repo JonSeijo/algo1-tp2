@@ -65,7 +65,34 @@ Secuencia<InfoVueloCruzado> Drone::vuelosCruzados(const Secuencia<Drone>& ds){
 	return Secuencia<InfoVueloCruzado>();
 }
 
+// La posicion actual es el final de trayectoria.
+// Ver si lo mostramos aparte. En ese caso, que hacer cuando no esta en vuelo? no mostrarlo?
 void Drone::mostrar(std::ostream & os) const{
+    os << "Drone" << std::endl;
+    os << "    Id: " << _id << std::endl;
+    os << "    Bateria: " << _bateria << std::endl;
+    os << "    En vuelo: ";
+    if (_enVuelo) os << "Si" << std::endl;
+    else os << "No" << std::endl;
+
+    os << "    Vuelos realizados: ";
+    unsigned int i = 0;
+    while (i < _trayectoria.size()){
+        os << "[" << _trayectoria.at(i).x  << "," <<_trayectoria.at(i).y << "] ";
+        i++;
+    }
+    os << std::endl;
+
+
+    os << "    Productos disponibles: ";
+    unsigned int j = 0;
+    while (j < _productos.size()){
+        os << _productos.at(j) << "  ";
+        j++;
+    }
+    os << std::endl;
+
+
 
 }
 
@@ -345,7 +372,8 @@ bool Drone::_mismosProductos(Secuencia<Producto> secuA, Secuencia<Producto> secu
 }
 
 std::ostream & operator<<(std::ostream & os, const Drone & d){
-	return os;
+    d.mostrar(os);
+    return os;
 }
 
 /*
