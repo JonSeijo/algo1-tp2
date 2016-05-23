@@ -82,6 +82,41 @@ void Sistema::guardar(std::ostream & os) const{
 }
 
 void Sistema::cargar(std::istream & is){
+    std::string dSistema;
+    std::string dCampo;
+    std::string dEnjambre;
+    std::string dEstadosCultivo;
+
+    getline(is, dSistema,'\0');
+
+    std::cout << dSistema << "\n" << std::endl;
+
+    _leerSepararDatos(dSistema, dCampo, dEnjambre, dEstadosCultivo);
+    _cargarCampo(dCampo);
+    _cargarEnjambre(dEnjambre);
+    _cargarEstadosCultivo(dEstadosCultivo);
+
+}
+
+void Sistema::_leerSepararDatos(std::string &dSistema, std::string &dCampo,
+                                std::string &dEnjambre, std::string &dEstadosCultivo){
+
+}
+
+void Sistema::_cargarCampo(std::string &dCampo){
+
+}
+
+void Sistema::_cargarDroneIndividual(std::string &dDrone){
+
+}
+
+void Sistema::_cargarEnjambre(std::string &dEnjambre){
+
+}
+
+void Sistema::_cargarEstadosCultivo(std::string &dEstadosCultivo){
+
 }
 
 void Sistema::_guardarDrones(std::ostream &os) const{

@@ -38,6 +38,14 @@ class Sistema {
         void _mostrarEstadosCultivos(std::ostream &os) const;
         void _guardarEstadosCultivos(std::ostream &os) const;
         void _guardarDrones(std::ostream &os) const;
+
+        void _leerSepararDatos(std::string &dSistema, std::string &dCampo,
+                                std::string &dEnjambre, std::string &dEstadosCultivo);
+        void _cargarCampo(std::string &dCampo);
+        void _cargarDroneIndividual(std::string &dDrone);
+        void _cargarEnjambre(std::string &dEnjambre);
+        void _cargarEstadosCultivo(std::string &dEstadosCultivo);
+
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.

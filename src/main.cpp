@@ -54,14 +54,20 @@ int main(){
     Drone d1(5, productos);
 
     Secuencia<Drone> sec;
-    sec.push_back(d);
-    sec.push_back(d);
+    //sec.push_back(d);
+    //sec.push_back(d);
 
     Sistema sis(c, sec);
-
+/*  // Prueba guardar sistema
     ofstream archivoSistema("sistema.txt");
     sis.guardar(archivoSistema);
     archivoSistema.close();
+*/
+    ifstream archivoLecturaSistema("sistema.txt");
+    sis.cargar(archivoLecturaSistema);
+    archivoLecturaSistema.close();
+
+    cout << sis;
 
     return 0;
 }
