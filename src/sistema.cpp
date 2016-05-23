@@ -69,10 +69,23 @@ void Sistema::mostrar(std::ostream & os) const{
 
 }
 
+// NO SACAR ESPACIOS PLZ
 void Sistema::guardar(std::ostream & os) const{
     os << "{ S ";
     _campo.guardar(os);
-    os << " [";
+    os << " ";
+    _guardarDrones(os);
+    os << " ";
+    _guardarEstadosCultivos(os);
+    os << "}";
+
+}
+
+void Sistema::cargar(std::istream & is){
+}
+
+void Sistema::_guardarDrones(std::ostream &os) const{
+    os << "[";
     unsigned int i = 0;
     while (i < _enjambre.size()){
         _enjambre.at(i).guardar(os);
@@ -81,19 +94,10 @@ void Sistema::guardar(std::ostream & os) const{
             os << ",";
         }
     }
-    os << "] ";
-
-    _guardarEstadosCultivos(os);
-
-    os << "}";
-
-}
-
-void Sistema::cargar(std::istream & is){
+    os << "]";
 }
 
 void Sistema::_guardarEstadosCultivos(std::ostream &os) const{
-
     int j = 0;
     os << "[";
     while (j < _campo.dimensiones().largo){
@@ -107,11 +111,9 @@ void Sistema::_guardarEstadosCultivos(std::ostream &os) const{
             os << estadoDelCultivo(p);
 
             i++;
-
             if (i < _campo.dimensiones().ancho){
                 os << ",";
             }
-
         }
 
         j++;
@@ -121,10 +123,7 @@ void Sistema::_guardarEstadosCultivos(std::ostream &os) const{
             os << "]";
         }
     }
-
     os << "]";
-
-
 }
 
 void Sistema::_mostrarEstadosCultivos(std::ostream &os) const{
