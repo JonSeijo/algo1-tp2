@@ -66,7 +66,12 @@ int main(){
     ifstream archivoLecturaSistema("sistema.txt");
     sis.cargar(archivoLecturaSistema);
     archivoLecturaSistema.close();
+/*
+    Secuencia<Posicion> ps;
+    ps.push_back(posG);
 
+    sis.seVinoLaMaleza(ps);
+*/
     cout << sis;
 
     return 0;

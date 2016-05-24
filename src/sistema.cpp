@@ -29,6 +29,14 @@ void Sistema::crecer(){
 }
 
 void Sistema::seVinoLaMaleza(const Secuencia<Posicion>& ps){
+    // Por el requiere, toda posicion de ps es Cultivo y esta en rango
+    unsigned int i = 0;
+    while (i < ps.size()){
+        int x = ps.at(i).x;
+        int y = ps.at(i).y;
+        _estado.parcelas.at(x).at(y) = ConMaleza;
+        i++;
+    }
 }
 
 void Sistema::seExpandePlaga(){
