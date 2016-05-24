@@ -108,7 +108,29 @@ void Sistema::cargar(std::istream & is){
 
 void Sistema::_leerSepararDatos(std::string &dSistema, std::string &dCampo,
                                 std::string &dEnjambre, std::string &dEstadosCultivo){
+    int i = 1;
+    int k = 0;
+    bool terminado = false;
+    std::string datoActual;
 
+    while (!terminado){
+        if (dSistema[i] == '{'){
+            k = i;
+        }
+        if (dSistema[i] == '}' && ){
+            datoActual = dCampo += dSistema.substr(k, i-k);
+            if (dSistema[k+2] == 'C'){
+                dCampo += datoActual;
+            }
+            if (dSistema[k+2] == 'D'){
+                dEnjambre += datoActual;
+            }
+
+        }
+
+        i++;
+
+    }
 }
 
 void Sistema::_cargarCampo(std::string &dCampo){
