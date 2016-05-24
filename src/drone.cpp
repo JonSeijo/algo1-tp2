@@ -452,3 +452,23 @@ std::ostream & operator<<(std::ostream & os, const Producto & p){
 
     return os;
 }
+
+void Drone::moverA(const Posicion pos){
+
+}
+
+void Drone::setBateria(const Carga c){
+
+}           
+
+void Drone::borrarVueloRealizado(){
+
+}
+            
+void Drone::cambiarPosicionActual(const Posicion p){
+
+}
+            
+void Drone::sacarProducto(const Producto p){
+    
+}
