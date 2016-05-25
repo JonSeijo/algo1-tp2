@@ -67,6 +67,15 @@ bool Sistema::listoParaCosechar() const{
 }
 
 void Sistema::aterrizarYCargarBaterias(Carga b){
+    unsigned int i = 0;
+    while(i < _enjambre.size()){
+        if(_enjambre.at(i).bateria() < b){
+            _enjambre.at(i).setBateria(100);
+            _enjambre.at(i).moverA(posGranero());
+            _enjambre.at(i).borrarVueloRealizado();
+
+        }
+    }
 }
 
 void Sistema::fertilizarPorFilas(){
@@ -305,4 +314,21 @@ std::ostream & operator<<(std::ostream & os, const EstadoCultivo & e){
 std::ostream & operator<<(std::ostream & os, const Sistema & s){
     s.mostrar(os);
 	return os;
+}
+
+Posicion Sistema::posGranero() const {
+    Posicion p;
+    unsigned int i = 0;
+    while(i < _campo.dimensiones().ancho){
+        unsigned int j = 0;
+        while(j < _campo.dimensiones().largo){
+            if(_campo.contenido(i, j) == Granero){
+                p.x = i;
+                p.y = j;
+            }
+            j++;
+        }
+        i++;
+    }
+    return p;
 }

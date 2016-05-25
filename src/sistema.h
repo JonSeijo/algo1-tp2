@@ -47,6 +47,8 @@ class Sistema {
         void _cargarEnjambre(std::string &dEnjambre);
         void _cargarEstadosCultivo(std::string &dEstadosCultivo);
 
+        Posicion posGranero() const;
+
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.
