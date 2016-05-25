@@ -188,6 +188,27 @@ void Sistema::_cargarDroneIndividual(Drone &d, std::string &dDrone){
 
 void Sistema::_cargarEnjambre(std::string &dEnjambre){
     std::cout << "ENJAMBRE\n" << dEnjambre << std::endl;
+    // Vacio el enjambre anterior.
+    // La idea es crear drone nuevos con los datos, y appendearlos al enjambre
+    _enjambre.resize(0);
+    unsigned int i = 0;
+    int ultimoInicio = 0;
+    std::string dDrone = "";
+
+    while (i < dEnjambre.size()){
+        if (dEnjambre[i] == '{'){
+            ultimoInicio = i;
+        }
+        if (dEnjambre[i] == '}'){
+            Secuencia<Producto> ps;
+            Drone d(0, ps);
+
+            dDrone = dEnjambre.substr(ultimoInicio, i-ultimoInicio);
+            _cargarDroneIndividual(d, dDrone);
+            _enjambre.push_back(d);
+        }
+        i++;
+    }
 }
 
 void Sistema::_cargarEstadosCultivo(std::string &dEstadosCultivo){
