@@ -46,8 +46,9 @@ void Sistema::despegar(const Drone & d){
 }
 
 bool Sistema::listoParaCosechar() const{
+	int totalCultivos = (_campo.dimensiones().ancho * _campo.dimensiones().largo) - 2;
+
 	int cantCosechable = 0;
-	int cantNoCosechable = 0;
 	int i = 0;
 
 	while(i < _estado.parcelas.size()){
@@ -55,8 +56,6 @@ bool Sistema::listoParaCosechar() const{
 		while(j < _estado.parcelas.at(i).size()){
 			if(_estado.parcelas.at(i) == ListoParaCosechar){
 				cantCosechable++;
-			}else{
-				cantNoCosechable++;
 			}
 			j++;
 		}
@@ -64,11 +63,7 @@ bool Sistema::listoParaCosechar() const{
 		i++;
 	}
 
-	//Aca meti un - 2 para sacar la casa y el granero
-	//medio feo si, la otra es ir accediendo tabien al campo
-	//lo cual tambien es feo
-
-	return (cantCosechable/cantNoCosechable - 2) >= 0.9;
+	return (cantCosechable / totalCultivos) >= 0.9;
 }
 
 void Sistema::aterrizarYCargarBaterias(Carga b){
