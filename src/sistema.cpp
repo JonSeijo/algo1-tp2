@@ -246,14 +246,13 @@ void Sistema::_cargarEstadosCultivo(std::string &dEstados){
             }
         }
 
+        // necesitaCierre es util para ignorar la coma entre las listas
         if (dEstados[i] == '['){
             necesitaCierre = true;
         }
 
-        if (!necesitaCierre){
-            if (dEstados[i] == ']' && dEstados[i+1] == '}'){
-                terminado = true;
-            }
+        if (dEstados[i] == ']' && dEstados[i+1] == '}'){
+            terminado = true;
         }
         i++;
     }
