@@ -50,10 +50,10 @@ bool Sistema::listoParaCosechar() const{
 	int totalCultivos = (_campo.dimensiones().ancho * _campo.dimensiones().largo) - 2;
 
 	int cantCosechable = 0;
-	int i = 0;
+    unsigned int i = 0;
 
 	while(i < _estado.parcelas.size()){
-		int j = 0;
+        unsigned int j = 0;
         while(j < _estado.parcelas.at(i).size()){
             if(_estado.parcelas.at(i).at(j) == ListoParaCosechar){
 				cantCosechable++;
@@ -176,7 +176,7 @@ void Sistema::_cargarCampo(std::string &dCampo){
     _campo.cargar(campoIstream);
 }
 
-void Sistema::_cargarDroneIndividual(std::string &dDrone){
+void Sistema::_cargarDroneIndividual(Drone &d, std::string &dDrone){
 
 }
 
