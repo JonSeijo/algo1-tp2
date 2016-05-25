@@ -220,8 +220,62 @@ void Sistema::_cargarEnjambre(std::string &dEnjambre){
     }
 }
 
-void Sistema::_cargarEstadosCultivo(std::string &dEstadosCultivo){
+void Sistema::_cargarEstadosCultivo(std::string &dEstados){
+    _estado.parcelas.resize(0, std::vector<EstadoCultivo>(0));
+    _estado.parcelas.resize(_campo.dimensiones().ancho, std::vector<EstadoCultivo>(_campo.dimensiones().largo, NoSensado));
 
+    int i = 1;
+    int posX = 0;
+    int posY = 0;
+    bool terminado = false;
+    bool necesitaCierre = false;
+    std::string datoActual = "";
+
+    std::cout << "\ncarga estados cultivos \n";
+
+    while (!terminado){
+
+        if (necesitaCierre){
+            std::cout << dEstados[i];
+            if (dEstados[i] == ','){
+                _cargarEstadoIndividual(posX, posY, datoActual);
+                datoActual = "";
+                posX++;
+            }
+
+            else if (dEstados[i] == ']'){
+                necesitaCierre = false;
+                _cargarEstadoIndividual(posX, posY, datoActual);
+                datoActual = "";
+                posX = 0;
+                posY++;
+            }
+            else{
+                datoActual += dEstados[i];
+            }
+        }
+
+        // necesitaCierre es util para ignorar la coma entre las listas
+        if (dEstados[i] == '['){
+            necesitaCierre = true;
+        }
+
+        if (dEstados[i] == ']' && dEstados[i+1] == '}'){
+            terminado = true;
+        }
+        i++;
+    }
+    std::cout << "\nfin estados cultivos\n" << std::endl;
+}
+
+void Sistema::_cargarEstadoIndividual(int x, int y, std::string dEstado){
+//RecienSembrado, EnCrecimiento, ListoParaCosechar, ConMaleza, ConPlaga, NoSensado
+    if(dEstado == "RecienSembrado") _estado.parcelas.at(x).at(y) = RecienSembrado;
+    if(dEstado == "EnCrecimiento") _estado.parcelas.at(x).at(y) = EnCrecimiento;
+    if(dEstado == "ListoParaCosechar") _estado.parcelas.at(x).at(y) = ListoParaCosechar;
+    if(dEstado == "ConMaleza") _estado.parcelas.at(x).at(y) = ConMaleza;
+    if(dEstado == "ConPlaga") _estado.parcelas.at(x).at(y) = ConPlaga;
+    if(dEstado == "NoSensado") _estado.parcelas.at(x).at(y) = NoSensado;
 }
 
 void Sistema::_guardarDrones(std::ostream &os) const{

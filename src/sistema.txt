@@ -1,1 +1,0 @@
-{ S { C [2,2] [[Casa,Granero], [Cultivo,Cultivo]]} [{ D 5 100 [[0,0],[1,0]] [Herbicida, Plaguicida]},{ D 1 98 [[0,0],[1,0]] [Fertilizante, Plaguicida]},{ D 0 0 [] []}] [[NoSensado,NoSensado], [NoSensado,NoSensado]]}
