@@ -45,11 +45,16 @@ class Sistema {
         void _cargarCampo(std::string &dCampo);
         void _cargarDroneIndividual(Drone &d, std::string &dDrone);
         void _cargarEnjambre(std::string &dEnjambre);
+
+
+        Posicion posGranero() const;
+
         void _cargarEstadosCultivo(std::string &dEstados);
         void _cargarEstadoIndividual(int x, int y, std::string dEstado);
+
         bool _igualEstados(const Sistema &s) const;
         bool _mismosDrones(const Sistema &s) const;
-        bool _pertenece(Drone d, Secuencia<Drone> enjambre);
+        bool _pertenece(Drone d, const Secuencia<Drone> enjambre) const;
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.

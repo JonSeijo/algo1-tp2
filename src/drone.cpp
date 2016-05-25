@@ -465,6 +465,8 @@ void Drone::setBateria(const Carga c){
 void Drone::borrarVueloRealizado(){
     //lean la especificacion de esta
     //no estoy seguro de que este bien especificada
+    _enVuelo = false;
+    _trayectoria.clear();
 }
             
 void Drone::cambiarPosicionActual(const Posicion p){

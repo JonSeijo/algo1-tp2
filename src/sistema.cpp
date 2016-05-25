@@ -67,6 +67,15 @@ bool Sistema::listoParaCosechar() const{
 }
 
 void Sistema::aterrizarYCargarBaterias(Carga b){
+    unsigned int i = 0;
+    while(i < _enjambre.size()){
+        if(_enjambre.at(i).bateria() < b){
+            _enjambre.at(i).setBateria(100);
+            _enjambre.at(i).moverA(posGranero());
+            _enjambre.at(i).borrarVueloRealizado();
+
+        }
+    }
 }
 
 void Sistema::fertilizarPorFilas(){
@@ -390,7 +399,7 @@ bool Sistema::_mismosDrones(const Sistema &s) const{
     return mismos;
 }
 
-bool Sistema::_pertenece(Drone d, Secuencia<Drone> enjambre){
+bool Sistema::_pertenece(Drone d, const Secuencia<Drone> enjambre) const{
 
 }
 
@@ -408,4 +417,24 @@ std::ostream & operator<<(std::ostream & os, const EstadoCultivo & e){
 std::ostream & operator<<(std::ostream & os, const Sistema & s){
     s.mostrar(os);
 	return os;
+}
+
+Posicion Sistema::posGranero() const {
+    Posicion posGranero;
+    unsigned int i = 0;
+    while(i < _campo.dimensiones().ancho){
+        unsigned int j = 0;
+        while(j < _campo.dimensiones().largo){
+            Posicion p;
+            p.x = i;
+            p.y = j;
+            if(_campo.contenido(p) == Granero){
+                posGranero.x = i;
+                posGranero.y = j;
+            }
+            j++;
+        }
+        i++;
+    }
+    return posGranero;
 }
