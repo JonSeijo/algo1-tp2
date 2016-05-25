@@ -46,7 +46,24 @@ void Sistema::despegar(const Drone & d){
 }
 
 bool Sistema::listoParaCosechar() const{
-	return false;
+	int totalCultivos = (_campo.dimensiones().ancho * _campo.dimensiones().largo) - 2;
+
+	int cantCosechable = 0;
+	int i = 0;
+
+	while(i < _estado.parcelas.size()){
+		int j = 0;
+		while(j < _estado.parcelas.at(i).size()){
+			if(_estado.parcelas.at(i) == ListoParaCosechar){
+				cantCosechable++;
+			}
+			j++;
+		}
+		}
+		i++;
+	}
+
+	return (cantCosechable / totalCultivos) >= 0.9;
 }
 
 void Sistema::aterrizarYCargarBaterias(Carga b){

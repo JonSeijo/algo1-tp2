@@ -35,6 +35,22 @@ class Sistema {
 		Secuencia<Drone> _enjambre;
         Grilla<EstadoCultivo> _estado;
 
+                // Auxiliares
+        bool enRango(int x, int y) const;
+        bool enRango(const Posicion p) const;
+        bool enRangoConPlaga(int x, int y) const;
+        Posicion posicionGranero() const;
+        bool enRangoCultivable(int x, int y) const;
+        bool enRangoCultivableLibre(int x, int y) const;
+        bool parcelaLibre(int x, int y) const;
+        static Posicion vecinoAlOeste(const Posicion &p);
+
+        static bool tieneUnProducto(const Secuencia<Producto> &ps, const Producto &productoABuscar);
+        // solución --> deberíamos agregarla como funciones globales en tipos.h
+        void split(const std::string &s, char delim, std::vector<std::string> &elems);
+        std::vector<std::string> split(const std::string &s, char delim);
+
+
         void _mostrarEstadosCultivos(std::ostream &os) const;
         void _guardarEstadosCultivos(std::ostream &os) const;
         void _guardarDrones(std::ostream &os) const;
