@@ -145,7 +145,7 @@ void Sistema::_leerSepararDatos(std::string &dSistema, std::string &dCampo,
                         necesitaCierre = false;
                     }
                     if (dSistema[ultimoInicio+2] == 'D'){
-                        dEnjambre = dSistema.substr(ultimoInicio, i-ultimoInicio+1);
+                        dEnjambre += dSistema.substr(ultimoInicio, i-ultimoInicio+1);
                         ultimoFin = i;
                         sinDrones = false;
                         necesitaCierre = false;
@@ -170,18 +170,24 @@ void Sistema::_leerSepararDatos(std::string &dSistema, std::string &dCampo,
 void Sistema::_cargarCampo(std::string &dCampo){
     // Convierto la string con los datos a un iStringStream (que es un iStream)
     // para poder usar directamente l cargar de campo.
-    // Si no hago esto podria copiar/pegar la funcion desde campo, en la parte que cargo desde string
-    // Esto es porque no puedo crear una clase publica que lo haga.
+    // Si no hago esto podria copiar/pegar la funcion desde drone, en la parte que cargo desde string.
+    // Como no puedo crear clase publica, ni tampoco quiero copypastear, hago este cambio de tipo
+
      std::istringstream campoIstream(dCampo);
     _campo.cargar(campoIstream);
 }
 
 void Sistema::_cargarDroneIndividual(Drone &d, std::string &dDrone){
-
+    // Convierto la string con los datos a un iStringStream (que es un iStream)
+    // para poder usar directamente 'cargar' de drone.
+    // Si no hago esto podria copiar/pegar la funcion desde drone, en la parte que cargo desde string.
+    // Como no puedo crear clase publica, ni tampoco quiero copypastear, hago este cambio de tipo
+    std::istringstream droneIstream(dDrone);
+    d.cargar(droneIstream);
 }
 
 void Sistema::_cargarEnjambre(std::string &dEnjambre){
-
+    std::cout << "ENJAMBRE\n" << dEnjambre << std::endl;
 }
 
 void Sistema::_cargarEstadosCultivo(std::string &dEstadosCultivo){
