@@ -212,6 +212,16 @@ void Sistema::_cargarEnjambre(std::string &dEnjambre){
 }
 
 void Sistema::_cargarEstadosCultivo(std::string &dEstadosCultivo){
+    _estado.parcelas.resize(0, std::vector<EstadoCultivo>(0));
+    _estado.parcelas.resize(_campo.dimensiones().ancho, std::vector<EstadoCultivo>(_campo.dimensiones().largo, NoSensado));
+
+
+
+
+    std::cout << dEstadosCultivo << std::endl;
+}
+
+void Sistema::_cargarEstadoIndividual(int x, int y, std::string dEstado){
 
 }
 

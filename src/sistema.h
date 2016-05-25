@@ -61,7 +61,7 @@ class Sistema {
         void _cargarDroneIndividual(Drone &d, std::string &dDrone);
         void _cargarEnjambre(std::string &dEnjambre);
         void _cargarEstadosCultivo(std::string &dEstadosCultivo);
-
+        void _cargarEstadoIndividual(int x, int y, std::string dEstado);
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.
