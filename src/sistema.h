@@ -60,7 +60,7 @@ class Sistema {
         void _cargarCampo(std::string &dCampo);
         void _cargarDroneIndividual(Drone &d, std::string &dDrone);
         void _cargarEnjambre(std::string &dEnjambre);
-        void _cargarEstadosCultivo(std::string &dEstadosCultivo);
+        void _cargarEstadosCultivo(std::string &dEstados);
         void _cargarEstadoIndividual(int x, int y, std::string dEstado);
 };
 
