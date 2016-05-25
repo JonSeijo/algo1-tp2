@@ -58,7 +58,8 @@ int main(){
     //sec.push_back(d);
 
     Sistema sis(c, sec);
-/*  // Prueba guardar sistema
+    Sistema sis2(c, sec);
+    /*  // Prueba guardar sistema
     ofstream archivoSistema("sistema.txt");
     sis.guardar(archivoSistema);
     archivoSistema.close();
@@ -66,13 +67,17 @@ int main(){
     ifstream archivoLecturaSistema("sistema.txt");
     sis.cargar(archivoLecturaSistema);
     archivoLecturaSistema.close();
+
+    ifstream archivoLecturaSistema2("sistema.txt");
+    sis2.cargar(archivoLecturaSistema2);
+    archivoLecturaSistema2.close();
 /*
     Secuencia<Posicion> ps;
     ps.push_back(posG);
 
     sis.seVinoLaMaleza(ps);
 */
-    cout << sis;
+    cout << "sis == sis2: " << (sis == sis2) << endl;
 
     return 0;
 }

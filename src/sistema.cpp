@@ -338,11 +338,60 @@ void Sistema::_mostrarEstadosCultivos(std::ostream &os) const{
 }
 
 bool Sistema::operator==(const Sistema & otroSistema) const{
-    return false;
-    //this->_campo == otroSistema._campo
-    //		&& this->_estado == otroSistema._estado
-//			/*&& std::is_permutation(_enjambre.begin(), _enjambre.end(), otroSistema._enjambre.begin())*/;
-//*/
+    return _campo == otroSistema.campo() &&
+            _igualEstados(otroSistema) &&
+            _mismosDrones(otroSistema);
+}
+
+bool Sistema::_igualEstados(const Sistema &s) const{
+    bool iguales = true;
+    unsigned int i = 0;
+
+    while (i < _estado.parcelas.size()){
+        unsigned int j = 0;
+
+        // Si _igualEstados se ejecuta es porque los campos eran iguales
+        // Como los campos tienen dimension (igual a los estados de cultivo),
+        //puedo acceder a las posiciones sin que se indefina
+        while (j < _estado.parcelas.at(0).size()){
+            Posicion p;
+            p.x = i;
+            p.y = j;
+            if (estadoDelCultivo(p) != s.estadoDelCultivo(p)){
+                iguales = false;
+            }
+            j++;
+        }
+        i++;
+    }
+    return iguales;
+}
+
+bool Sistema::_mismosDrones(const Sistema &s) const{
+
+    bool mismos = true;
+    if (_enjambre.size() == s.enjambreDrones().size()){
+
+        unsigned int i = 0;
+        // Recordar que como los ids son unicos,
+        // no hay dos drones iguales en la misma lista
+
+        while (i < _enjambre.size()){
+            if (!_pertenece(_enjambre.at(i), s.enjambreDrones() )){
+                mismos = false;
+            }
+            i++;
+        }
+
+
+    }else{
+        mismos = false;
+    }
+    return mismos;
+}
+
+bool Sistema::_pertenece(Drone d, Secuencia<Drone> enjambre){
+
 }
 
 std::ostream & operator<<(std::ostream & os, const EstadoCultivo & e){
