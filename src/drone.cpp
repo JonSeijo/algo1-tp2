@@ -454,21 +454,32 @@ std::ostream & operator<<(std::ostream & os, const Producto & p){
 }
 
 void Drone::moverA(const Posicion pos){
-
+    _enVuelo = true;
+    _trayectoria.push_back(pos);
 }
 
 void Drone::setBateria(const Carga c){
-
+    _bateria = c;
 }           
 
 void Drone::borrarVueloRealizado(){
-
+    //lean la especificacion de esta
+    //no estoy seguro de que este bien especificada
 }
             
 void Drone::cambiarPosicionActual(const Posicion p){
-
+    _posicionActual = p;
 }
             
 void Drone::sacarProducto(const Producto p){
+    unsigned int i = 0;
+    while(i < _productos.size()){
+        if(_productos.at(i) == p){
+            _productos.erase(_productos.begin() + i);
+            i += _productos.size();
+        }
+
+        i++;
+    }
     
 }
