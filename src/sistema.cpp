@@ -1,5 +1,6 @@
 #include "sistema.h"
 #include <algorithm>
+#include <sstream>
 
 Sistema::Sistema(){
     std::cout << "const vacio sistema" << std::endl;
@@ -167,7 +168,12 @@ void Sistema::_leerSepararDatos(std::string &dSistema, std::string &dCampo,
 }
 
 void Sistema::_cargarCampo(std::string &dCampo){
-
+    // Convierto la string con los datos a un iStringStream (que es un iStream)
+    // para poder usar directamente l cargar de campo.
+    // Si no hago esto podria copiar/pegar la funcion desde campo, en la parte que cargo desde string
+    // Esto es porque no puedo crear una clase publica que lo haga.
+     std::istringstream campoIstream(dCampo);
+    _campo.cargar(campoIstream);
 }
 
 void Sistema::_cargarDroneIndividual(std::string &dDrone){
