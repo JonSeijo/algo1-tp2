@@ -1,5 +1,6 @@
 #include "sistema.h"
 #include <algorithm>
+#include <sstream>
 
 Sistema::Sistema(){
     std::cout << "const vacio sistema" << std::endl;
@@ -49,21 +50,20 @@ bool Sistema::listoParaCosechar() const{
 	int totalCultivos = (_campo.dimensiones().ancho * _campo.dimensiones().largo) - 2;
 
 	int cantCosechable = 0;
-	int i = 0;
+    unsigned int i = 0;
 
 	while(i < _estado.parcelas.size()){
-		int j = 0;
-		while(j < _estado.parcelas.at(i).size()){
-			if(_estado.parcelas.at(i) == ListoParaCosechar){
+        unsigned int j = 0;
+        while(j < _estado.parcelas.at(i).size()){
+            if(_estado.parcelas.at(i).at(j) == ListoParaCosechar){
 				cantCosechable++;
 			}
 			j++;
 		}
-		}
 		i++;
-	}
+    }
 
-	return (cantCosechable / totalCultivos) >= 0.9;
+    return ((cantCosechable / totalCultivos) >= 0.9);
 }
 
 void Sistema::aterrizarYCargarBaterias(Carga b){
@@ -125,19 +125,90 @@ void Sistema::cargar(std::istream & is){
 
 void Sistema::_leerSepararDatos(std::string &dSistema, std::string &dCampo,
                                 std::string &dEnjambre, std::string &dEstadosCultivo){
+    int i = 1;
+    int ultimoInicio = 0;
+    int ultimoFin = 0;
+    bool terminado = false;
+    bool necesitaCierre = false;
+    bool sinDrones = true;
 
+    while (!terminado){
+        if (dSistema[i] == '{'){
+            ultimoInicio = i;
+            necesitaCierre = true;
+        }
+        if (dSistema[i] == '}'){
+                if (necesitaCierre){
+                    if (dSistema[ultimoInicio+2] == 'C'){
+                        dCampo = dSistema.substr(ultimoInicio, i-ultimoInicio+1);
+                        ultimoFin = i;
+                        necesitaCierre = false;
+                    }
+                    if (dSistema[ultimoInicio+2] == 'D'){
+                        dEnjambre += dSistema.substr(ultimoInicio, i-ultimoInicio+1);
+                        ultimoFin = i;
+                        sinDrones = false;
+                        necesitaCierre = false;
+                    }
+
+                }else{
+                    if(sinDrones){
+                        dEstadosCultivo = dSistema.substr(ultimoFin + 5, dSistema.npos - ultimoFin-6);
+                    }else{
+                        dEstadosCultivo = dSistema.substr(ultimoFin + 3, dSistema.npos - ultimoFin-4);
+                    }
+
+                    terminado = true;
+                }
+            }
+
+        i++;
+
+    }
 }
 
 void Sistema::_cargarCampo(std::string &dCampo){
+    // Convierto la string con los datos a un iStringStream (que es un iStream)
+    // para poder usar directamente l cargar de campo.
+    // Si no hago esto podria copiar/pegar la funcion desde drone, en la parte que cargo desde string.
+    // Como no puedo crear clase publica, ni tampoco quiero copypastear, hago este cambio de tipo
 
+     std::istringstream campoIstream(dCampo);
+    _campo.cargar(campoIstream);
 }
 
-void Sistema::_cargarDroneIndividual(std::string &dDrone){
-
+void Sistema::_cargarDroneIndividual(Drone &d, std::string &dDrone){
+    // Convierto la string con los datos a un iStringStream (que es un iStream)
+    // para poder usar directamente 'cargar' de drone.
+    // Si no hago esto podria copiar/pegar la funcion desde drone, en la parte que cargo desde string.
+    // Como no puedo crear clase publica, ni tampoco quiero copypastear, hago este cambio de tipo
+    std::istringstream droneIstream(dDrone);
+    d.cargar(droneIstream);
 }
 
 void Sistema::_cargarEnjambre(std::string &dEnjambre){
+    std::cout << "ENJAMBRE\n" << dEnjambre << std::endl;
+    // Vacio el enjambre anterior.
+    // La idea es crear drone nuevos con los datos, y appendearlos al enjambre
+    _enjambre.resize(0);
+    unsigned int i = 0;
+    int ultimoInicio = 0;
+    std::string dDrone = "";
 
+    while (i < dEnjambre.size()){
+        if (dEnjambre[i] == '{'){
+            ultimoInicio = i;
+        }
+        if (dEnjambre[i] == '}'){
+            Secuencia<Producto> ps;
+            Drone d(0, ps);
+
+            dDrone = dEnjambre.substr(ultimoInicio, i-ultimoInicio);
+            _cargarDroneIndividual(d, dDrone);
+            _enjambre.push_back(d);
+        }
+        i++;
+    }
 }
 
 void Sistema::_cargarEstadosCultivo(std::string &dEstadosCultivo){

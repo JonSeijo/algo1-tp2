@@ -43,7 +43,7 @@ class Sistema {
         void _leerSepararDatos(std::string &dSistema, std::string &dCampo,
                                 std::string &dEnjambre, std::string &dEstadosCultivo);
         void _cargarCampo(std::string &dCampo);
-        void _cargarDroneIndividual(std::string &dDrone);
+        void _cargarDroneIndividual(Drone &d, std::string &dDrone);
         void _cargarEnjambre(std::string &dEnjambre);
         void _cargarEstadosCultivo(std::string &dEstadosCultivo);
 
