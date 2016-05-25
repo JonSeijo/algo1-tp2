@@ -53,17 +53,16 @@ bool Sistema::listoParaCosechar() const{
 
 	while(i < _estado.parcelas.size()){
 		int j = 0;
-		while(j < _estado.parcelas.at(i).size()){
-			if(_estado.parcelas.at(i) == ListoParaCosechar){
+        while(j < _estado.parcelas.at(i).size()){
+            if(_estado.parcelas.at(i).at(j) == ListoParaCosechar){
 				cantCosechable++;
 			}
 			j++;
 		}
-		}
 		i++;
-	}
+    }
 
-	return (cantCosechable / totalCultivos) >= 0.9;
+    return ((cantCosechable / totalCultivos) >= 0.9);
 }
 
 void Sistema::aterrizarYCargarBaterias(Carga b){
@@ -126,24 +125,41 @@ void Sistema::cargar(std::istream & is){
 void Sistema::_leerSepararDatos(std::string &dSistema, std::string &dCampo,
                                 std::string &dEnjambre, std::string &dEstadosCultivo){
     int i = 1;
-    int k = 0;
+    int ultimoInicio = 0;
+    int ultimoFin = 0;
     bool terminado = false;
-    std::string datoActual;
+    bool necesitaCierre = false;
+    bool sinDrones = true;
 
     while (!terminado){
         if (dSistema[i] == '{'){
-            k = i;
+            ultimoInicio = i;
+            necesitaCierre = true;
         }
-        if (dSistema[i] == '}' && ){
-            datoActual = dCampo += dSistema.substr(k, i-k);
-            if (dSistema[k+2] == 'C'){
-                dCampo += datoActual;
-            }
-            if (dSistema[k+2] == 'D'){
-                dEnjambre += datoActual;
-            }
+        if (dSistema[i] == '}'){
+                if (necesitaCierre){
+                    if (dSistema[ultimoInicio+2] == 'C'){
+                        dCampo = dSistema.substr(ultimoInicio, i-ultimoInicio+1);
+                        ultimoFin = i;
+                        necesitaCierre = false;
+                    }
+                    if (dSistema[ultimoInicio+2] == 'D'){
+                        dEnjambre = dSistema.substr(ultimoInicio, i-ultimoInicio+1);
+                        ultimoFin = i;
+                        sinDrones = false;
+                        necesitaCierre = false;
+                    }
 
-        }
+                }else{
+                    if(sinDrones){
+                        dEstadosCultivo = dSistema.substr(ultimoFin + 5, dSistema.npos - ultimoFin-6);
+                    }else{
+                        dEstadosCultivo = dSistema.substr(ultimoFin + 3, dSistema.npos - ultimoFin-4);
+                    }
+
+                    terminado = true;
+                }
+            }
 
         i++;
 
