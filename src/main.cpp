@@ -31,7 +31,7 @@ int main(){
     Drone d1(5, productos);
 
     Secuencia<Drone> sec;
-    //sec.push_back(d);
+    sec.push_back(d);
     //sec.push_back(d);
 
     Sistema sis(c, sec);
@@ -47,6 +47,8 @@ int main(){
     sis.cargar(archivoLecturaSistema);
     archivoLecturaSistema.close();
 */
+
+    sis.despegar(d);
     cout << "sis == sis2: " << (sis == sis2) << endl;
 
     return 0;

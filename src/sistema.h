@@ -18,7 +18,7 @@ class Sistema {
 		void crecer();
 		void seVinoLaMaleza(const Secuencia<Posicion>& ps);
 		void seExpandePlaga();
-		void despegar(const Drone& d);
+        void despegar(const Drone& d);
 		bool listoParaCosechar() const;
 		void aterrizarYCargarBaterias(Carga b);
 		void fertilizarPorFilas();
@@ -46,7 +46,6 @@ class Sistema {
         void _cargarDroneIndividual(Drone &d, std::string &dDrone);
         void _cargarEnjambre(std::string &dEnjambre);
 
-
         Posicion posGranero() const;
 
         void _cargarEstadosCultivo(std::string &dEstados);
@@ -55,6 +54,10 @@ class Sistema {
         bool _igualEstados(const Sistema &s) const;
         bool _mismosDrones(const Sistema &s) const;
         bool _pertenece(Drone d, const Secuencia<Drone> enjambre) const;
+
+        Posicion _parcelaCultivoLibre() const;
+        bool _esLibreDeDrones(Posicion p) const;
+        bool _esAdyacente(Posicion p1, Posicion p2) const;
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.

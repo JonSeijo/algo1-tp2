@@ -44,6 +44,62 @@ void Sistema::seExpandePlaga(){
 }
 
 void Sistema::despegar(const Drone & d){
+    unsigned int i = 0;
+    while (i < _enjambre.size()){
+        if (_enjambre.at(i) == d){
+            _enjambre.at(i).cambiarPosicionActual(_parcelaCultivoLibre());
+        }
+        i++;
+    }
+
+    std::cout << "despego el drone" << std::endl;
+}
+
+Posicion Sistema::_parcelaCultivoLibre() const{
+    Secuencia<Posicion> ps;
+
+    int i = 0;
+    while (i < _campo.dimensiones().ancho){
+        int j = 0;
+        while (j < _campo.dimensiones().largo){
+            Posicion p;
+            p.x = i;
+            p.y = j;
+
+            if (_esAdyacente(p, posGranero()) &&
+                    _esLibreDeDrones(p)){
+                ps.push_back(p);
+            }
+            j++;
+        }
+        i++;
+    }
+
+    // Solo necesito una, y el requiere garantiza que existe
+    return ps.at(0);
+
+}
+
+bool Sistema::_esLibreDeDrones(Posicion p) const{
+
+    unsigned int i = 0;
+    bool libre = true;
+    while (i < _enjambre.size()){
+        if (_enjambre.at(i).posicionActual().x == p.x &&
+                _enjambre.at(i).posicionActual().y == p.y){
+            libre = false;
+        }
+        i++;
+    }
+
+    return libre;
+}
+
+bool Sistema::_esAdyacente(Posicion p1, Posicion p2) const{
+    return (p1.x == p2.x-1 && p1.y == p2.y) ||
+            (p1.x == p2.x+1 && p1.y == p2.y) ||
+            (p1.x == p2.x && p1.y == p2.y -1) ||
+            (p1.x == p2.x && p1.y == p2.y +1);
 }
 
 bool Sistema::listoParaCosechar() const{
