@@ -10,7 +10,7 @@ using namespace std;
 int main(){
 	
     // testeando
-    //si me olvido de borrar sean libres de hacer mierda todo esto
+    // si me olvido de borrar sean libres de hacer mierda todo esto
 
     Posicion posG;
     posG.x = 0;
@@ -21,36 +21,13 @@ int main(){
     posC.y = 0;
 
     Campo c(posG, posC);
-    /*
-    Prueba de guardado
-    std::ofstream archivoCampo("campo.txt");
-    c.guardar(archivoCampo);
-    archivoCampo.close();
-    */
-    //cout << c;
-
     Campo c2(posG, posC);
-    // Prueba de cargado
-    //std::ifstream archivoLecturaCampo("campo.txt");
-    //c.cargar(archivoLecturaCampo);
-    //archivoLecturaCampo.close();
-
-    //cout << c;
-
-    // Prueba igualdad
-    //cout << (c == c2) << endl;
 
     std::vector<Producto> productos;
     productos.push_back(Herbicida);
     productos.push_back(Plaguicida);
 
     Drone d(5, productos);
-
-    // Prueba de cargado Drone
-    std::ifstream archivoLecturaDrone("drone.txt");
-    d.cargar(archivoLecturaDrone);
-    archivoLecturaDrone.close();
-
     Drone d1(5, productos);
 
     Secuencia<Drone> sec;
@@ -64,18 +41,11 @@ int main(){
     sis.guardar(archivoSistema);
     archivoSistema.close();
 */
+   /*
+    Prueba cargar sistema
     ifstream archivoLecturaSistema("sistema.txt");
     sis.cargar(archivoLecturaSistema);
     archivoLecturaSistema.close();
-
-    ifstream archivoLecturaSistema2("sistema.txt");
-    sis2.cargar(archivoLecturaSistema2);
-    archivoLecturaSistema2.close();
-/*
-    Secuencia<Posicion> ps;
-    ps.push_back(posG);
-
-    sis.seVinoLaMaleza(ps);
 */
     cout << "sis == sis2: " << (sis == sis2) << endl;
 

@@ -123,8 +123,6 @@ void Sistema::cargar(std::istream & is){
 
     getline(is, dSistema,'\0');
 
-    std::cout << dSistema << "\n" << std::endl;
-
     _leerSepararDatos(dSistema, dCampo, dEnjambre, dEstadosCultivo);
     _cargarCampo(dCampo);
     _cargarEnjambre(dEnjambre);
@@ -400,7 +398,15 @@ bool Sistema::_mismosDrones(const Sistema &s) const{
 }
 
 bool Sistema::_pertenece(Drone d, const Secuencia<Drone> enjambre) const{
-
+    bool pertenece = false;
+    unsigned int i = 0;
+    while (i < enjambre.size()){
+        if (d == enjambre.at(i)){
+            pertenece = true;
+        }
+        i++;
+    }
+    return pertenece;
 }
 
 std::ostream & operator<<(std::ostream & os, const EstadoCultivo & e){
@@ -421,9 +427,9 @@ std::ostream & operator<<(std::ostream & os, const Sistema & s){
 
 Posicion Sistema::posGranero() const {
     Posicion posGranero;
-    unsigned int i = 0;
+    int i = 0;
     while(i < _campo.dimensiones().ancho){
-        unsigned int j = 0;
+        int j = 0;
         while(j < _campo.dimensiones().largo){
             Posicion p;
             p.x = i;
