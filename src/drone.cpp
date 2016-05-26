@@ -456,6 +456,7 @@ std::ostream & operator<<(std::ostream & os, const Producto & p){
 void Drone::moverA(const Posicion pos){
     _enVuelo = true;
     _trayectoria.push_back(pos);
+    _posicionActual = pos;
 }
 
 void Drone::setBateria(const Carga c){
