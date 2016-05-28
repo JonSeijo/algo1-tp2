@@ -64,7 +64,8 @@ int main(){
    // sis.crecer();
    // cout << sis;
     // cout << "sis == sis2: " << (sis == sis2) << endl;
-    sis.seExpandePlaga();
+   // sis.seExpandePlaga();
+    sis.fertilizarPorFilas();
     cout << sis;
 
 

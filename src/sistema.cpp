@@ -278,7 +278,8 @@ void Sistema::_moverDrone(std::vector<Posicion> recorridoDrone, Drone d){
 std::vector<Posicion> Sistema::_recorridoDrone(Drone d, int recorridoMaximo){
     std::vector<Posicion> posRecorridas;
     int i = 1;
-    while (i < recorridoMaximo){
+    std::cout << "RECORRIDO MAXIMO : " << recorridoMaximo << std::endl;
+    while (i <= recorridoMaximo){
         Posicion p;
         p.x = d.posicionActual().x - i;
         p.y = d.posicionActual().y;
@@ -298,7 +299,7 @@ int Sistema::_parcelasLibres(Drone d){
     int posMasAlejada = 0;
     bool terminado = false;
     int i = 0;
-    while (i <= d.posicionActual().x || !terminado){
+    while (!terminado){
 
         bool todoEsCultivo = true;
         int j = i;
@@ -316,8 +317,14 @@ int Sistema::_parcelasLibres(Drone d){
             posMasAlejada = i;
             terminado = true;
         }
+
         i++;
+
+        if ( i <= d.posicionActual().x){
+            terminado = true;
+        }
     }
+    std::cout << "_PARCELAS LIBRES: " << d.posicionActual().x - posMasAlejada << std::endl;
     return d.posicionActual().x - posMasAlejada;
 }
 
@@ -326,13 +333,17 @@ int Sistema::_fertAplicable(Drone d){
     int primeraAlcanzable = 0;
     bool terminado = false;
     int i = 0;
-    while (i <= d.posicionActual().x || !terminado){
+    while (!terminado){
         if (_cantFertilizables(i,d) <= _cuentaProds(Fertilizante, d.productosDisponibles())){
             primeraAlcanzable = i;
             terminado = true;
         }
         i++;
+        if (i <= d.posicionActual().x){
+            terminado = true;
+        }
     }
+    std::cout << "FERT APLICABLE: " << (d.posicionActual().x - primeraAlcanzable) << std::endl;
     return (d.posicionActual().x - primeraAlcanzable);
 }
 
