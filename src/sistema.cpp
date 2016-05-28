@@ -257,7 +257,11 @@ void Sistema::_fertilizar(std::vector<Posicion> recorridoDrone){
 }
 
 void Sistema::_moverDrone(std::vector<Posicion> recorridoDrone, Drone d){
-
+    unsigned int i = 0;
+    while (i < recorridoDrone.size()){
+        d.moverA(recorridoDrone.at(i));
+        i++;
+    }
 }
 
 std::vector<Posicion> Sistema::_recorridoDrone(Drone d, int recorridoMaximo){
