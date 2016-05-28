@@ -253,13 +253,24 @@ void Sistema::fertilizarPorFilas(){
 }
 
 void Sistema::_fertilizar(std::vector<Posicion> recorridoDrone){
-
+    unsigned int i = 0;
+    while (i < recorridoDrone.size()){
+        Posicion p = recorridoDrone.at(i);
+        if(_estado.parcelas.at(p.x).at(p.y) == RecienSembrado ||
+              _estado.parcelas.at(p.x).at(p.y) == EnCrecimiento){
+            _estado.parcelas.at(p.x).at(p.y) = ListoParaCosechar;
+        }
+        i++;
+    }
 }
 
 void Sistema::_moverDrone(std::vector<Posicion> recorridoDrone, Drone d){
     unsigned int i = 0;
     while (i < recorridoDrone.size()){
+        // moverA actualiza la posicionActual y la trayectoria
         d.moverA(recorridoDrone.at(i));
+        d.setBateria(d.bateria() - 1);
+        d.sacarProducto(Fertilizante);
         i++;
     }
 }
