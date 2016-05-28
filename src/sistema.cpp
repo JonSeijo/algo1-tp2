@@ -262,7 +262,15 @@ void Sistema::_moverDrone(std::vector<Posicion> recorridoDrone, Drone d){
 
 std::vector<Posicion> Sistema::_recorridoDrone(Drone d, int recorridoMaximo){
     std::vector<Posicion> posRecorridas;
+    int i = 1;
+    while (i < recorridoMaximo){
+        Posicion p;
+        p.x = d.posicionActual().x - i;
+        p.y = d.posicionActual().y;
+        posRecorridas.push_back(p);
 
+        i++;
+    }
     return posRecorridas;
 }
 
