@@ -31,6 +31,11 @@ class Drone{
         void cambiarPosicionActual(const Posicion p);
         void sacarProducto(const Producto p);
 
+        static Secuencia<Secuencia< Posicion > > dameTrayectorias(const Secuencia<Drone>& ds);
+        static Secuencia<Secuencia<Posicion> > agruparPosiciones(const Secuencia<Secuencia<Posicion> > pss);
+        static Secuencia<Secuencia<InfoVueloCruzado> > agruparRepetidas(const Secuencia<Secuencia<Posicion> > tss);
+        static Secuencia<InfoVueloCruzado> borrarSobrantesYOrdenar(const Secuencia<Secuencia<InfoVueloCruzado> > xss);
+
 	private:
 		bool dosOMenos(const Secuencia<int>) const;
 		bool ordenada(const Secuencia<int>) const;
