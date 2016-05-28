@@ -262,6 +262,7 @@ void Sistema::_moverDrone(std::vector<Posicion> recorridoDrone, Drone d){
 
 std::vector<Posicion> Sistema::_recorridoDrone(Drone d, int recorridoMaximo){
     std::vector<Posicion> posRecorridas;
+
     return posRecorridas;
 }
 
@@ -274,11 +275,11 @@ int Sistema::_parcelasLibres(Drone d){
     int posMasAlejada = 0;
     bool terminado = false;
     int i = 0;
-    while (i < d.posicionActual().x || !terminado){
+    while (i <= d.posicionActual().x || !terminado){
 
         bool todoEsCultivo = true;
         int j = i;
-        while (j < d.posicionActual().x){
+        while (j <= d.posicionActual().x){
             Posicion p;
             p.x = j;
             p.y = d.posicionActual().y;
