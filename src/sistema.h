@@ -70,6 +70,10 @@ class Sistema {
         std::vector<Posicion> _recorridoDrone(Drone d, int recorridoMaximo);
         int _recorridoMaximo(Drone d);
         int _minimo(int a, int b);
+        int _fertAplicable(Drone d);
+        int _cuentaProds(Producto p, std::vector<Producto> ps);
+        int _cantFertilizables(int i, Drone d);
+        int _parcelasLibres(Drone d);
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.

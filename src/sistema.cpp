@@ -266,9 +266,80 @@ std::vector<Posicion> Sistema::_recorridoDrone(Drone d, int recorridoMaximo){
 }
 
 int Sistema::_recorridoMaximo(Drone d){
-    int recorridoMaximo = 0;
+    // Identico a la especificacion
+    return _minimo(_minimo(_fertAplicable(d), d.bateria()), _parcelasLibres(d));
+}
 
-    return recorridoMaximo;
+int Sistema::_parcelasLibres(Drone d){
+    int posMasAlejada = 0;
+    bool terminado = false;
+    int i = 0;
+    while (i < d.posicionActual().x || !terminado){
+
+        bool todoEsCultivo = true;
+        int j = i;
+        while (j < d.posicionActual().x){
+            Posicion p;
+            p.x = j;
+            p.y = d.posicionActual().y;
+            if (_campo.contenido(p) != Cultivo){
+                todoEsCultivo = false;
+            }
+            j++;
+        }
+
+        if (todoEsCultivo){
+            posMasAlejada = i;
+            terminado = true;
+        }
+        i++;
+    }
+    return d.posicionActual().x - posMasAlejada;
+}
+
+int Sistema::_fertAplicable(Drone d){
+    // Crease o no, estoy cumpliendo la especificacion tal cual
+    int primeraAlcanzable = 0;
+    bool terminado = false;
+    int i = 0;
+    while (i <= d.posicionActual().x || !terminado){
+        if (_cantFertilizables(i,d) <= _cuentaProds(Fertilizante, d.productosDisponibles())){
+            primeraAlcanzable = i;
+            terminado = true;
+        }
+        i++;
+    }
+    return (d.posicionActual().x - primeraAlcanzable);
+}
+
+int Sistema::_cuentaProds(Producto p, std::vector<Producto> ps){
+    int contador = 0;
+    unsigned int i = 0;
+    while (i < ps.size()){
+        if (ps.at(i) ==  p){
+            contador++;
+        }
+        i++;
+    }
+    return contador;
+}
+
+int Sistema::_cantFertilizables(int i, Drone d){
+    int cantFertilizbles = 0;
+    int j = i;
+    while (j < d.posicionActual().x){
+        Posicion p;
+        p.x = j;
+        p.y = d.posicionActual().y;
+        if (_campo.contenido(p) == Cultivo){
+            if(_estado.parcelas.at(p.x).at(p.y) == RecienSembrado ||
+                    _estado.parcelas.at(p.x).at(p.y) == EnCrecimiento){
+                cantFertilizbles++;
+            }
+        }
+        j++;
+    }
+    return cantFertilizbles;
 }
 
 int Sistema::_minimo(int a, int b){
