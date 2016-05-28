@@ -237,6 +237,46 @@ void Sistema::aterrizarYCargarBaterias(Carga b){
 }
 
 void Sistema::fertilizarPorFilas(){
+    unsigned int i = 0;
+    while (i < _enjambre.size()){
+        if (_enjambre.at(i).enVuelo()){
+            int recorridoMaximo = _recorridoMaximo(_enjambre.at(i));
+            std::vector<Posicion> recorridoDrone = _recorridoDrone(_enjambre.at(i), recorridoMaximo);
+
+            _moverDrone(recorridoDrone, _enjambre.at(i));
+            _fertilizar(recorridoDrone);
+        }
+
+        i++;
+    }
+
+}
+
+void Sistema::_fertilizar(std::vector<Posicion> recorridoDrone){
+
+}
+
+void Sistema::_moverDrone(std::vector<Posicion> recorridoDrone, Drone d){
+
+}
+
+std::vector<Posicion> Sistema::_recorridoDrone(Drone d, int recorridoMaximo){
+    std::vector<Posicion> posRecorridas;
+    return posRecorridas;
+}
+
+int Sistema::_recorridoMaximo(Drone d){
+    int recorridoMaximo = 0;
+
+    return recorridoMaximo;
+}
+
+int Sistema::_minimo(int a, int b){
+    int minimo;
+    if (a < b) minimo = a;
+    else minimo = b;
+
+    return minimo;
 }
 
 void Sistema::volarYSensar(const Drone & d){
