@@ -61,10 +61,11 @@ int main(){
     //cout<< x.at(1).cantidadCruces << endl;
 
     cout << sis;
-    sis.crecer();
-    cout << sis;
+   // sis.crecer();
+   // cout << sis;
     // cout << "sis == sis2: " << (sis == sis2) << endl;
-
+    sis.seExpandePlaga();
+    cout << sis;
 
 
     return 0;

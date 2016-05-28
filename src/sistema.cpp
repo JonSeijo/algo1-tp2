@@ -56,6 +56,93 @@ void Sistema::seVinoLaMaleza(const Secuencia<Posicion>& ps){
 }
 
 void Sistema::seExpandePlaga(){
+    std::vector<Posicion> posicionesPlaga = _posicionesConPlaga();
+    unsigned int i = 0;
+    while (i < posicionesPlaga.size()) {
+        _plaguizarVecinos(posicionesPlaga.at(i));
+        i++;
+    }
+
+}
+
+std::vector<Posicion> Sistema::_adyacentes(Posicion p){
+    std::vector<Posicion> adyacentes;
+
+    Posicion v1;
+    v1.x = p.x -1;
+    v1.y = p.y;
+
+    Posicion v2;
+    v2.x = p.x +1;
+    v2.y = p.y;
+
+    Posicion v3;
+    v3.x = p.x;
+    v3.y = p.y -1;
+
+    Posicion v4;
+    v4.x = p.x;
+    v4.y = p.y +1;
+
+    adyacentes.push_back(v1);
+    adyacentes.push_back(v2);
+    adyacentes.push_back(v3);
+    adyacentes.push_back(v4);
+
+    return adyacentes;
+}
+
+void Sistema::_plaguizarVecinos(Posicion p) {
+    std::vector<Posicion> vecinosConCultivos = _vecinosConCultivos(p);
+    unsigned int i = 0;
+    while (i < vecinosConCultivos.size()){
+        Posicion pPlaguizar;
+        pPlaguizar.x = vecinosConCultivos.at(i).x;
+        pPlaguizar.y = vecinosConCultivos.at(i).y;
+        _estado.parcelas.at(pPlaguizar.x).at(pPlaguizar.y) = ConPlaga;
+        i++;
+    }
+}
+
+std::vector<Posicion> Sistema::_vecinosConCultivos(Posicion p){
+    std::vector<Posicion> vecinosConCultivos;
+    std::vector<Posicion> vecinosAChequear = _adyacentes(p);
+
+    unsigned int i = 0;
+    while (i < vecinosAChequear.size()){
+        if(_enRango(vecinosAChequear.at(i)) &&
+                _campo.contenido(vecinosAChequear.at(i)) == Cultivo){
+            vecinosConCultivos.push_back(vecinosAChequear.at(i));
+        }
+        i++;
+    }
+    return vecinosConCultivos;
+}
+
+bool Sistema::_enRango(Posicion p){
+    return 0 <= p.x && p.x < _campo.dimensiones().ancho &&
+            0 <= p.y && p.y < _campo.dimensiones().largo;
+}
+
+std::vector<Posicion> Sistema::_posicionesConPlaga(){
+    std::vector<Posicion> posicionesPlaga;
+    int i = 0;
+
+    while (i < _campo.dimensiones().ancho){
+        int j = 0;
+        while (j < _campo.dimensiones().largo){
+            if (_estado.parcelas.at(i).at(j) == ConPlaga){
+                Posicion p;
+                p.x = i;
+                p.y = j;
+                posicionesPlaga.push_back(p);
+            }
+            j++;
+        }
+        i++;
+    }
+
+    return posicionesPlaga;
 }
 
 void Sistema::despegar(const Drone & d){

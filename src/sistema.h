@@ -58,6 +58,12 @@ class Sistema {
         Posicion _parcelaCultivoLibre() const;
         bool _esLibreDeDrones(Posicion p) const;
         bool _esAdyacente(Posicion p1, Posicion p2) const;
+
+        std::vector<Posicion> _posicionesConPlaga();
+        void _plaguizarVecinos(Posicion p);
+        std::vector<Posicion> _vecinosConCultivos(Posicion p);
+        std::vector<Posicion> _adyacentes(Posicion p);
+        bool _enRango(Posicion p);
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.
