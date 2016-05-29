@@ -223,17 +223,23 @@ bool Sistema::listoParaCosechar() const{
     unsigned int i = 0;
 
 	while(i < _estado.parcelas.size()){
-        unsigned int j = 0;
-        while(j < _estado.parcelas.at(i).size()){
-            if(_estado.parcelas.at(i).at(j) == ListoParaCosechar){
-				cantCosechable++;
-			}
-			j++;
-		}
+        cantCosechable += _cuentaCosechables(i);
 		i++;
     }
 
     return ((cantCosechable / totalCultivos) >= 0.9);
+}
+
+int Sistema::_cuentaCosechables(int i) const{
+    int res = 0;
+    unsigned int j = 0;
+    while(j < _estado.parcelas.at(i).size()){
+        if(_estado.parcelas.at(i).at(j) == ListoParaCosechar){
+            res++;
+        }
+        j++;
+    }
+    return res;
 }
 
 void Sistema::aterrizarYCargarBaterias(Carga b){
