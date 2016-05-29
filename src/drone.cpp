@@ -78,6 +78,132 @@ Secuencia<InfoVueloCruzado> Drone::vuelosCruzados(const Secuencia<Drone>& ds){
     return yss;
 }
 
+//Toma una secuencia de Drones y devuelve una secuencia de secuencias de posiciones con las trayectorias de esos Drones
+Secuencia<Secuencia<Posicion> > Drone::dameTrayectorias(const Secuencia<Drone>& ds){
+    Secuencia<Secuencia<Posicion> > res;
+    unsigned int i = 0;
+    while(i < ds.size() ){
+        res.push_back(ds.at(i)._trayectoria);
+        i++;
+    }
+    return res;
+}
+
+//Rearma la matriz agrupando las posiciones de los Drones de acuerdo al índice en la trayectoria
+Secuencia<Secuencia<Posicion> > Drone::agruparPosiciones(const Secuencia<Secuencia<Posicion> > pss){
+    Secuencia<Secuencia<Posicion> > res;
+    unsigned int i = 0;
+    while(i < pss.at(0).size()){
+        unsigned int j = 0;
+        Secuencia<Posicion> a;
+        while(j < pss.size()){
+            a.push_back(pss.at(j).at(i));
+            j++;
+        }
+        res.push_back(a);
+        i++;
+    }
+    return res;
+}
+
+//En cada secuencia de la matriz agrupa las posiciones según la cantidad de repeticiones, ya como tipo InfoVuelosRealizados "((x,y),z)"
+//En algunos casos elimina la última posición de las sublistas sin hacerla aparecer en la secuencia (ya que no hace falta porque si está en la última posición
+// hay dos opciones: o está repetida y entonces fue contada antes, o no lo está y en ese caso no hace falta agregarla ya que igualmente sería descartada en el siguiente paso)
+Secuencia<Secuencia<InfoVueloCruzado> > Drone::agruparRepetidas(const Secuencia<Secuencia<Posicion> > tss){
+    Secuencia<Secuencia<InfoVueloCruzado> > res;
+    unsigned int i = 0;
+    while(i < tss.size()){
+        Secuencia<InfoVueloCruzado> a;
+        unsigned int j = 0;
+        while(j < tss.at(i).size() - 1){
+            unsigned int k = j + 1;
+            unsigned int contador = 1;
+            while(k < tss.at(i).size()){
+                if((tss.at(i).at(j).x == tss.at(i).at(k).x) && (tss.at(i).at(j).y == tss.at(i).at(j).y)){
+                    contador++;
+                    k++;
+                }
+                else{
+                    k++;
+                }
+            }
+            if(a.size() == 0){
+                InfoVueloCruzado b;
+                b.posicion.x = tss.at(i).at(j).x;
+                b.posicion.y = tss.at(i).at(j).y;
+                b.cantidadCruces = contador;
+                a.push_back(b);
+                j++;
+            }
+            else{
+                unsigned int l = 0;
+                while(l < a.size()){
+                    if((a.at(l).posicion.x == tss.at(i).at(j).x) && (a.at(l).posicion.y == tss.at(i).at(j).y)){
+                        l = a.size() + 20;
+                    }
+                    else{
+                        l++;
+                    }
+                }
+                if (l == a.size() + 20){
+                    j++;
+                }
+                else{
+                    InfoVueloCruzado b;
+                    b.posicion.x = tss.at(i).at(j).x;
+                    b.posicion.y = tss.at(i).at(j).y;
+                    b.cantidadCruces = contador;
+                    a.push_back(b);
+                    j++;
+                }
+            }
+        }
+        res.push_back(a);
+        i++;
+    }
+    return res;
+}
+
+//Borra aquellos elementos en los que haya 1 solo cruce y ordena a los demás de menor a mayor
+Secuencia<InfoVueloCruzado> Drone::borrarSobrantesYOrdenar(const Secuencia<Secuencia<InfoVueloCruzado> > xss){
+    Secuencia<InfoVueloCruzado> res;
+    unsigned int i = 0;
+    while(i < xss.size()){
+        unsigned int j = 0;
+        while(j < xss.at(i).size()){
+            if(xss.at(i).at(j).cantidadCruces > 1){
+                res.push_back(xss.at(i).at(j));
+                j++;
+            }
+            else{
+                j++;
+            }
+        }
+        i++;
+    }
+    unsigned int k = 0;
+    while(k < res.size()){
+        unsigned int l = k + 1;
+        while(l < res.size()){
+            if(res.at(k).cantidadCruces > res.at(l).cantidadCruces){
+                InfoVueloCruzado c;
+                InfoVueloCruzado d;
+                c = res.at(k);
+                d = res.at(l);
+                res.at(k) = d;
+                res.at(l) = c;
+                l++;
+            }
+            else{
+                l++;
+            }
+        }
+        k++;
+    }
+    return res;
+}
+
+
 // La posicion actual es el final de trayectoria.
 // Ver si lo mostramos aparte. En ese caso, que hacer cuando no esta en vuelo? no mostrarlo?
 void Drone::mostrar(std::ostream & os) const{
@@ -455,130 +581,6 @@ bool Drone::ordenada(const Secuencia<int> xs) const{
 	return r == xs;
 }
 
-//Toma una secuencia de Drones y devuelve una secuencia de secuencias de posiciones con las trayectorias de esos Drones
-Secuencia<Secuencia<Posicion> > Drone::dameTrayectorias(const Secuencia<Drone>& ds){
-    Secuencia<Secuencia<Posicion> > res;
-    unsigned int i = 0;
-    while(i < ds.size() ){
-        res.push_back(ds.at(i)._trayectoria);
-        i++;
-    }
-    return res;
-}
-
-//Rearma la matriz agrupando las posiciones de los Drones de acuerdo al índice en la trayectoria
-Secuencia<Secuencia<Posicion> > Drone::agruparPosiciones(const Secuencia<Secuencia<Posicion> > pss){
-    Secuencia<Secuencia<Posicion> > res;
-    unsigned int i = 0;
-    while(i < pss.at(0).size()){
-        unsigned int j = 0;
-        Secuencia<Posicion> a;
-        while(j < pss.size()){
-            a.push_back(pss.at(j).at(i));
-            j++;
-        }
-        res.push_back(a);
-        i++;
-    }
-    return res;
-}
-
-//En cada secuencia de la matriz agrupa las posiciones según la cantidad de repeticiones, ya como tipo InfoVuelosRealizados "((x,y),z)"
-//En algunos casos elimina la última posición de las sublistas sin hacerla aparecer en la secuencia (ya que no hace falta porque si está en la última posición
-// hay dos opciones: o está repetida y entonces fue contada antes, o no lo está y en ese caso no hace falta agregarla ya que igualmente sería descartada en el siguiente paso)
-Secuencia<Secuencia<InfoVueloCruzado> > Drone::agruparRepetidas(const Secuencia<Secuencia<Posicion> > tss){
-    Secuencia<Secuencia<InfoVueloCruzado> > res;
-    unsigned int i = 0;
-    while(i < tss.size()){
-        Secuencia<InfoVueloCruzado> a;
-        unsigned int j = 0;
-        while(j < tss.at(i).size() - 1){
-            unsigned int k = j + 1;
-            unsigned int contador = 1;
-            while(k < tss.at(i).size()){
-                if((tss.at(i).at(j).x == tss.at(i).at(k).x) && (tss.at(i).at(j).y == tss.at(i).at(j).y)){
-                    contador++;
-                    k++;
-                }
-                else{
-                    k++;
-                }
-            }
-            if(a.size() == 0){
-                InfoVueloCruzado b;
-                b.posicion.x = tss.at(i).at(j).x;
-                b.posicion.y = tss.at(i).at(j).y;
-                b.cantidadCruces = contador;
-                a.push_back(b);
-                j++;
-            }
-            else{
-                unsigned int l = 0;
-                while(l < a.size()){
-                    if((a.at(l).posicion.x == tss.at(i).at(j).x) && (a.at(l).posicion.y == tss.at(i).at(j).y)){
-                        l = a.size() + 20;
-                    }
-                    else{
-                        l++;
-                    }
-                }
-                if (l == a.size() + 20){
-                    j++;
-                }
-                else{
-                    InfoVueloCruzado b;
-                    b.posicion.x = tss.at(i).at(j).x;
-                    b.posicion.y = tss.at(i).at(j).y;
-                    b.cantidadCruces = contador;
-                    a.push_back(b);
-                    j++;
-                }
-            }
-        }
-        res.push_back(a);
-        i++;
-    }
-    return res;
-}
-
-//Borra aquellos elementos en los que haya 1 solo cruce y ordena a los demás de menor a mayor
-Secuencia<InfoVueloCruzado> Drone::borrarSobrantesYOrdenar(const Secuencia<Secuencia<InfoVueloCruzado> > xss){
-    Secuencia<InfoVueloCruzado> res;
-    unsigned int i = 0;
-    while(i < xss.size()){
-        unsigned int j = 0;
-        while(j < xss.at(i).size()){
-            if(xss.at(i).at(j).cantidadCruces > 1){
-                res.push_back(xss.at(i).at(j));
-                j++;
-            }
-            else{
-                j++;
-            }
-        }
-        i++;
-    }
-    unsigned int k = 0;
-    while(k < res.size()){
-        unsigned int l = k + 1;
-        while(l < res.size()){
-            if(res.at(k).cantidadCruces > res.at(l).cantidadCruces){
-                InfoVueloCruzado c;
-                InfoVueloCruzado d;
-                c = res.at(k);
-                d = res.at(l);
-                res.at(k) = d;
-                res.at(l) = c;
-                l++;
-            }
-            else{
-                l++;
-            }
-        }
-        k++;
-    }
-    return res;
-}
 
 
 
