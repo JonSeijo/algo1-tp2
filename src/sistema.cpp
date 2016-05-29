@@ -498,7 +498,6 @@ void Sistema::_cargarDroneIndividual(Drone &d, std::string &dDrone){
 }
 
 void Sistema::_cargarEnjambre(std::string &dEnjambre){
-    std::cout << "ENJAMBRE\n" << dEnjambre << std::endl;
     // Vacio el enjambre anterior.
     // La idea es crear drone nuevos con los datos, y appendearlos al enjambre
     _enjambre.resize(0);
@@ -533,12 +532,9 @@ void Sistema::_cargarEstadosCultivo(std::string &dEstados){
     bool necesitaCierre = false;
     std::string datoActual = "";
 
-    std::cout << "\ncarga estados cultivos \n";
-
     while (!terminado){
 
         if (necesitaCierre){
-            std::cout << dEstados[i];
             if (dEstados[i] == ','){
                 _cargarEstadoIndividual(posX, posY, datoActual);
                 datoActual = "";
@@ -567,7 +563,7 @@ void Sistema::_cargarEstadosCultivo(std::string &dEstados){
         }
         i++;
     }
-    std::cout << "\nfin estados cultivos\n" << std::endl;
+
 }
 
 void Sistema::_cargarEstadoIndividual(int x, int y, std::string dEstado){

@@ -133,9 +133,10 @@ int Drone::_cuentaPos(Posicion p, Secuencia<Posicion> ps){
     return contador;
 }
 
-//En cada secuencia de la matriz agrupa las posiciones según la cantidad de repeticiones, ya como tipo InfoVuelosRealizados "((x,y),z)"
-//En algunos casos elimina la última posición de las sublistas sin hacerla aparecer en la secuencia (ya que no hace falta porque si está en la última posición
-// hay dos opciones: o está repetida y entonces fue contada antes, o no lo está y en ese caso no hace falta agregarla ya que igualmente sería descartada en el siguiente paso)
+// En cada secuencia de la matriz agrupa las posiciones según la cantidad de repeticiones
+// en la forma InfoVuelosRealizados "((x,y),z)",
+// filtrando los repetidos y los que tienen solamente 1 cruce (consigo mismo)
+
 Secuencia<Secuencia<InfoVueloCruzado> > Drone::agruparRepetidas(const Secuencia<Secuencia<Posicion> > tss){
 
     Secuencia<Secuencia<InfoVueloCruzado>> res;
@@ -173,8 +174,9 @@ Secuencia<Secuencia<InfoVueloCruzado> > Drone::agruparRepetidas(const Secuencia<
 //Borra aquellos elementos en los que haya 1 solo cruce y ordena a los demás de menor a mayor
 Secuencia<InfoVueloCruzado> Drone::borrarSobrantesYOrdenar(const Secuencia<Secuencia<InfoVueloCruzado> > xss){
 
-    // LOS ESTOY AGREGANDO TAL CUAL VIENEN PARA PROBAR
-
+    // 'Aplano' la secuencia de secuencias
+    // Todos tienen cruces > 1 porque los filtre antes
+    // by: jon
     Secuencia<InfoVueloCruzado> res;
     unsigned int i = 0;
     while (i < xss.size()){
@@ -186,21 +188,8 @@ Secuencia<InfoVueloCruzado> Drone::borrarSobrantesYOrdenar(const Secuencia<Secue
         i++;
     }
 
-    /*Secuencia<InfoVueloCruzado> res;
-    unsigned int i = 0;
-    while(i < xss.size()){
-        unsigned int j = 0;
-        while(j < xss.at(i).size()){
-            if(xss.at(i).at(j).cantidadCruces > 1){
-                res.push_back(xss.at(i).at(j));
-                j++;
-            }
-            else{
-                j++;
-            }
-        }
-        i++;
-    }
+    // Ordena de forma creciente por cantidadCruces
+    // by: lucasB
     unsigned int k = 0;
     while(k < res.size()){
         unsigned int l = k + 1;
@@ -219,7 +208,7 @@ Secuencia<InfoVueloCruzado> Drone::borrarSobrantesYOrdenar(const Secuencia<Secue
             }
         }
         k++;
-    }*/
+    }
     return res;
 }
 

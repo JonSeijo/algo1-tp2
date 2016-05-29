@@ -64,33 +64,17 @@ int main(){
     listaDrones.push_back(d2);
     listaDrones.push_back(d3);
 
-    //Prueba, revisar la trayectoria que tienen en drone.cpp, en lo posible hacer Drones
-    //con distintas trayectorias para probarlo, funciona cuando hay un solo drone en la lista
-    //y cuando todos tienen las mismas posiciones, falta el caso más común pero no se como 
     //cambiarle trayectorias a drones sin modificar el cpp
-    cout << "ENTRE" << endl;
-
-    unsigned int j = 0;
-    while(j < listaDrones.size()){
-        cout << listaDrones.at(j);
-        j++;
-    }
 
     Secuencia<InfoVueloCruzado> cruces = Drone::vuelosCruzados(listaDrones);
     unsigned int i = 0;
     while (i < cruces.size()){
-        cout << "cruce " << i << endl;
-        cout << "pos:   (" << cruces.at(i).posicion.x << " " << cruces.at(i).posicion.y << ") " ;
-        cout << "cant: " << cruces.at(i).cantidadCruces << "\n" << endl;
+       // cout << "cruce " << i << endl;
+        cout << "pos: (" << cruces.at(i).posicion.x << " " << cruces.at(i).posicion.y << ") " ;
+        cout << "cantCruces: " << cruces.at(i).cantidadCruces << "\n" << endl;
         i++;
     }
-    cout << "SALI" << endl;
-/*
-    Secuencia<InfoVueloCruzado> x = d2.vuelosCruzados(sec);
-    cout << "Hubo cruces " << x.size() << " veces, que pais generoso." << endl;
-    cout<< x.at(0).posicion.x << endl;
-    cout<< x.at(1).cantidadCruces << endl;
-*/
+
     //cout << sis;
    // sis.crecer();
    // cout << sis;
