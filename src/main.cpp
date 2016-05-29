@@ -70,9 +70,8 @@ int main(){
     listaDrones.push_back(d3);
     listaDrones.push_back(d4);
 
-    cout << "antes de vuelos cruzados" << endl;
     Secuencia<InfoVueloCruzado> cruces = Drone::vuelosCruzados(listaDrones);
-    cout << "post de vuelos cruzados" << endl;
+
     unsigned int i = 0;
     cout << cruces.size() << endl;
     while (i < cruces.size()){
@@ -82,7 +81,7 @@ int main(){
         i++;
     }
 
-   // cout << "Vuelo Escalerado: " << d1.vueloEscalerado() << endl;
+    cout << "Vuelo Escalerado: " << d1.vueloEscalerado() << endl;
 
 
     //cout << sis;
