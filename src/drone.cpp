@@ -76,6 +76,7 @@ Secuencia<InfoVueloCruzado> Drone::vuelosCruzados(const Secuencia<Drone>& ds){
     Secuencia<InfoVueloCruzado> yss = borrarSobrantesYOrdenar(xss);
 
     return yss;
+   // return xss;
 }
 
 //Toma una secuencia de Drones y devuelve una secuencia de secuencias de posiciones con las trayectorias de esos Drones
@@ -98,12 +99,13 @@ Secuencia<Secuencia<Posicion> > Drone::agruparPosiciones(const Secuencia<Secuenc
         Secuencia<Posicion> posicionesEnMomento;
         posicionesEnMomento.resize(0);
         while (j < pss.at(0).size()){
-            posicionesEnMomento.push_back(pss.at(i).at(j));
+            posicionesEnMomento.push_back(pss.at(j).at(i));
             j++;
         }
         res.push_back(posicionesEnMomento);
         i++;
     }
+
     return res;
 }
 
@@ -165,65 +167,26 @@ Secuencia<Secuencia<InfoVueloCruzado> > Drone::agruparRepetidas(const Secuencia<
         i++;
     }
 
-
-    /*  Secuencia<Secuencia<InfoVueloCruzado> > res;
-    unsigned int i = 0;
-    while(i < tss.size()){
-        Secuencia<InfoVueloCruzado> a;
-        unsigned int j = 0;
-        while(j < tss.at(i).size() - 1){
-            unsigned int k = j + 1;
-            unsigned int contador = 1;
-            while(k < tss.at(i).size()){
-                if((tss.at(i).at(j).x == tss.at(i).at(k).x) &&
-                        (tss.at(i).at(j).y == tss.at(i).at(j).y)){
-                    contador++;
-                    k++;
-                }
-                else{
-                    k++;
-                }
-            }
-            if(a.size() == 0){
-                InfoVueloCruzado b;
-                b.posicion.x = tss.at(i).at(j).x;
-                b.posicion.y = tss.at(i).at(j).y;
-                b.cantidadCruces = contador;
-                a.push_back(b);
-                j++;
-            }
-            else{
-                unsigned int l = 0;
-                while(l < a.size()){
-                    if((a.at(l).posicion.x == tss.at(i).at(j).x) && (a.at(l).posicion.y == tss.at(i).at(j).y)){
-                        l = a.size() + 20;
-                    }
-                    else{
-                        l++;
-                    }
-                }
-                if (l == a.size() + 20){
-                    j++;
-                }
-                else{
-                    InfoVueloCruzado b;
-                    b.posicion.x = tss.at(i).at(j).x;
-                    b.posicion.y = tss.at(i).at(j).y;
-                    b.cantidadCruces = contador;
-                    a.push_back(b);
-                    j++;
-                }
-            }
-        }
-        res.push_back(a);
-        i++;
-    }*/
     return res;
 }
 
 //Borra aquellos elementos en los que haya 1 solo cruce y ordena a los demás de menor a mayor
 Secuencia<InfoVueloCruzado> Drone::borrarSobrantesYOrdenar(const Secuencia<Secuencia<InfoVueloCruzado> > xss){
+
+    // LOS ESTOY AGREGANDO TAL CUAL VIENEN PARA PROBAR
+
     Secuencia<InfoVueloCruzado> res;
+    unsigned int i = 0;
+    while (i < xss.size()){
+        unsigned int j = 0;
+        while (j < xss.at(i).size()){
+            res.push_back(xss.at(i).at(j));
+            j++;
+        }
+        i++;
+    }
+
+    /*Secuencia<InfoVueloCruzado> res;
     unsigned int i = 0;
     while(i < xss.size()){
         unsigned int j = 0;
@@ -256,7 +219,7 @@ Secuencia<InfoVueloCruzado> Drone::borrarSobrantesYOrdenar(const Secuencia<Secue
             }
         }
         k++;
-    }
+    }*/
     return res;
 }
 
