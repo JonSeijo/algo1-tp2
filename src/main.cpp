@@ -64,16 +64,21 @@ int main(){
     listaDrones.push_back(d2);
     listaDrones.push_back(d3);
 
-    //cambiarle trayectorias a drones sin modificar el cpp
 
+    cout << "antes de vuelos cruzados" << endl;
     Secuencia<InfoVueloCruzado> cruces = Drone::vuelosCruzados(listaDrones);
+    cout << "post de vuelos cruzados" << endl;
     unsigned int i = 0;
+    cout << cruces.size() << endl;
     while (i < cruces.size()){
        // cout << "cruce " << i << endl;
         cout << "pos: (" << cruces.at(i).posicion.x << " " << cruces.at(i).posicion.y << ") " ;
         cout << "cantCruces: " << cruces.at(i).cantidadCruces << "\n" << endl;
         i++;
     }
+
+    cout << "Vuelo Escalerado: " << d1.vueloEscalerado() << endl;
+
 
     //cout << sis;
    // sis.crecer();

@@ -67,14 +67,35 @@ const Secuencia<Producto>& Drone::productosDisponibles() const{
 }
 
 bool Drone::vueloEscalerado() const{
-	Secuencia<int> xs = damePrimeros(_trayectoria);
+    return _enVuelo && _escalerado();
+/*	Secuencia<int> xs = damePrimeros(_trayectoria);
 	Secuencia<int> ys = dameSegundos(_trayectoria);
 
 	return _enVuelo 
 			&& ordenada(xs)
 			&& ordenada(ys)
 			&& dosOMenos(xs)
-			&& dosOMenos(ys);
+            && dosOMenos(ys);*/
+}
+
+bool Drone::_escalerado() const{
+    return _esEscalerado(1,1) || _esEscalerado(1,-1) ||
+            _esEscalerado(-1,1) || _esEscalerado(-1,-1);
+}
+
+bool Drone::_esEscalerado(int X, int Y) const{
+    std::cout << "_esEscalerado    x " << X << " y " << Y << "\n";
+    bool cumplenTodos = true;
+    unsigned int i = 0;
+    while (i < _trayectoria.size()-2){
+
+        if ((_trayectoria.at(i).x - _trayectoria.at(i+2).x) != X ||
+                (_trayectoria.at(i).y - _trayectoria.at(i+2).y) != Y ){
+            cumplenTodos = false;
+        }
+        i++;
+    }
+    return cumplenTodos;
 }
 
 Secuencia<InfoVueloCruzado> Drone::vuelosCruzados(const Secuencia<Drone>& ds){
@@ -84,7 +105,6 @@ Secuencia<InfoVueloCruzado> Drone::vuelosCruzados(const Secuencia<Drone>& ds){
     Secuencia<InfoVueloCruzado> yss = borrarSobrantesYOrdenar(xss);
 
     return yss;
-   // return xss;
 }
 
 //Toma una secuencia de Drones y devuelve una secuencia de secuencias de posiciones con las trayectorias de esos Drones
