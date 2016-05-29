@@ -66,7 +66,8 @@ class Drone{
         static Secuencia<Secuencia<Posicion> > agruparPosiciones(const Secuencia<Secuencia<Posicion> > pss);
         static Secuencia<Secuencia<InfoVueloCruzado> > agruparRepetidas(const Secuencia<Secuencia<Posicion> > tss);
         static Secuencia<InfoVueloCruzado> borrarSobrantesYOrdenar(const Secuencia<Secuencia<InfoVueloCruzado> > xss);
-
+        static int _cuentaPos(Posicion p, Secuencia<Posicion> ps);
+        static bool _perteneceInfoPos(Posicion p, Secuencia<InfoVueloCruzado> ps);
 
 };
 

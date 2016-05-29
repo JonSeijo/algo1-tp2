@@ -107,11 +107,66 @@ Secuencia<Secuencia<Posicion> > Drone::agruparPosiciones(const Secuencia<Secuenc
     return res;
 }
 
+bool Drone::_perteneceInfoPos(Posicion p, Secuencia<InfoVueloCruzado> ps){
+    bool pertenece = false;
+    unsigned int i = 0;
+    while (i < ps.size()){
+        if(p.x == ps.at(i).posicion.x && p.y == ps.at(i).posicion.y){
+            pertenece = true;
+        }
+        i++;
+    }
+    return pertenece;
+}
+
+int Drone::_cuentaPos(Posicion p, Secuencia<Posicion> ps){
+    int contador = 0;
+    unsigned int i = 0;
+    while (i < ps.size()){
+        if (p.x == ps.at(i).x && p.y == ps.at(i).y){
+            contador++;
+        }
+        i++;
+    }
+    return contador;
+}
+
 //En cada secuencia de la matriz agrupa las posiciones según la cantidad de repeticiones, ya como tipo InfoVuelosRealizados "((x,y),z)"
 //En algunos casos elimina la última posición de las sublistas sin hacerla aparecer en la secuencia (ya que no hace falta porque si está en la última posición
 // hay dos opciones: o está repetida y entonces fue contada antes, o no lo está y en ese caso no hace falta agregarla ya que igualmente sería descartada en el siguiente paso)
 Secuencia<Secuencia<InfoVueloCruzado> > Drone::agruparRepetidas(const Secuencia<Secuencia<Posicion> > tss){
-    Secuencia<Secuencia<InfoVueloCruzado> > res;
+
+    Secuencia<Secuencia<InfoVueloCruzado>> res;
+    unsigned int i = 0;
+    while (i < tss.size()){
+        Secuencia<InfoVueloCruzado> crucesEnPos;
+        crucesEnPos.resize(0);
+        unsigned int j = 0;
+
+        while (j < tss.at(i).size()){
+
+            Posicion posMomento;
+            posMomento.x = tss.at(i).at(j).x;
+            posMomento.y = tss.at(i).at(j).y;
+
+            int cantCruces = _cuentaPos(posMomento, tss.at(i));
+
+            if (!_perteneceInfoPos(posMomento, crucesEnPos)){
+                if (cantCruces > 1){
+                    InfoVueloCruzado info;
+                    info.posicion = posMomento;
+                    info.cantidadCruces = cantCruces;
+                    crucesEnPos.push_back(info);
+                }
+            }
+            j++;
+        }
+        res.push_back(crucesEnPos);
+        i++;
+    }
+
+
+    /*  Secuencia<Secuencia<InfoVueloCruzado> > res;
     unsigned int i = 0;
     while(i < tss.size()){
         Secuencia<InfoVueloCruzado> a;
@@ -120,7 +175,8 @@ Secuencia<Secuencia<InfoVueloCruzado> > Drone::agruparRepetidas(const Secuencia<
             unsigned int k = j + 1;
             unsigned int contador = 1;
             while(k < tss.at(i).size()){
-                if((tss.at(i).at(j).x == tss.at(i).at(k).x) && (tss.at(i).at(j).y == tss.at(i).at(j).y)){
+                if((tss.at(i).at(j).x == tss.at(i).at(k).x) &&
+                        (tss.at(i).at(j).y == tss.at(i).at(j).y)){
                     contador++;
                     k++;
                 }
@@ -161,7 +217,7 @@ Secuencia<Secuencia<InfoVueloCruzado> > Drone::agruparRepetidas(const Secuencia<
         }
         res.push_back(a);
         i++;
-    }
+    }*/
     return res;
 }
 
