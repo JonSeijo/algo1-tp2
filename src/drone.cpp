@@ -6,6 +6,10 @@ Drone::Drone(){
     _id = 0;
     _bateria = 100;
     _enVuelo = false;
+    // Si lo pongo en (0,0) cumple la especificacion
+    // Le defino una posicion valida porque sino se rompe en otro lado
+    _posicionActual.x = 0;
+    _posicionActual.x = 0;
 }
 
 Drone::Drone(ID i, const std::vector<Producto>& ps){
@@ -13,6 +17,10 @@ Drone::Drone(ID i, const std::vector<Producto>& ps){
 	_productos = ps;
 	_bateria = 100;
     _enVuelo = false;
+    // Si lo pongo en (0,0) cumple la especificacion
+    // Le defino una posicion valida porque sino se rompe en otro lado
+    _posicionActual.x = 0;
+    _posicionActual.y = 0;
     
     //Trayectoria de prueba
 

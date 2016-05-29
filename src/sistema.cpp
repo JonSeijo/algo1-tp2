@@ -3,15 +3,27 @@
 #include <sstream>
 
 Sistema::Sistema(){
-    std::cout << "const vacio sistema" << std::endl;
+    Posicion posG;
+    posG.x = 0;
+    posG.y = 0;
 
+    Posicion posC;
+    posC.x = 1;
+    posC.y = 0;
+    Campo c(posG, posC);
+
+    Secuencia<Drone> ds;
+    ds.resize(0);
+
+    _campo = c;
+    _enjambre = ds;
+    _estado.parcelas.resize(c.dimensiones().ancho, std::vector<EstadoCultivo>(c.dimensiones().largo, NoSensado));
 }
 
 Sistema::Sistema(const Campo &c, const Secuencia<Drone> &ds){
     _campo = c;
 	_enjambre = ds;
 	_estado.parcelas.resize(c.dimensiones().ancho, std::vector<EstadoCultivo>(c.dimensiones().largo, NoSensado));
-    //initEstados();
 }
 
 const Campo & Sistema::campo() const{
