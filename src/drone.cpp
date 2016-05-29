@@ -93,14 +93,15 @@ Secuencia<Secuencia<Posicion> > Drone::dameTrayectorias(const Secuencia<Drone>& 
 Secuencia<Secuencia<Posicion> > Drone::agruparPosiciones(const Secuencia<Secuencia<Posicion> > pss){
     Secuencia<Secuencia<Posicion> > res;
     unsigned int i = 0;
-    while(i < pss.at(0).size()){
+    while (i < pss.size()){
         unsigned int j = 0;
-        Secuencia<Posicion> a;
-        while(j < pss.size()){
-            a.push_back(pss.at(j).at(i));
+        Secuencia<Posicion> posicionesEnMomento;
+        posicionesEnMomento.resize(0);
+        while (j < pss.at(0).size()){
+            posicionesEnMomento.push_back(pss.at(i).at(j));
             j++;
         }
-        res.push_back(a);
+        res.push_back(posicionesEnMomento);
         i++;
     }
     return res;
