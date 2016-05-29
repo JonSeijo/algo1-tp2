@@ -68,14 +68,6 @@ const Secuencia<Producto>& Drone::productosDisponibles() const{
 
 bool Drone::vueloEscalerado() const{
     return _enVuelo && _escalerado();
-/*	Secuencia<int> xs = damePrimeros(_trayectoria);
-	Secuencia<int> ys = dameSegundos(_trayectoria);
-
-	return _enVuelo 
-			&& ordenada(xs)
-			&& ordenada(ys)
-			&& dosOMenos(xs)
-            && dosOMenos(ys);*/
 }
 
 bool Drone::_escalerado() const{
@@ -121,19 +113,22 @@ Secuencia<Secuencia<Posicion> > Drone::dameTrayectorias(const Secuencia<Drone>& 
 //Rearma la matriz agrupando las posiciones de los Drones de acuerdo al índice en la trayectoria
 Secuencia<Secuencia<Posicion> > Drone::agruparPosiciones(const Secuencia<Secuencia<Posicion> > pss){
     Secuencia<Secuencia<Posicion> > res;
-    unsigned int i = 0;
-    while (i < pss.size()){
-        unsigned int j = 0;
+    unsigned int j = 0;
+    while (j < pss.at(0).size()){
+
         Secuencia<Posicion> posicionesEnMomento;
         posicionesEnMomento.resize(0);
-        while (j < pss.at(0).size()){
-            posicionesEnMomento.push_back(pss.at(j).at(i));
-            j++;
+
+        unsigned int i = 0;
+        while (i < pss.size()){
+
+            posicionesEnMomento.push_back(pss.at(i).at(j));
+
+            i++;
         }
         res.push_back(posicionesEnMomento);
-        i++;
+        j++;
     }
-
     return res;
 }
 

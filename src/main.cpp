@@ -31,6 +31,7 @@ int main(){
     Drone d1(5, productos);
     Drone d2(78, productos);
     Drone d3(43, productos);
+    Drone d4(10, productos);
 
     Secuencia<Drone> sec;
     sec.push_back(d);
@@ -59,11 +60,15 @@ int main(){
     d3.cargar(fileDrone3);
     fileDrone3.close();
 
+    ifstream fileDrone4("drone4.txt");
+    d4.cargar(fileDrone4);
+    fileDrone4.close();
+
     Secuencia<Drone> listaDrones;
     listaDrones.push_back(d1);
     listaDrones.push_back(d2);
     listaDrones.push_back(d3);
-
+    listaDrones.push_back(d4);
 
     cout << "antes de vuelos cruzados" << endl;
     Secuencia<InfoVueloCruzado> cruces = Drone::vuelosCruzados(listaDrones);
@@ -77,7 +82,7 @@ int main(){
         i++;
     }
 
-    cout << "Vuelo Escalerado: " << d1.vueloEscalerado() << endl;
+   // cout << "Vuelo Escalerado: " << d1.vueloEscalerado() << endl;
 
 
     //cout << sis;
