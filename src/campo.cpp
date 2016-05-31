@@ -11,6 +11,14 @@ Campo::Campo(){
     _grilla.parcelas.at(1).at(0) = Casa;
 }
 
+Campo::Campo(const Posicion &posG, const Posicion &posC, Dimension dimension) {
+    _dimension = dimension;
+    _grilla = Grilla<Parcela>(_dimension);
+    _grilla.parcelas[posG.x][posG.y] = Granero;
+    _grilla.parcelas[posC.x][posC.y] = Casa;
+}
+
+
 // Propiedad de jonathan
 Campo::Campo(const Posicion &posG, const Posicion &posC){
    // La dimension es +1 porque vendria a ser "el largo de la lista"

@@ -7,6 +7,8 @@ class Campo {
 	public:
 		Campo();
 		Campo(const Posicion &posG, const Posicion &posC);
+		Campo(const Posicion &posG, const Posicion &posC, Dimension dimension);
+
 
 		Dimension dimensiones() const;
 		Parcela contenido(const Posicion &pos) const;
