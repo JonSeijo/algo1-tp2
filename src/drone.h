@@ -76,6 +76,5 @@ class Drone{
 
 // Definirlo usando mostrar, para poder usar << con este tipo.
 std::ostream & operator<<(std::ostream & os,const Drone & d);
-std::ostream & operator<<(std::ostream & os, const Producto & p);
 
 #endif // DRONE_H_INCLUDED

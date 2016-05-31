@@ -245,25 +245,3 @@ std::ostream & operator<<(std::ostream & os, const Campo & c){
     return os;
 }
 
-std::ostream & operator<<(std::ostream & os, const Parcela & p){
-    if (p == Cultivo) os << "Cultivo";
-    if (p == Granero) os << "Granero";
-    if (p == Casa) os << "Casa";
-
-	return os;
-}
-
-/*
- * DISCLAIMER (jonathan), estoy casi seguro que estan mal aca,
- * Porque son necesarias en drone y en sistema.
- * Producto no tiene nada que ver con campo, las pasteo donde me parece
- *
-
-std::ostream & operator<<(std::ostream & os, const Producto & p){
-	return os;
-}
-
-std::ostream & operator<<(std::ostream & os, const EstadoCultivo & e){
-	return os;
-}
-*/

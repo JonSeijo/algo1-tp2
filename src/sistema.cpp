@@ -727,16 +727,6 @@ bool Sistema::_pertenece(Drone d, const Secuencia<Drone> enjambre) const{
     return pertenece;
 }
 
-std::ostream & operator<<(std::ostream & os, const EstadoCultivo & e){
-    if (e == NoSensado) os << "NoSensado";
-    if (e == RecienSembrado) os << "RecienSembrado";
-    if (e == EnCrecimiento) os << "EnCrecimiento";
-    if (e == ListoParaCosechar) os << "ListoParaCosechar";
-    if (e == ConMaleza) os << "ConMaleza";
-    if (e == ConPlaga) os << "ConPlaga";
-
-    return os;
-}
 
 std::ostream & operator<<(std::ostream & os, const Sistema & s){
     s.mostrar(os);

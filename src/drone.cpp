@@ -615,17 +615,6 @@ bool Drone::ordenada(const Secuencia<int> xs) const{
 
 
 
-
-std::ostream & operator<<(std::ostream & os, const Producto & p){
-    if (p == Fertilizante) os << "Fertilizante";
-    if (p == Plaguicida) os << "Plaguicida";
-    if (p == PlaguicidaBajoConsumo) os << "PlaguicidaBajoConsumo";
-    if (p == Herbicida) os << "Herbicida";
-    if (p == HerbicidaLargoAlcance) os << "HerbicidaLargoAlcance";
-
-    return os;
-}
-
 void Drone::moverA(const Posicion pos){
     _enVuelo = true;
     _trayectoria.push_back(pos);
