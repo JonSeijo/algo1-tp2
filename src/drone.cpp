@@ -652,7 +652,7 @@ void Drone::sacarProducto(const Producto p){
     while(i < _productos.size()){
         if(_productos.at(i) == p){
             _productos.erase(_productos.begin() + i);
-            i += _productos.size();
+            break;
         }
 
         i++;

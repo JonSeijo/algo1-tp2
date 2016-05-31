@@ -1,0 +1,46 @@
+\documentclass[a4paper]{article}
+
+\usepackage[spanish]{babel} % Le indicamos a LaTeX que vamos a escribir en espa�ol.
+\usepackage[latin1]{inputenc} % Permite utilizar tildes y e�es normalmente
+\input{Algo1Macros}% Macros especificas para especificar problemas en AyEDI
+\usepackage{caratula} % Se puede descargar en ~> https://github.com/bcardiff/dc-tex
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{ 
+    language=C++,
+    backgroundcolor=\color{black!5}, % set backgroundcolor
+}
+% Aca solo vamos a poner el esqueleto del documento, pero no vamos a especificar nada.
+
+\begin{document} % Todo lo que escribamos a partir de aca va a aparecer en el documento.
+
+% Completar los datos de la caratula
+\titulo{TPI - Demostraciones} 
+\fecha{\today}
+\materia{Algoritmos y Estructuras de Datos I}
+\grupo{Grupo ?}
+
+% Completar con cuantos integrantes quieran :)
+\integrante{Apellido, Nombre1}{001/01}{email1@dominio.com}
+\integrante{Apellido, Nombre2}{002/01}{email2@dominio.com}
+\integrante{Apellido, Nombre3}{003/01}{email3@dominio.com}
+\integrante{Apellido, Nombre4}{004/01}{email4@dominio.com}
+
+\maketitle
+
+\section{Vuelo Escalerado}
+
+\input{espec/vueloEscalerado}
+
+\newpage
+
+\section{Listo Para Cosechar}
+
+\input{espec/espec}
+
+\input{espec/listoParaCosechar}
+
+
+
+
+\end{document} %Termin�!
