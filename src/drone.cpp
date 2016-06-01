@@ -162,7 +162,7 @@ int Drone::_cuentaPos(Posicion p, Secuencia<Posicion> ps){
 
 Secuencia<Secuencia<InfoVueloCruzado> > Drone::agruparRepetidas(const Secuencia<Secuencia<Posicion> > tss){
 
-    Secuencia<Secuencia<InfoVueloCruzado>> res;
+    Secuencia<Secuencia<InfoVueloCruzado> > res;
     unsigned int i = 0;
     while (i < tss.size()){
         Secuencia<InfoVueloCruzado> crucesEnPos;

@@ -408,6 +408,71 @@ int Sistema::_minimo(int a, int b){
 }
 
 void Sistema::volarYSensar(const Drone & d){
+    Secuencia<Posicion> adyacentesvalidas = _darPosicionesValidas(d.posicionActual());
+    moverUnaPosicionAlDrone(adyacentesvalidas.at(0), d);
+    if(_campo.contenido(adyacentesvalidas.at(0)) != Cultivo){
+        restarBateria(d.bateria() - 1, d);
+    }
+    else{
+        if((_estado.parcelas.at(adyacentesvalidas.at(0).x).at(adyacentesvalidas.at(0).y) == NoSensado)){
+            restarBateria(d.bateria() - 1, d);
+            cambiaARecienSembrado(adyacentesvalidas.at(0));
+        }
+        if((_estado.parcelas.at(adyacentesvalidas.at(0).x).at(adyacentesvalidas.at(0).y) == RecienSembrado) || 
+        (_estado.parcelas.at(adyacentesvalidas.at(0).x).at(adyacentesvalidas.at(0).y) == EnCrecimiento)){
+            restarBateria(d.bateria() - 1, d);
+            if(tieneFertilizante(d)){
+                quitarProducto(Fertilizante, d);
+                cambiaAListoParaCosechar(adyacentesvalidas.at(0));
+            }
+        }
+        if((_estado.parcelas.at(adyacentesvalidas.at(0).x).at(adyacentesvalidas.at(0).y) == ConMaleza) && (d.bateria() >= 6)){
+            if(tieneHerbicida(d)){
+                restarBateria(d.bateria() - 6, d);
+                quitarProducto(Herbicida, d);
+                cambiaARecienSembrado(adyacentesvalidas.at(0));
+            }
+            if(!tieneHerbicida(d) && tieneHerbicidaLargoAlcance(d)){
+                restarBateria(d.bateria() - 6, d);
+                quitarProducto(HerbicidaLargoAlcance, d);
+                cambiaAdyacentesConMalezaARecienSembrado(adyacentesvalidas.at(0));
+            }
+            if(!tieneHerbicida(d) && !tieneHerbicidaLargoAlcance(d)){
+                restarBateria(d.bateria() - 1, d);
+            }
+        }
+        if((_estado.parcelas.at(adyacentesvalidas.at(0).x).at(adyacentesvalidas.at(0).y) == ConMaleza) && (d.bateria() < 6)){
+            restarBateria(d.bateria() - 1, d);
+        }
+        if((_estado.parcelas.at(adyacentesvalidas.at(0).x).at(adyacentesvalidas.at(0).y) == ConPlaga) && (d.bateria() >= 11)){
+            if(tienePlaguicidaBajoConsumo(d)){
+                restarBateria(d.bateria() - 6, d);
+                quitarProducto(PlaguicidaBajoConsumo, d);
+                cambiaARecienSembrado(adyacentesvalidas.at(0));
+            }
+            if(!tienePlaguicidaBajoConsumo(d) && (tienePlaguicida(d))){
+                restarBateria(d.bateria() - 11, d);
+                quitarProducto(Plaguicida, d);
+                cambiaARecienSembrado(adyacentesvalidas.at(0));
+            }
+            if(!tienePlaguicidaBajoConsumo(d) && !tienePlaguicida(d)){
+                restarBateria(d.bateria() - 1, d);
+            }
+        }
+        if((_estado.parcelas.at(adyacentesvalidas.at(0).x).at(adyacentesvalidas.at(0).y) == ConPlaga) && (d.bateria() < 11) && (d.bateria() >= 6)){
+            if(tienePlaguicidaBajoConsumo(d)){
+                restarBateria(d.bateria() - 6, d);
+                quitarProducto(PlaguicidaBajoConsumo, d);
+                cambiaARecienSembrado(adyacentesvalidas.at(0));
+            }
+            else{
+                restarBateria(d.bateria() - 1, d);
+            }
+        }
+        if((_estado.parcelas.at(adyacentesvalidas.at(0).x).at(adyacentesvalidas.at(0).y) == ConPlaga) && (d.bateria() < 6)){
+            restarBateria(d.bateria() - 1, d);
+        }
+    }
 }
 
 void Sistema::mostrar(std::ostream & os) const{
@@ -755,4 +820,152 @@ Posicion Sistema::posGranero() const {
         i++;
     }
     return posGranero;
+}
+
+Secuencia<Posicion> Sistema::_darPosicionesValidas(const Posicion posactual){
+    Secuencia<Posicion> validas;
+    int j = 0;
+    while(j < _campo.dimensiones().ancho){
+        int k = 0;
+        while(k < _campo.dimensiones().largo){
+            Posicion q;
+            q.x = j;
+            q.y = k;
+            if((_esAdyacente(q, posactual))&&(_esLibreDeDrones(q))){
+                validas.push_back(q);
+            }
+            k++;
+        }
+        j++;
+    }
+    return validas;
+}
+
+bool Sistema::tieneFertilizante(const Drone d){
+    int i = 0;
+    bool t = false;
+    while(i < d.productosDisponibles().size()){
+        if(d.productosDisponibles().at(i) == Fertilizante){
+            t = true;
+        }
+        i++;
+    }
+    return t;
+}
+
+bool Sistema::tienePlaguicida(const Drone d){
+    int i = 0;
+    bool t = false;
+    while(i < d.productosDisponibles().size()){
+        if(d.productosDisponibles().at(i) == Plaguicida){
+            t = true;
+        }
+        i++;
+    }
+    return t;
+}
+
+bool Sistema::tienePlaguicidaBajoConsumo(const Drone d){
+    int i = 0;
+    bool t = false;
+    while(i < d.productosDisponibles().size()){
+        if(d.productosDisponibles().at(i) == PlaguicidaBajoConsumo){
+            t = true;
+        }
+        i++;
+    }
+    return t;
+}
+
+bool Sistema::tieneHerbicida(const Drone d){
+    int i = 0;
+    bool t = false;
+    while(i < d.productosDisponibles().size()){
+        if(d.productosDisponibles().at(i) == Herbicida){
+            t = true;
+        }
+        i++;
+    }
+    return t;
+}
+
+bool Sistema::tieneHerbicidaLargoAlcance(const Drone d){
+    int i = 0;
+    bool t = false;
+    while(i < d.productosDisponibles().size()){
+        if(d.productosDisponibles().at(i) == HerbicidaLargoAlcance){
+            t = true;
+        }
+        i++;
+    }
+    return t;
+}
+
+Secuencia<Posicion> Sistema::adyacentesACambiar(const Posicion posactual){
+    Secuencia<Posicion> estadoacambiar;
+    int j = 0;
+    while(j < _campo.dimensiones().ancho){
+        int k = 0;
+        while(k < _campo.dimensiones().largo){
+            Posicion q;
+            q.x = j;
+            q.y = k;
+            if((_esAdyacente(q, posactual)) && (_campo.contenido(q) == Cultivo)){
+                if(estadoDelCultivo(q) == ConMaleza){
+                    estadoacambiar.push_back(q);
+                }
+            }
+            k++;
+        }
+        j++;
+    }
+    return estadoacambiar;
+}
+
+void Sistema::cambiaAListoParaCosechar(const Posicion posactual){
+    _estado.parcelas.at(posactual.x).at(posactual.y) = ListoParaCosechar;
+}
+
+void Sistema::cambiaARecienSembrado(const Posicion posactual){
+    _estado.parcelas.at(posactual.x).at(posactual.y) = RecienSembrado;
+}
+
+void Sistema::cambiaAdyacentesConMalezaARecienSembrado(const Posicion posactual){
+    Secuencia<Posicion> xs = adyacentesACambiar(posactual);
+    xs.push_back(posactual);
+    int i = 0;
+    while(i < xs.size()){
+        _estado.parcelas.at(xs.at(i).x).at(xs.at(i).y) = RecienSembrado;
+        i++;
+    }
+}
+
+void Sistema::moverUnaPosicionAlDrone(Posicion p, Drone d){
+    int i = 0;
+    while(i < _enjambre.size()){
+        if(_enjambre.at(i) == d){
+            _enjambre.at(i).moverA(p);
+        }
+        i++;
+    }
+}
+
+void Sistema::restarBateria(int x, Drone d){
+    int i = 0;
+    while(i < _enjambre.size()){
+        if(_enjambre.at(i) == d){
+            _enjambre.at(i).setBateria(x);
+        }
+        i++;
+    }
+}
+
+void Sistema::quitarProducto(Producto p, Drone d){
+    int i = 0;
+    while(i < _enjambre.size()){
+        if(_enjambre.at(i) == d){
+            _enjambre.at(i).sacarProducto(p);
+        }
+        i++;
+    }
 }

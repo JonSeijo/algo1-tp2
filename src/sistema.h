@@ -88,6 +88,20 @@ class Sistema {
         int _cuentaProds(Producto p, std::vector<Producto> ps);
         int _cantFertilizables(int i, Drone d);
         int _parcelasLibres(Drone d);
+
+        Secuencia<Posicion> _darPosicionesValidas(const Posicion posactual);
+        bool tieneFertilizante(const Drone d);
+        bool tienePlaguicida(const Drone d);
+        bool tienePlaguicidaBajoConsumo(const Drone d);
+        bool tieneHerbicida(const Drone d);
+        bool tieneHerbicidaLargoAlcance(const Drone d);
+        Secuencia<Posicion> adyacentesACambiar(const Posicion posactual);
+        void cambiaAListoParaCosechar(const Posicion posactual);
+        void cambiaARecienSembrado(const Posicion posactual);
+        void cambiaAdyacentesConMalezaARecienSembrado(const Posicion posactual);
+        void moverUnaPosicionAlDrone(Posicion p, Drone d);
+        void restarBateria(int x, Drone d);
+        void quitarProducto(Producto p, Drone d);
 };
 
 // Definirlo usando mostrar, para poder usar << con este tipo.
