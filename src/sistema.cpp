@@ -224,13 +224,13 @@ bool Sistema::listoParaCosechar() const{
     unsigned int i = 0;
 
 	while(i < _estado.parcelas.size()){
-        cantCosechable += _cuentaCosechables(_estado.parcelas.at(i));
+        cantCosechable += _cuentaCosechables(_estado.parcelas.at(i), i);
 		i++;
     }
     return cantCosechable/totalCultivos >= 0.9f;
 }
 
-int Sistema::_cuentaCosechables(std::vector<EstadoCultivo> fila) const{
+int Sistema::_cuentaCosechables(std::vector<EstadoCultivo> fila, int i) const{
     int res = 0;
     unsigned int j = 0;
     while(j <  fila.size()){
