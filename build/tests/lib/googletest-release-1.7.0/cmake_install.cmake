@@ -1,4 +1,4 @@
-# Install script for directory: /home/jonno/projects/algo1/algo1-tp2/tests/lib/googletest-release-1.7.0
+# Install script for directory: /home/lcordoba/Desarrollo/Algo/algo1-tp2/tests/lib/googletest-release-1.7.0
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

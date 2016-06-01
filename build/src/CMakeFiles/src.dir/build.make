@@ -34,11 +34,14 @@ RM = /usr/bin/cmake -E remove -f
 # Escaping for special characters.
 EQUALS = =
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
+
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jonno/projects/algo1/algo1-tp2
+CMAKE_SOURCE_DIR = /home/lcordoba/Desarrollo/Algo/algo1-tp2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jonno/projects/algo1/algo1-tp2/build
+CMAKE_BINARY_DIR = /home/lcordoba/Desarrollo/Algo/algo1-tp2/build
 
 # Include any dependencies generated for this target.
 include src/CMakeFiles/src.dir/depend.make
@@ -51,17 +54,17 @@ include src/CMakeFiles/src.dir/flags.make
 
 src/CMakeFiles/src.dir/tipos.cpp.o: src/CMakeFiles/src.dir/flags.make
 src/CMakeFiles/src.dir/tipos.cpp.o: ../src/tipos.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jonno/projects/algo1/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/src.dir/tipos.cpp.o"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/src.dir/tipos.cpp.o -c /home/jonno/projects/algo1/algo1-tp2/src/tipos.cpp
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/src.dir/tipos.cpp.o -c /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/tipos.cpp
 
 src/CMakeFiles/src.dir/tipos.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/tipos.cpp.i"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jonno/projects/algo1/algo1-tp2/src/tipos.cpp > CMakeFiles/src.dir/tipos.cpp.i
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/tipos.cpp > CMakeFiles/src.dir/tipos.cpp.i
 
 src/CMakeFiles/src.dir/tipos.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/tipos.cpp.s"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jonno/projects/algo1/algo1-tp2/src/tipos.cpp -o CMakeFiles/src.dir/tipos.cpp.s
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/tipos.cpp -o CMakeFiles/src.dir/tipos.cpp.s
 
 src/CMakeFiles/src.dir/tipos.cpp.o.requires:
 .PHONY : src/CMakeFiles/src.dir/tipos.cpp.o.requires
@@ -74,17 +77,17 @@ src/CMakeFiles/src.dir/tipos.cpp.o.provides.build: src/CMakeFiles/src.dir/tipos.
 
 src/CMakeFiles/src.dir/campo.cpp.o: src/CMakeFiles/src.dir/flags.make
 src/CMakeFiles/src.dir/campo.cpp.o: ../src/campo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jonno/projects/algo1/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/src.dir/campo.cpp.o"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/src.dir/campo.cpp.o -c /home/jonno/projects/algo1/algo1-tp2/src/campo.cpp
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/src.dir/campo.cpp.o -c /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/campo.cpp
 
 src/CMakeFiles/src.dir/campo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/campo.cpp.i"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jonno/projects/algo1/algo1-tp2/src/campo.cpp > CMakeFiles/src.dir/campo.cpp.i
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/campo.cpp > CMakeFiles/src.dir/campo.cpp.i
 
 src/CMakeFiles/src.dir/campo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/campo.cpp.s"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jonno/projects/algo1/algo1-tp2/src/campo.cpp -o CMakeFiles/src.dir/campo.cpp.s
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/campo.cpp -o CMakeFiles/src.dir/campo.cpp.s
 
 src/CMakeFiles/src.dir/campo.cpp.o.requires:
 .PHONY : src/CMakeFiles/src.dir/campo.cpp.o.requires
@@ -97,17 +100,17 @@ src/CMakeFiles/src.dir/campo.cpp.o.provides.build: src/CMakeFiles/src.dir/campo.
 
 src/CMakeFiles/src.dir/drone.cpp.o: src/CMakeFiles/src.dir/flags.make
 src/CMakeFiles/src.dir/drone.cpp.o: ../src/drone.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jonno/projects/algo1/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/src.dir/drone.cpp.o"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/src.dir/drone.cpp.o -c /home/jonno/projects/algo1/algo1-tp2/src/drone.cpp
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/src.dir/drone.cpp.o -c /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/drone.cpp
 
 src/CMakeFiles/src.dir/drone.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/drone.cpp.i"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jonno/projects/algo1/algo1-tp2/src/drone.cpp > CMakeFiles/src.dir/drone.cpp.i
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/drone.cpp > CMakeFiles/src.dir/drone.cpp.i
 
 src/CMakeFiles/src.dir/drone.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/drone.cpp.s"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jonno/projects/algo1/algo1-tp2/src/drone.cpp -o CMakeFiles/src.dir/drone.cpp.s
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/drone.cpp -o CMakeFiles/src.dir/drone.cpp.s
 
 src/CMakeFiles/src.dir/drone.cpp.o.requires:
 .PHONY : src/CMakeFiles/src.dir/drone.cpp.o.requires
@@ -120,17 +123,17 @@ src/CMakeFiles/src.dir/drone.cpp.o.provides.build: src/CMakeFiles/src.dir/drone.
 
 src/CMakeFiles/src.dir/sistema.cpp.o: src/CMakeFiles/src.dir/flags.make
 src/CMakeFiles/src.dir/sistema.cpp.o: ../src/sistema.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jonno/projects/algo1/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/src.dir/sistema.cpp.o"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/src.dir/sistema.cpp.o -c /home/jonno/projects/algo1/algo1-tp2/src/sistema.cpp
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/src.dir/sistema.cpp.o -c /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/sistema.cpp
 
 src/CMakeFiles/src.dir/sistema.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/sistema.cpp.i"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jonno/projects/algo1/algo1-tp2/src/sistema.cpp > CMakeFiles/src.dir/sistema.cpp.i
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/sistema.cpp > CMakeFiles/src.dir/sistema.cpp.i
 
 src/CMakeFiles/src.dir/sistema.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/sistema.cpp.s"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jonno/projects/algo1/algo1-tp2/src/sistema.cpp -o CMakeFiles/src.dir/sistema.cpp.s
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/sistema.cpp -o CMakeFiles/src.dir/sistema.cpp.s
 
 src/CMakeFiles/src.dir/sistema.cpp.o.requires:
 .PHONY : src/CMakeFiles/src.dir/sistema.cpp.o.requires
@@ -143,17 +146,17 @@ src/CMakeFiles/src.dir/sistema.cpp.o.provides.build: src/CMakeFiles/src.dir/sist
 
 src/CMakeFiles/src.dir/aux.cpp.o: src/CMakeFiles/src.dir/flags.make
 src/CMakeFiles/src.dir/aux.cpp.o: ../src/aux.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jonno/projects/algo1/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/src.dir/aux.cpp.o"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/src.dir/aux.cpp.o -c /home/jonno/projects/algo1/algo1-tp2/src/aux.cpp
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/src.dir/aux.cpp.o -c /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/aux.cpp
 
 src/CMakeFiles/src.dir/aux.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/aux.cpp.i"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jonno/projects/algo1/algo1-tp2/src/aux.cpp > CMakeFiles/src.dir/aux.cpp.i
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/aux.cpp > CMakeFiles/src.dir/aux.cpp.i
 
 src/CMakeFiles/src.dir/aux.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/aux.cpp.s"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jonno/projects/algo1/algo1-tp2/src/aux.cpp -o CMakeFiles/src.dir/aux.cpp.s
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lcordoba/Desarrollo/Algo/algo1-tp2/src/aux.cpp -o CMakeFiles/src.dir/aux.cpp.s
 
 src/CMakeFiles/src.dir/aux.cpp.o.requires:
 .PHONY : src/CMakeFiles/src.dir/aux.cpp.o.requires
@@ -183,8 +186,8 @@ src/libsrc.a: src/CMakeFiles/src.dir/aux.cpp.o
 src/libsrc.a: src/CMakeFiles/src.dir/build.make
 src/libsrc.a: src/CMakeFiles/src.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libsrc.a"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && $(CMAKE_COMMAND) -P CMakeFiles/src.dir/cmake_clean_target.cmake
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/src.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && $(CMAKE_COMMAND) -P CMakeFiles/src.dir/cmake_clean_target.cmake
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/src.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/CMakeFiles/src.dir/build: src/libsrc.a
@@ -198,10 +201,10 @@ src/CMakeFiles/src.dir/requires: src/CMakeFiles/src.dir/aux.cpp.o.requires
 .PHONY : src/CMakeFiles/src.dir/requires
 
 src/CMakeFiles/src.dir/clean:
-	cd /home/jonno/projects/algo1/algo1-tp2/build/src && $(CMAKE_COMMAND) -P CMakeFiles/src.dir/cmake_clean.cmake
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src && $(CMAKE_COMMAND) -P CMakeFiles/src.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/src.dir/clean
 
 src/CMakeFiles/src.dir/depend:
-	cd /home/jonno/projects/algo1/algo1-tp2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jonno/projects/algo1/algo1-tp2 /home/jonno/projects/algo1/algo1-tp2/src /home/jonno/projects/algo1/algo1-tp2/build /home/jonno/projects/algo1/algo1-tp2/build/src /home/jonno/projects/algo1/algo1-tp2/build/src/CMakeFiles/src.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lcordoba/Desarrollo/Algo/algo1-tp2 /home/lcordoba/Desarrollo/Algo/algo1-tp2/src /home/lcordoba/Desarrollo/Algo/algo1-tp2/build /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src/CMakeFiles/src.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/src.dir/depend
 

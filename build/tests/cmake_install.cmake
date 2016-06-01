@@ -1,4 +1,4 @@
-# Install script for directory: /home/jonno/projects/algo1/algo1-tp2/tests
+# Install script for directory: /home/lcordoba/Desarrollo/Algo/algo1-tp2/tests
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/jonno/projects/algo1/algo1-tp2/build/tests/lib/googletest-release-1.7.0/cmake_install.cmake")
+  INCLUDE("/home/lcordoba/Desarrollo/Algo/algo1-tp2/build/tests/lib/googletest-release-1.7.0/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

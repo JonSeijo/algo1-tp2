@@ -1,1 +1,0 @@
-{ D 1 100 [[1,3],[2,3],[3,3]] [HerbicidaLargoAlcance, PlaguicidaBajoConsumo, Herbicida]}

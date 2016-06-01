@@ -1,4 +1,4 @@
-# Install script for directory: /home/jonno/projects/algo1/algo1-tp2
+# Install script for directory: /home/lcordoba/Desarrollo/Algo/algo1-tp2
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,8 +34,8 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/jonno/projects/algo1/algo1-tp2/build/tests/cmake_install.cmake")
-  INCLUDE("/home/jonno/projects/algo1/algo1-tp2/build/src/cmake_install.cmake")
+  INCLUDE("/home/lcordoba/Desarrollo/Algo/algo1-tp2/build/tests/cmake_install.cmake")
+  INCLUDE("/home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -45,7 +45,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/jonno/projects/algo1/algo1-tp2/build/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/lcordoba/Desarrollo/Algo/algo1-tp2/build/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/jonno/projects/algo1/algo1-tp2/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/lcordoba/Desarrollo/Algo/algo1-tp2/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

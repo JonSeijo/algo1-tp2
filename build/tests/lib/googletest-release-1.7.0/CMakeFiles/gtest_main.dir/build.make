@@ -34,11 +34,14 @@ RM = /usr/bin/cmake -E remove -f
 # Escaping for special characters.
 EQUALS = =
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
+
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jonno/projects/algo1/algo1-tp2
+CMAKE_SOURCE_DIR = /home/lcordoba/Desarrollo/Algo/algo1-tp2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jonno/projects/algo1/algo1-tp2/build
+CMAKE_BINARY_DIR = /home/lcordoba/Desarrollo/Algo/algo1-tp2/build
 
 # Include any dependencies generated for this target.
 include tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/depend.make
@@ -51,17 +54,17 @@ include tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/flags.make
 
 tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/flags.make
 tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: ../tests/lib/googletest-release-1.7.0/src/gtest_main.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jonno/projects/algo1/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /home/jonno/projects/algo1/algo1-tp2/tests/lib/googletest-release-1.7.0/src/gtest_main.cc
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /home/lcordoba/Desarrollo/Algo/algo1-tp2/tests/lib/googletest-release-1.7.0/src/gtest_main.cc
 
 tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/src/gtest_main.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gtest_main.dir/src/gtest_main.cc.i"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jonno/projects/algo1/algo1-tp2/tests/lib/googletest-release-1.7.0/src/gtest_main.cc > CMakeFiles/gtest_main.dir/src/gtest_main.cc.i
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lcordoba/Desarrollo/Algo/algo1-tp2/tests/lib/googletest-release-1.7.0/src/gtest_main.cc > CMakeFiles/gtest_main.dir/src/gtest_main.cc.i
 
 tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/src/gtest_main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gtest_main.dir/src/gtest_main.cc.s"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jonno/projects/algo1/algo1-tp2/tests/lib/googletest-release-1.7.0/src/gtest_main.cc -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.s
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lcordoba/Desarrollo/Algo/algo1-tp2/tests/lib/googletest-release-1.7.0/src/gtest_main.cc -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.s
 
 tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o.requires:
 .PHONY : tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o.requires
@@ -83,8 +86,8 @@ tests/lib/googletest-release-1.7.0/libgtest_main.a: tests/lib/googletest-release
 tests/lib/googletest-release-1.7.0/libgtest_main.a: tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/build.make
 tests/lib/googletest-release-1.7.0/libgtest_main.a: tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libgtest_main.a"
-	cd /home/jonno/projects/algo1/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && $(CMAKE_COMMAND) -P CMakeFiles/gtest_main.dir/cmake_clean_target.cmake
-	cd /home/jonno/projects/algo1/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gtest_main.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && $(CMAKE_COMMAND) -P CMakeFiles/gtest_main.dir/cmake_clean_target.cmake
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gtest_main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/build: tests/lib/googletest-release-1.7.0/libgtest_main.a
@@ -94,10 +97,10 @@ tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/requires: tests/lib
 .PHONY : tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/requires
 
 tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/clean:
-	cd /home/jonno/projects/algo1/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && $(CMAKE_COMMAND) -P CMakeFiles/gtest_main.dir/cmake_clean.cmake
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/tests/lib/googletest-release-1.7.0 && $(CMAKE_COMMAND) -P CMakeFiles/gtest_main.dir/cmake_clean.cmake
 .PHONY : tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/clean
 
 tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/depend:
-	cd /home/jonno/projects/algo1/algo1-tp2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jonno/projects/algo1/algo1-tp2 /home/jonno/projects/algo1/algo1-tp2/tests/lib/googletest-release-1.7.0 /home/jonno/projects/algo1/algo1-tp2/build /home/jonno/projects/algo1/algo1-tp2/build/tests/lib/googletest-release-1.7.0 /home/jonno/projects/algo1/algo1-tp2/build/tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lcordoba/Desarrollo/Algo/algo1-tp2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lcordoba/Desarrollo/Algo/algo1-tp2 /home/lcordoba/Desarrollo/Algo/algo1-tp2/tests/lib/googletest-release-1.7.0 /home/lcordoba/Desarrollo/Algo/algo1-tp2/build /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/tests/lib/googletest-release-1.7.0 /home/lcordoba/Desarrollo/Algo/algo1-tp2/build/tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : tests/lib/googletest-release-1.7.0/CMakeFiles/gtest_main.dir/depend
 

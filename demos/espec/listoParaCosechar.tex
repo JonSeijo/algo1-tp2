@@ -1,15 +1,33 @@
 \begin{lstlisting}
 bool Sistema::listoParaCosechar() const{
-	int totalCultivos = (_campo.dimensiones().ancho * _campo.dimensiones().largo) - 2;
+    float totalCultivos = (_campo.dimensiones().ancho * _campo.dimensiones().largo) - 2;
 
-	int cantCosechable = 0;
+    float cantCosechable = 0;
     unsigned int i = 0;
 
 	while(i < _estado.parcelas.size()){
-        cantCosechable += _cuentaCosechables(i);
+        cantCosechable += _cuentaCosechables(_estado.parcelas.at(i));
 		i++;
     }
-
-    return ((cantCosechable / totalCultivos) >= 0.9);
+    return cantCosechable/totalCultivos >= 0.9f;
 }
+
+int Sistema::_cuentaCosechables(std::vector<EstadoCultivo> fila) const{
+    int res = 0;
+    unsigned int j = 0;
+    while(j <  fila.size()){
+        if(fila.at(j) == ListoParaCosechar){
+            Posicion p;
+            p.x = i;
+            p.y = j;
+            if(campo().contenido(p) == Cultivo){
+                res++;
+            }
+        }
+        j++;
+    }
+    return res;
+}
+
+
 \end{lstlisting}

@@ -4,11 +4,11 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/jonno/projects/algo1/algo1-tp2/src/aux.cpp" "/home/jonno/projects/algo1/algo1-tp2/build/src/CMakeFiles/src.dir/aux.cpp.o"
-  "/home/jonno/projects/algo1/algo1-tp2/src/campo.cpp" "/home/jonno/projects/algo1/algo1-tp2/build/src/CMakeFiles/src.dir/campo.cpp.o"
-  "/home/jonno/projects/algo1/algo1-tp2/src/drone.cpp" "/home/jonno/projects/algo1/algo1-tp2/build/src/CMakeFiles/src.dir/drone.cpp.o"
-  "/home/jonno/projects/algo1/algo1-tp2/src/sistema.cpp" "/home/jonno/projects/algo1/algo1-tp2/build/src/CMakeFiles/src.dir/sistema.cpp.o"
-  "/home/jonno/projects/algo1/algo1-tp2/src/tipos.cpp" "/home/jonno/projects/algo1/algo1-tp2/build/src/CMakeFiles/src.dir/tipos.cpp.o"
+  "/home/lcordoba/Desarrollo/Algo/algo1-tp2/src/aux.cpp" "/home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src/CMakeFiles/src.dir/aux.cpp.o"
+  "/home/lcordoba/Desarrollo/Algo/algo1-tp2/src/campo.cpp" "/home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src/CMakeFiles/src.dir/campo.cpp.o"
+  "/home/lcordoba/Desarrollo/Algo/algo1-tp2/src/drone.cpp" "/home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src/CMakeFiles/src.dir/drone.cpp.o"
+  "/home/lcordoba/Desarrollo/Algo/algo1-tp2/src/sistema.cpp" "/home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src/CMakeFiles/src.dir/sistema.cpp.o"
+  "/home/lcordoba/Desarrollo/Algo/algo1-tp2/src/tipos.cpp" "/home/lcordoba/Desarrollo/Algo/algo1-tp2/build/src/CMakeFiles/src.dir/tipos.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

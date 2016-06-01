@@ -224,17 +224,17 @@ bool Sistema::listoParaCosechar() const{
     unsigned int i = 0;
 
 	while(i < _estado.parcelas.size()){
-        cantCosechable += _cuentaCosechables(i);
+        cantCosechable += _cuentaCosechables(_estado.parcelas.at(i));
 		i++;
     }
     return cantCosechable/totalCultivos >= 0.9f;
 }
 
-int Sistema::_cuentaCosechables(int i) const{
+int Sistema::_cuentaCosechables(std::vector<EstadoCultivo> fila) const{
     int res = 0;
     unsigned int j = 0;
-    while(j <  _estado.parcelas.at(i).size()){
-        if(_estado.parcelas.at(i).at(j) == ListoParaCosechar){
+    while(j <  fila.size()){
+        if(fila.at(j) == ListoParaCosechar){
             Posicion p;
             p.x = i;
             p.y = j;

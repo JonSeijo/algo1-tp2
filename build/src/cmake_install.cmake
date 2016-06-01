@@ -1,4 +1,4 @@
-# Install script for directory: /home/jonno/projects/algo1/algo1-tp2/src
+# Install script for directory: /home/lcordoba/Desarrollo/Algo/algo1-tp2/src
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
