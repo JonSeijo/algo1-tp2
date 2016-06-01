@@ -217,25 +217,29 @@ bool Sistema::_esAdyacente(Posicion p1, Posicion p2) const{
 }
 
 bool Sistema::listoParaCosechar() const{
-	int totalCultivos = (_campo.dimensiones().ancho * _campo.dimensiones().largo) - 2;
+    float totalCultivos = (_campo.dimensiones().ancho * _campo.dimensiones().largo) - 2;
 
-	int cantCosechable = 0;
+    float cantCosechable = 0;
     unsigned int i = 0;
 
 	while(i < _estado.parcelas.size()){
         cantCosechable += _cuentaCosechables(i);
 		i++;
     }
-
-    return ((cantCosechable / totalCultivos) >= 0.9);
+    return cantCosechable/totalCultivos >= 0.9f;
 }
 
 int Sistema::_cuentaCosechables(int i) const{
     int res = 0;
     unsigned int j = 0;
-    while(j < _estado.parcelas.at(i).size()){
+    while(j <  _estado.parcelas.at(i).size()){
         if(_estado.parcelas.at(i).at(j) == ListoParaCosechar){
-            res++;
+            Posicion p;
+            p.x = i;
+            p.y = j;
+            if(campo().contenido(p) == Cultivo){
+                res++;
+            }
         }
         j++;
     }

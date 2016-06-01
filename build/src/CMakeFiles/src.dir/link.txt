@@ -1,0 +1,2 @@
+/usr/bin/ar cr libsrc.a  CMakeFiles/src.dir/tipos.cpp.o CMakeFiles/src.dir/campo.cpp.o CMakeFiles/src.dir/drone.cpp.o CMakeFiles/src.dir/sistema.cpp.o CMakeFiles/src.dir/aux.cpp.o
+/usr/bin/ranlib libsrc.a

@@ -11,7 +11,7 @@ int main(){
 	
     // testeando
     // si me olvido de borrar sean libres de hacer mierda todo esto
-
+/*
     Posicion posG;
     posG.x = 0;
     posG.y = 0;
@@ -35,7 +35,7 @@ int main(){
 
     Secuencia<Drone> sec;
     sec.push_back(d);
-    Sistema sis(c, sec);
+    Sistema sis(c, sec); */
     //Sistema sis2(c, sec);
  /*     // Prueba guardar sistema
     ofstream archivoSistema("sistema.txt");
@@ -44,7 +44,7 @@ int main(){
 */
 
    // Prueba cargar sistema
-    ifstream archivoLecturaSistema("sistema.txt");
+/*    ifstream archivoLecturaSistema("sistema.txt");
     sis.cargar(archivoLecturaSistema);
     archivoLecturaSistema.close();
 
@@ -83,7 +83,7 @@ int main(){
 
     cout << "Vuelo Escalerado: " << d1.vueloEscalerado() << endl;
 
-
+*/
     //cout << sis;
    // sis.crecer();
    // cout << sis;
