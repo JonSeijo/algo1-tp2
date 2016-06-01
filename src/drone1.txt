@@ -1,1 +1,1 @@
-{ D 5 100 [[0,0],[0,1],[1,1]] [Herbicida, Plaguicida]}
+{ D 5 100 [[0,0],[0,1],[1,1]] [Herbicida,Plaguicida] false [20,47]}

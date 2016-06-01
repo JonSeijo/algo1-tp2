@@ -51,19 +51,30 @@ class Drone{
         std::string _dameStringProductos() const;
         std::string _dameStringPosicion(Posicion p) const;
         std::string _dameStringProd(Producto p) const;
+        std::string _dameStringEnVuelo() const;
+        std::string _dameStringPosActual() const;
+
         void _leerSepararDatos(std::string &datos, std::string &dId, std::string &dBateria,
-                                      std::string &dTrayectoria, std::string &dProductos);
+                                      std::string &dTrayectoria, std::string &dProductos,
+                                      std::string &dEnVuelo, std::string &dPosActual);
 
         void _cargarBateria(std::string dBateria);
         void _cargarId(std::string dId);
         void _cargarTrayectoria(std::string dTrayectoria);
-        void _cargarPosicionIndividual(std::string dPos);
+        Posicion _cargarPosicionIndividual(std::string dPos);
 
         void _cargarProductos(std::string dProductos);
         void _cargarProductoIndividual(std::string dProd);
+        void _cargarPosActual(std::string dPosActual);
+        void _cargarEnVuelo(std::string dEnVuelo);
 
         bool _igualTrayectoria(Secuencia<Posicion> trA, Secuencia<Posicion> trB) const;
         bool _mismosProductos(Secuencia<Producto> secuA, Secuencia<Producto> secuB) const;
+
+        template<class T>
+        unsigned int cuenta(const T &x, const std::vector<T> &v) const;
+        template<class T>
+        bool mismos(const std::vector<T> &a, const std::vector<T> &b) const;
 
         static Secuencia<Secuencia< Posicion > > dameTrayectorias(const Secuencia<Drone>& ds);
         static Secuencia<Secuencia<Posicion> > agruparPosiciones(const Secuencia<Secuencia<Posicion> > pss);
