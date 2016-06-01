@@ -304,6 +304,7 @@ void Drone::cargar(std::istream & is){
 }
 
 void Drone::_cargarPosActual(std::string dPosActual){
+    std::cout << "posactual    : " << dPosActual << std::endl;
     _posicionActual = _cargarPosicionIndividual(dPosActual);
 }
 
@@ -313,12 +314,12 @@ void Drone::_cargarEnVuelo(std::string dEnVuelo){
     unsigned int i = 0;
     while (!terminado){
         if (dEnVuelo[i] == 't'){
+            leyoEstado = true;
             _enVuelo = true;
         }
 
         i++;
         if (i >= dEnVuelo.size()){
-            leyoEstado = true;
             terminado = true;
         }
     }
@@ -331,7 +332,7 @@ void Drone::_cargarEnVuelo(std::string dEnVuelo){
 
 void Drone::_cargarProductos(std::string dProductos){
     // Vaciar el vector de productos y cargar los nuevos
-    // dProductos:_[Herbicida,_Plaguicida]
+    // dProductos:_[Herbicida,Plaguicida]
     _productos.resize(0);
 
     // Separo los productos uno a uno y los voy cargando
@@ -343,7 +344,7 @@ void Drone::_cargarProductos(std::string dProductos){
         if (dProductos[i] == ','){
             _cargarProductoIndividual(dActual);
             dActual = "";
-            i += 2;
+            i++;
         }
         if (dProductos[i] == ']'){
             if(dActual != ""){
@@ -391,7 +392,8 @@ void Drone::_cargarTrayectoria(std::string dTrayectoria){
             }
 
             if((dTrayectoria[i] == ']') && (dTrayectoria[i-1] == ']')){
-                _cargarPosicionIndividual(dActual);
+                Posicion p = _cargarPosicionIndividual(dActual);
+                _trayectoria.push_back(p);
                 terminado = true;
             }else{
                 dActual += dTrayectoria[i];
@@ -406,8 +408,14 @@ void Drone::_cargarTrayectoria(std::string dTrayectoria){
 }
 
 Posicion Drone::_cargarPosicionIndividual(std::string dPos){
+    std::cout << "dpos:" << dPos << std::endl;
     int posSeparador = dPos.find(',');
-    int x = atoi(dPos.substr(1, posSeparador - 1).c_str());
+    int x = 0;
+    if(dPos[0] == '['){
+        x = atoi(dPos.substr(1, posSeparador - 1).c_str());
+    }else{
+        x = atoi(dPos.substr(2, posSeparador - 1).c_str());
+    }
     int y = atoi(dPos.substr(posSeparador + 1, dPos.length() - posSeparador - 2).c_str());
 
     Posicion p;
@@ -453,14 +461,15 @@ void Drone::_leerSepararDatos(std::string &datos, std::string &dId, std::string 
 
         if (cantEspacios == 4) dTrayectoria += datos[i];
 
-        if (cantEspacios == 5) dEnVuelo += datos[i];
+        if (cantEspacios == 5) dProductos += datos[i];
 
-        if (cantEspacios == 6) dPosActual += datos[i];
+        if (cantEspacios == 6) dEnVuelo += datos[i];
 
         if (cantEspacios == 7){
-            dProductos = datos.substr(i, datos.npos);
+            dPosActual = datos.substr(i, datos.npos);
             terminado = true;
         }
+
         i++;
     }
 
@@ -516,7 +525,7 @@ std::string Drone::_dameStringProductos() const{
         cadenaProductos += _dameStringProd(_productos.at(i));
         i++;
         if (i < _productos.size()){
-            cadenaProductos += ", ";
+            cadenaProductos += ",";
         }
     }
 
@@ -540,8 +549,28 @@ bool Drone::operator==(const Drone & otroDrone) const{
     return _id == otroDrone.id() &&
            _bateria == otroDrone.bateria() &&
            _enVuelo == otroDrone.enVuelo() &&
+           _posicionActual == otroDrone.posicionActual() &&
            _igualTrayectoria(_trayectoria, otroDrone.vueloRealizado()) &&
-           _mismosProductos(_productos, otroDrone.productosDisponibles());
+           mismos(_productos, otroDrone.productosDisponibles());
+            // _mismosProductos(_productos, otroDrone.productosDisponibles());
+}
+
+template<class T>
+unsigned int Drone::cuenta(const T &x, const std::vector<T> &v) const{
+    unsigned int cant = 0;
+    for (unsigned int i = 0; i < v.size(); ++i) {
+        if (x == v[i]) ++cant;
+    }
+    return cant;
+}
+
+template<class T>
+bool Drone::mismos(const std::vector<T> &a, const std::vector<T> &b) const {
+    bool res = a.size() == b.size();
+    for (unsigned int i = 0; res && i < a.size(); ++i) {
+        res = cuenta(a[i], a) == cuenta(a[i], b);
+    }
+    return res;
 }
 
 bool Drone::_igualTrayectoria(Secuencia<Posicion> trA, Secuencia<Posicion> trB) const{

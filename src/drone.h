@@ -71,6 +71,11 @@ class Drone{
         bool _igualTrayectoria(Secuencia<Posicion> trA, Secuencia<Posicion> trB) const;
         bool _mismosProductos(Secuencia<Producto> secuA, Secuencia<Producto> secuB) const;
 
+        template<class T>
+        unsigned int cuenta(const T &x, const std::vector<T> &v) const;
+        template<class T>
+        bool mismos(const std::vector<T> &a, const std::vector<T> &b) const;
+
         static Secuencia<Secuencia< Posicion > > dameTrayectorias(const Secuencia<Drone>& ds);
         static Secuencia<Secuencia<Posicion> > agruparPosiciones(const Secuencia<Secuencia<Posicion> > pss);
         static Secuencia<Secuencia<InfoVueloCruzado> > agruparRepetidas(const Secuencia<Secuencia<Posicion> > tss);

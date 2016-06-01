@@ -52,7 +52,10 @@ int main(){
     ifstream fileDrone1("drone1.txt");
     d1.cargar(fileDrone1);
     fileDrone1.close();
-
+    cout << d1;
+    ofstream fileDrone1Bis("drone1-bis.txt");
+    d1.guardar(fileDrone1Bis);
+    fileDrone1Bis.close();
     cout << d1;
 /*
     ifstream fileDrone2("drone2.txt");
