@@ -170,7 +170,7 @@ void Sistema::despegar(const Drone & d){
 }
 
 Posicion Sistema::_parcelaCultivoLibre() const{
-    Secuencia<Posicion> ps;
+    Posicion res;
 
     int i = 0;
     while (i < _campo.dimensiones().ancho){
@@ -182,15 +182,16 @@ Posicion Sistema::_parcelaCultivoLibre() const{
 
             if (_esAdyacente(p, posGranero()) &&
                     _esLibreDeDrones(p)){
-                ps.push_back(p);
+                res = p;
+                break;
             }
             j++;
         }
         i++;
     }
 
-    // Solo necesito una, y el requiere garantiza que existe
-    return ps.at(0);
+
+    return res;
 
 }
 
