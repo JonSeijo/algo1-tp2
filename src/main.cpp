@@ -4,6 +4,7 @@
 #include "drone.h"
 #include "sistema.h"
 #include "tipos.h"
+#include "aux.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ int main(){
 	
     // testeando
     // si me olvido de borrar sean libres de hacer mierda todo esto
-/*
+
     Posicion posG;
     posG.x = 0;
     posG.y = 0;
@@ -29,7 +30,7 @@ int main(){
 
     Drone d(5, productos);
     Drone d1(5, productos);
-    Drone d2(78, productos);
+  /*  Drone d2(78, productos);
     Drone d3(43, productos);
     Drone d4(10, productos);
 
@@ -44,14 +45,16 @@ int main(){
 */
 
    // Prueba cargar sistema
-/*    ifstream archivoLecturaSistema("sistema.txt");
+/*   ifstream archivoLecturaSistema("sistema.txt");
     sis.cargar(archivoLecturaSistema);
     archivoLecturaSistema.close();
-
+*/
     ifstream fileDrone1("drone1.txt");
     d1.cargar(fileDrone1);
     fileDrone1.close();
 
+    cout << d1;
+/*
     ifstream fileDrone2("drone2.txt");
     d2.cargar(fileDrone2);
     fileDrone2.close();
