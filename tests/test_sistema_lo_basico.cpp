@@ -8,7 +8,7 @@ TEST(test_sistema_lo_basico, crear_sistema_y_sus_observadores_funcionan_ok) {
     EXPECT_EQ(s1.campo(), un_campo());
     for (int i = 0; i < s1.campo().dimensiones().ancho; i++) {
         for (int j = 0; j < s1.campo().dimensiones().largo; j++) {
-            EXPECT_EQ(s1.estadoDelCultivo({i, j}), RecienSembrado);
+            EXPECT_EQ(s1.estadoDelCultivo({i, j}), NoSensado);
         }
     }
     EXPECT_TRUE(test::mismos(s1.enjambreDrones(), algunos_drones()));

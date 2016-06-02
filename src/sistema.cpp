@@ -1,4 +1,5 @@
 #include "sistema.h"
+#include "aux.h"
 #include <algorithm>
 #include <sstream>
 
@@ -762,8 +763,28 @@ bool Sistema::_igualEstados(const Sistema &s) const{
     return iguales;
 }
 
-bool Sistema::_mismosDrones(const Sistema &s) const{
+template<class T>
+unsigned int Sistema::cuenta(const T &x, const std::vector<T> &v) const{
+    unsigned int cant = 0;
+    for (unsigned int i = 0; i < v.size(); ++i) {
+        if (x == v[i]) ++cant;
+    }
+    return cant;
+}
 
+template<class T>
+bool Sistema::mismos(const std::vector<T> &a, const std::vector<T> &b) const {
+    bool res = a.size() == b.size();
+    for (unsigned int i = 0; res && i < a.size(); ++i) {
+        res = cuenta(a[i], a) == cuenta(a[i], b);
+    }
+    return res;
+}
+
+bool Sistema::_mismosDrones(const Sistema &s) const{
+    // DEFINIR EL MISMOS DENTRO DEL SISTEMA
+    return mismos(_enjambre, s.enjambreDrones());
+    /*
     bool mismos = true;
     if (_enjambre.size() == s.enjambreDrones().size()){
 
@@ -782,7 +803,7 @@ bool Sistema::_mismosDrones(const Sistema &s) const{
     }else{
         mismos = false;
     }
-    return mismos;
+    return mismos;  */
 }
 
 bool Sistema::_pertenece(Drone d, const Secuencia<Drone> enjambre) const{
@@ -843,7 +864,7 @@ Secuencia<Posicion> Sistema::_darPosicionesValidas(const Posicion posactual){
 }
 
 bool Sistema::tieneFertilizante(const Drone d){
-    int i = 0;
+    unsigned int i = 0;
     bool t = false;
     while(i < d.productosDisponibles().size()){
         if(d.productosDisponibles().at(i) == Fertilizante){
@@ -855,7 +876,7 @@ bool Sistema::tieneFertilizante(const Drone d){
 }
 
 bool Sistema::tienePlaguicida(const Drone d){
-    int i = 0;
+    unsigned int i = 0;
     bool t = false;
     while(i < d.productosDisponibles().size()){
         if(d.productosDisponibles().at(i) == Plaguicida){
@@ -867,7 +888,7 @@ bool Sistema::tienePlaguicida(const Drone d){
 }
 
 bool Sistema::tienePlaguicidaBajoConsumo(const Drone d){
-    int i = 0;
+    unsigned int i = 0;
     bool t = false;
     while(i < d.productosDisponibles().size()){
         if(d.productosDisponibles().at(i) == PlaguicidaBajoConsumo){
@@ -879,7 +900,7 @@ bool Sistema::tienePlaguicidaBajoConsumo(const Drone d){
 }
 
 bool Sistema::tieneHerbicida(const Drone d){
-    int i = 0;
+    unsigned int i = 0;
     bool t = false;
     while(i < d.productosDisponibles().size()){
         if(d.productosDisponibles().at(i) == Herbicida){
@@ -891,7 +912,7 @@ bool Sistema::tieneHerbicida(const Drone d){
 }
 
 bool Sistema::tieneHerbicidaLargoAlcance(const Drone d){
-    int i = 0;
+    unsigned int i = 0;
     bool t = false;
     while(i < d.productosDisponibles().size()){
         if(d.productosDisponibles().at(i) == HerbicidaLargoAlcance){
@@ -934,7 +955,7 @@ void Sistema::cambiaARecienSembrado(const Posicion posactual){
 void Sistema::cambiaAdyacentesConMalezaARecienSembrado(const Posicion posactual){
     Secuencia<Posicion> xs = adyacentesACambiar(posactual);
     xs.push_back(posactual);
-    int i = 0;
+    unsigned int i = 0;
     while(i < xs.size()){
         _estado.parcelas.at(xs.at(i).x).at(xs.at(i).y) = RecienSembrado;
         i++;
@@ -942,7 +963,7 @@ void Sistema::cambiaAdyacentesConMalezaARecienSembrado(const Posicion posactual)
 }
 
 void Sistema::moverUnaPosicionAlDrone(Posicion p, Drone d){
-    int i = 0;
+    unsigned int i = 0;
     while(i < _enjambre.size()){
         if(_enjambre.at(i) == d){
             _enjambre.at(i).moverA(p);
@@ -952,7 +973,7 @@ void Sistema::moverUnaPosicionAlDrone(Posicion p, Drone d){
 }
 
 void Sistema::restarBateria(int x, Drone d){
-    int i = 0;
+    unsigned int i = 0;
     while(i < _enjambre.size()){
         if(_enjambre.at(i) == d){
             _enjambre.at(i).setBateria(x);
@@ -962,7 +983,7 @@ void Sistema::restarBateria(int x, Drone d){
 }
 
 void Sistema::quitarProducto(Producto p, Drone d){
-    int i = 0;
+    unsigned int i = 0;
     while(i < _enjambre.size()){
         if(_enjambre.at(i) == d){
             _enjambre.at(i).sacarProducto(p);

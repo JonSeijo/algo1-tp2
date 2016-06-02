@@ -24,21 +24,39 @@ int main(){
     Campo c(posG, posC);
     Campo c2(posG, posC);
 
-    std::vector<Producto> productos;
-    productos.push_back(Herbicida);
-    productos.push_back(Plaguicida);
+    std::vector<Producto> productos1;
+    productos1.push_back(Herbicida);
+    productos1.push_back(Herbicida);
+    productos1.push_back(Plaguicida);
 
-    Drone d(5, productos);
-    Drone d1(5, productos);
+    Drone d(5, productos1);
+
+    std::vector<Producto> productos2;
+    productos2.push_back(Herbicida);
+    productos2.push_back(Herbicida);
+    productos2.push_back(Plaguicida);
+
+    Drone d1(5, productos2);
   /*  Drone d2(78, productos);
     Drone d3(43, productos);
     Drone d4(10, productos);
+*/
+    Secuencia<Drone> sec1;
+    sec1.push_back(d);
+    sec1.push_back(d1);
 
-    Secuencia<Drone> sec;
-    sec.push_back(d);
-    Sistema sis(c, sec); */
+    Secuencia<Drone> sec2;
+    sec2.push_back(d1);
+    sec2.push_back(d);
+
     //Sistema sis2(c, sec);
- /*     // Prueba guardar sistema
+      // Prueba guardar sistema
+
+    Sistema sis1(c, sec1);
+    Sistema sis2(c, sec2);
+
+    cout << "sistemas iguales: " << (sis1 == sis2) << endl;
+/*
     ofstream archivoSistema("sistema.txt");
     sis.guardar(archivoSistema);
     archivoSistema.close();

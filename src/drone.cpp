@@ -21,25 +21,6 @@ Drone::Drone(ID i, const std::vector<Producto>& ps){
     // Le defino una posicion valida porque sino se rompe en otro lado
     _posicionActual.x = 0;
     _posicionActual.y = 0;
-    
-    //Trayectoria de prueba
-
-   /*Posicion p1;
-    p1.x = 0;
-    p1.y = 0;
-
-    Posicion p2;
-    p2.x = 1;
-    p2.y = 0;
-
-    Posicion p3;
-    p3.x = 0;
-    p3.y = 0;
-
-    _trayectoria.push_back(p1);
-    _trayectoria.push_back(p2);
-    _trayectoria.push_back(p3);
-    */
 }
 
 ID Drone::id() const{
@@ -304,7 +285,6 @@ void Drone::cargar(std::istream & is){
 }
 
 void Drone::_cargarPosActual(std::string dPosActual){
-    std::cout << "posactual    : " << dPosActual << std::endl;
     _posicionActual = _cargarPosicionIndividual(dPosActual);
 }
 
@@ -408,7 +388,6 @@ void Drone::_cargarTrayectoria(std::string dTrayectoria){
 }
 
 Posicion Drone::_cargarPosicionIndividual(std::string dPos){
-    std::cout << "dpos:" << dPos << std::endl;
     int posSeparador = dPos.find(',');
     int x = 0;
     if(dPos[0] == '['){

@@ -67,6 +67,12 @@ class Sistema {
         bool _mismosDrones(const Sistema &s) const;
         bool _pertenece(Drone d, const Secuencia<Drone> enjambre) const;
 
+        template<class T>
+        unsigned int cuenta(const T &x, const std::vector<T> &v) const;
+
+        template<class T>
+        bool mismos(const std::vector<T> &a, const std::vector<T> &b) const;
+
         Posicion _parcelaCultivoLibre() const;
         bool _esLibreDeDrones(Posicion p) const;
         bool _esAdyacente(Posicion p1, Posicion p2) const;
