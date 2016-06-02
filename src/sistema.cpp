@@ -218,27 +218,27 @@ bool Sistema::_esAdyacente(Posicion p1, Posicion p2) const{
 }
 
 bool Sistema::listoParaCosechar() const{
-    float totalCultivos = (_campo.dimensiones().ancho * _campo.dimensiones().largo) - 2;
+    float totalCultivos = (campo().dimensiones().ancho * campo().dimensiones().largo) - 2;
 
     float cantCosechable = 0;
-    unsigned int i = 0;
+    int i = 0;
 
-	while(i < _estado.parcelas.size()){
-        cantCosechable += _cuentaCosechables(_estado.parcelas.at(i), i);
+    while(i < campo().dimensiones().ancho){
+        cantCosechable += _cuentaCosechables(campo().dimensiones().largo ,i);
 		i++;
     }
     return cantCosechable/totalCultivos >= 0.9f;
 }
 
-int Sistema::_cuentaCosechables(const std::vector<EstadoCultivo> fila, int i) const{
+int Sistema::_cuentaCosechables(const int largo, int i) const{
     int res = 0;
-    unsigned int j = 0;
-    while(j <  fila.size()){
-        if(fila.at(j) == ListoParaCosechar){
-            Posicion p;
-            p.x = i;
-            p.y = j;
-            if(campo().contenido(p) == Cultivo){
+    int j = 0;
+    while(j <  largo){
+        Posicion p;
+        p.x = i;
+        p.y = j;
+        if(campo().contenido(p) == Cultivo){
+            if(estadoDelCultivo(p) == ListoParaCosechar){
                 res++;
             }
         }

@@ -77,7 +77,7 @@ class Sistema {
         bool _esLibreDeDrones(Posicion p) const;
         bool _esAdyacente(Posicion p1, Posicion p2) const;
 
-        int _cuentaCosechables(const std::vector<EstadoCultivo> fila, int i) const;
+        int _cuentaCosechables(const int largo, int i) const;
 
         std::vector<Posicion> _posicionesConPlaga();
         void _plaguizarVecinos(Posicion p);
