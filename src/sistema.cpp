@@ -162,12 +162,10 @@ void Sistema::despegar(const Drone & d){
     unsigned int i = 0;
     while (i < _enjambre.size()){
         if (_enjambre.at(i) == d){
-            _enjambre.at(i).cambiarPosicionActual(_parcelaCultivoLibre());
+            _enjambre.at(i).moverA(_parcelaCultivoLibre());
         }
         i++;
     }
-
-    std::cout << "despego el drone" << std::endl;
 }
 
 Posicion Sistema::_parcelaCultivoLibre() const{
@@ -182,6 +180,7 @@ Posicion Sistema::_parcelaCultivoLibre() const{
             p.y = j;
 
             if (_esAdyacente(p, posGranero()) &&
+                    _campo.contenido(p) == Cultivo &&
                     _esLibreDeDrones(p)){
                 res = p;
                 break;
