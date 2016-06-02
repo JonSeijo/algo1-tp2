@@ -1,11 +1,12 @@
 \begin{lstlisting}
 
 bool Sistema::listoParaCosechar() const{
-   
-    /* \textcolor{ao}{// Estado E1: } */
-    /* \textcolor{ao}{// Vale: totalCultivos =  } */
-	   
+     
     float cantCosechable = _cuentaCosechables();
+	
+	/* \textcolor{ao}{// Estado E1: } */
+    /* \textcolor{ao}{// Vale: totalCultivos =  } */
+
     float totalCultivos = _parcelasCultivo().size();
     
     return cantCosechable/totalCultivos >= 0.9f;
