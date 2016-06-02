@@ -965,7 +965,7 @@ void Sistema::cambiaAdyacentesConMalezaARecienSembrado(const Posicion posactual)
 void Sistema::moverUnaPosicionAlDrone(Posicion p, Drone d){
     unsigned int i = 0;
     while(i < _enjambre.size()){
-        if(_enjambre.at(i) == d){
+        if(_enjambre.at(i).id() == d.id()){
             _enjambre.at(i).moverA(p);
         }
         i++;
@@ -975,7 +975,7 @@ void Sistema::moverUnaPosicionAlDrone(Posicion p, Drone d){
 void Sistema::restarBateria(int x, Drone d){
     unsigned int i = 0;
     while(i < _enjambre.size()){
-        if(_enjambre.at(i) == d){
+        if(_enjambre.at(i).id() == d.id()){
             _enjambre.at(i).setBateria(x);
         }
         i++;
@@ -985,7 +985,7 @@ void Sistema::restarBateria(int x, Drone d){
 void Sistema::quitarProducto(Producto p, Drone d){
     unsigned int i = 0;
     while(i < _enjambre.size()){
-        if(_enjambre.at(i) == d){
+        if(_enjambre.at(i).id() == d.id()){
             _enjambre.at(i).sacarProducto(p);
         }
         i++;
