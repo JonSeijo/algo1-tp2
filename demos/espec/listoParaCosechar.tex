@@ -78,8 +78,17 @@ std::vector<Posicion> Sistema::_parcelasCultivo() const{
     
 }
 
-void Sistema::_parcelasCultivoLargo(std::vector<Posicion> &parcelasCultivo, int fila) const{
+void Sistema::_parcelasCultivoLargo(std::vector<Posicion> &parcelasCultivo,
+										const int fila) const{
+	/* \textcolor{ao}{// Modifica parcelasCultivo}*/	        
+    /* \textcolor{ao}{// Estado C1}*/	    
+    /* \textcolor{ao}{// Vale parcelasCultivo == pre(parcelasCultivo)}*/      
+    
     int j = 0;
+	
+	/* \textcolor{ao}{// Estado C2}*/	    
+    /* \textcolor{ao}{// Vale PC: j == 0 \&\& parcelasCultivo == parcelasCultivo@C1}*/      
+    
     while (j < campo().dimensiones().largo){
         Posicion p;
         p.x = fila;
@@ -89,6 +98,10 @@ void Sistema::_parcelasCultivoLargo(std::vector<Posicion> &parcelasCultivo, int 
         }
         j++;
     }
+	
+	/* \textcolor{ao}{// Estado C3}*/	    
+    /* \textcolor{ao}{// Vale QC: parcelasCultivo == [(fila,j)|\selector{j}{[0..largo(dimensiones(campo(this)))}, \newline
+    contenido(campo(this), fila, j) == Cultivo]}*/      
 }
 
 
