@@ -1,4 +1,13 @@
+\begin{problema}{listoParaCosechar}{this: Sistema}{bool}
+
+\asegura{res == (cantCultivosCosechables(campo(this))/|parcelasCultivo(campo(this))|\geq 0,9)}
+
+\aux{cantCultivosCosechables}{s: Sistema}{\ent}{|[1|\selector{pos}{parcelasCultivo(campo(s))}, \newline
+ estadoDelCultivo(pos, s) == ListoParaCosechar]|}
+
+\end{problema}
 
 \begin{problema}{cuentaCosechables}{es: [EstadoCultivo]}{\ent}
 \asegura{\res == |[e | \selector{e}{es}, e == ListoParaCosechar]|}
 \end{problema}
+

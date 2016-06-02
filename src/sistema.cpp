@@ -218,33 +218,46 @@ bool Sistema::_esAdyacente(Posicion p1, Posicion p2) const{
 }
 
 bool Sistema::listoParaCosechar() const{
-    float totalCultivos = (campo().dimensiones().ancho * campo().dimensiones().largo) - 2;
-
-    float cantCosechable = 0;
-    int i = 0;
-
-    while(i < campo().dimensiones().ancho){
-        cantCosechable += _cuentaCosechables(campo().dimensiones().largo ,i);
-		i++;
-    }
+    float cantCosechable = _cuentaCosechables();
+    float totalCultivos = _parcelasCultivo().size();
     return cantCosechable/totalCultivos >= 0.9f;
 }
 
-int Sistema::_cuentaCosechables(const int largo, int i) const{
+int Sistema::_cuentaCosechables() const{
     int res = 0;
+    unsigned int i = 0;
+    while(i < _parcelasCultivo().size()){
+        if (estadoDelCultivo(_parcelasCultivo().at(i)) == ListoParaCosechar){
+            res++;
+        }
+        i++;
+    }
+    return res;
+}
+
+std::vector<Posicion> Sistema::_parcelasCultivo() const{
+    std::vector<Posicion> parcelasCultivo;
+
+    int i = 0;
+    while (i < campo().dimensiones().ancho){
+        _parcelasCultivoLargo(parcelasCultivo, i);
+        i++;
+    }
+
+    return parcelasCultivo;
+}
+
+void Sistema::_parcelasCultivoLargo(std::vector<Posicion> &parcelasCultivo, int fila) const{
     int j = 0;
-    while(j <  largo){
+    while (j < campo().dimensiones().largo){
         Posicion p;
-        p.x = i;
+        p.x = fila;
         p.y = j;
-        if(campo().contenido(p) == Cultivo){
-            if(estadoDelCultivo(p) == ListoParaCosechar){
-                res++;
-            }
+        if (campo().contenido(p) == Cultivo){
+            parcelasCultivo.push_back(p);
         }
         j++;
     }
-    return res;
 }
 
 void Sistema::aterrizarYCargarBaterias(Carga b){
