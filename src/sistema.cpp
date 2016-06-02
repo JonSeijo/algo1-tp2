@@ -231,7 +231,7 @@ bool Sistema::listoParaCosechar() const{
     return cantCosechable/totalCultivos >= 0.9f;
 }
 
-int Sistema::_cuentaCosechables(std::vector<EstadoCultivo> fila, int i) const{
+int Sistema::_cuentaCosechables(const std::vector<EstadoCultivo> fila, int i) const{
     int res = 0;
     unsigned int j = 0;
     while(j <  fila.size()){
