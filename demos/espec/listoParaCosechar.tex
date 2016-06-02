@@ -78,7 +78,7 @@ std::vector<Posicion> Sistema::_parcelasCultivo() const{
     /* \textcolor{ao}{// Vale PC: i == 0 \&\& parcelasCultivo == parcelasCultivo@B1}*/    
         
     while (i < campo().dimensiones().ancho){ 
-    /* \textcolor{ao}{// I: 0$\leq$i$\leq$\&\&($\forall$\selector{a}{[0..i)},\selector{j}{[0..largo(dimensiones(campo(this))))},
+    /* \textcolor{ao}{// I: 0$\leq$i$\leq$$|$parcelasCultivo$|$\&\&($\forall$\selector{a}{[0..i)},\selector{j}{[0..largo(dimensiones(campo(this))))},
     (a,j) == Cultivo)(a,j)$\in$parcelasCultivo)}*/
     /* \textcolor{ao}{// B: i < ancho(dimensiones(campo(this)))}*/
     /* \textcolor{ao}{// Fv:ancho(dimensiones(campo(this)))-i.Cota:0}*/
@@ -204,6 +204,36 @@ total == |[1|\selector{a}{[0..i)},
 
 -----------------------------------------------------------------------
 -----------------------------------------------------------------------
+
+Demostracion de ciclo _parcelasCultivo.
+
+    /* \textcolor{ao}{// Pc: i == 0 \&\& parcelasCultivo == []}*/        
+    /* \textcolor{ao}{// I: 0$\leq$i$\leq$$|$parcelasCultivo$|$\&\&($\forall$\selector{a}{[0..i)},\selector{j}{[0..largo(dimensiones(campo(this))))},
+    (a,j) == Cultivo)(a,j)$\in$parcelasCultivo)}*/
+    /* \textcolor{ao}{// B: i < ancho(dimensiones(campo(this)))}*/
+    /* \textcolor{ao}{// Fv:ancho(dimensiones(campo(this)))-i.Cota:0}*/
+    /* \textcolor{ao}{// Qc: parcelasCultivo == parcelasCultivo(campo(this))}*/    
+
+
+    - Pc /*\implica*/ I
+    
+i == 0 /*\implica*/ 0 == i /*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ 0
+/*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ |[]| /*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ |parcelasCultivo|
+
+parcelasCultivo == [] /*\implica*/ (/*$\forall$*//*\selector{a}{[]}*/, /*\selector{j}{[0..largo(dimensiones(campo(this))))}*/,
+    (a,j) == Cultivo)(a,j)/*$\in$*/parcelasCultivo)}
+    (verdadero por vacuidad del paraTodo)
+    
+/*\implica*/ (/*$\forall$*//*\selector{a}{[0..0)}*/, /*\selector{j}{[0..largo(dimensiones(campo(this))))}*/,
+    (a,j) == Cultivo)(a,j)/*$\in$*/parcelasCultivo)}
+	(Verdadero pues [0..0) es vacio)
+
+/*\implica*/ (/*$\forall$*//*\selector{a}{[0..i)}*/,
+    /*\selector{j}{[0..largo(dimensiones(campo(this))))}*/,
+    (a,j) == Cultivo)(a,j)/*$\in$*/parcelasCultivo)}
+    (Verdadero pues i == 0)
+    
+
 
 \end{lstlisting}
 
