@@ -224,15 +224,15 @@ bool Sistema::listoParaCosechar() const{
 }
 
 int Sistema::_cuentaCosechables() const{
-    int res = 0;
+    int total = 0;
     unsigned int i = 0;
     while(i < _parcelasCultivo().size()){
         if (estadoDelCultivo(_parcelasCultivo().at(i)) == ListoParaCosechar){
-            res++;
+            total++;
         }
         i++;
     }
-    return res;
+    return total;
 }
 
 std::vector<Posicion> Sistema::_parcelasCultivo() const{
