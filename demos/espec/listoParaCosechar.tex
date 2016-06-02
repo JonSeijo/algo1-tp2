@@ -6,14 +6,14 @@ Ciclos y demostraciones despues.
 bool Sistema::listoParaCosechar() const{
      
     float cantCosechable = _cuentaCosechables();
-	
+
 	/* \textcolor{ao}{// Estado E1: } */
     /* \textcolor{ao}{// Vale: cantCosechable == cantCultivosCosechables(campo(this))  } */
 
     float totalCultivos = _parcelasCultivo().size();
     
     /* \textcolor{ao}{// Estado E2: } */
-    /* \textcolor{ao}{// Vale: totalCultivos == |parcelasCultivo(campo(this))|  \&\&  cantCosechable == cantCosechable@E1} */
+    /* \textcolor{ao}{// Vale: totalCultivos == $|$parcelasCultivo(campo(this))$|$  \&\&  cantCosechable == cantCosechable@E1} */
     
     return cantCosechable/totalCultivos >= 0.9f;
     
@@ -24,31 +24,43 @@ bool Sistema::listoParaCosechar() const{
 int Sistema::_cuentaCosechables() const{
     int total = 0;
 	
-	/* \textcolor{ao}{// Estado A1: } */
+    /* \textcolor{ao}{// Estado A1: } */
     /* \textcolor{ao}{// Vale: total == 0}*/
     
     unsigned int i = 0;
 
-	/* \textcolor{ao}{// Estado A2: } */
+    /* \textcolor{ao}{// Estado A2: } */
     /* \textcolor{ao}{// Vale: i == 0  \&\&  total == total@A1}*/
     /* \textcolor{ao}{// Vale PC: i == 0  \&\&  total == 0}*/
     
     while(i < _parcelasCultivo().size()){
-		
-    	/* \textcolor{ao}{// I: 0 $\leq$  i $\leq$ |parcelasCultivo(campo(this))|}*/
-	/* \textcolor{ao}{// B: i $<$ |parcelasCultivo(campo(this))|}*/
-	/* \textcolor{ao}{// Fv:|parcelasCultivo(campo(this))|-i Cota: 0}*/    	
+
+    /* \textcolor{ao}{// I: 0 $\leq$  i $\leq$ $|$parcelasCultivo(campo(this))$|$}*/
+    /* \textcolor{ao}{// B: i $<$ $|$parcelasCultivo(campo(this))$|$}*/
+    /* \textcolor{ao}{// Fv:$|$parcelasCultivo(campo(this))$|$-i Cota: 0}*/    	
     	
+    /* \textcolor{ao}{// Estado AC1}*/
+    /* \textcolor{ao}{// Vale Pif: I \&\& B}*/
+    		
         if (estadoDelCultivo(_parcelasCultivo().at(i)) == ListoParaCosechar){
             total++;
         }
+
+    /* \textcolor{ao}{// Estado AC2}*/
+    /* \textcolor{ao}{// Vale Qif: total ==$|$[1$|$\selector{p}{parcelasCultivo}, \newline  
+            estadoDelCultivo(p, this) == ListoParaCosechar]$|$\&\& i == i@AC2}*/
+
         i++;
+    
+    /* \textcolor{ao}{// Estado AC3}*/
+    /* \textcolor{ao}{// Vale: i == i@AC3+1  \&\&  total == total@AC2 \&\&  I}*/
+            
     }
 
     /* \textcolor{ao}{// Estado A3}*/	    
     /* \textcolor{ao}{// Vale QC: total == cantCultivosCosechables(this)}*/    
     return total;
-    
+
     /* \textcolor{ao}{// Estado A4}*/    
     /* \textcolor{ao}{// Vale res == total@A3}*/    
     
@@ -63,9 +75,26 @@ std::vector<Posicion> Sistema::_parcelasCultivo() const{
 	/* \textcolor{ao}{// Estado B2}*/	    
     /* \textcolor{ao}{// Vale PC: i == 0 \&\& parcelasCultivo == parcelasCultivo@B1}*/    
         
-    while (i < campo().dimensiones().ancho){
+    while (i < campo().dimensiones().ancho){ 
+    /* \textcolor{ao}{// I: 0$\leq$i$\leq$\&\&($\forall$\selector{a}{[0..i)},\selector{j}{[0..largo(dimensiones(campo(this))))},
+    (a,j) == Cultivo)(a,j)$\in$parcelasCultivo)}*/
+    /* \textcolor{ao}{// B: i < ancho(dimensiones(campo(this)))}*/
+    /* \textcolor{ao}{// Fv:ancho(dimensiones(campo(this)))-i.Cota:0}*/
+    
+    	/* \textcolor{ao}{// Estado BC1}*/   
+    	/* \textcolor{ao}{// Vale I \&\& B}*/       	    
+        
         _parcelasCultivoLargo(parcelasCultivo, i);
+
+    	/* \textcolor{ao}{// Estado BC2}*/   
+    	/* \textcolor{ao}{// Vale $\forall$\selector{a}{[0..i]},\selector{j}{[0..largo(dimensiones(campo(this)))},
+    	(a,j) == Cultivo)(a,j)$\in$parcelasCultivo) \&\& }*/
+    	/* \textcolor{ao}{$\forall$\selector{a}{(i..$|$ancho(dimensiones(campo))$|$)},\selector{j}{[0..largo(dimensiones(campo(this)))})(a,j)$\not\in$parcelasCultivo)}*/
+    	/* \textcolor{ao}{\&\& i == i@BC1}*/
+
         i++;
+	/* \textcolor{ao}{// Estado BC3}*/   
+    	/* \textcolor{ao}{// Vale: i == i@BC2+1 \&\& I }*/        
     }
     
     /* \textcolor{ao}{// Estado B3}*/	    
@@ -78,8 +107,8 @@ std::vector<Posicion> Sistema::_parcelasCultivo() const{
     
 }
 
-void Sistema::_parcelasCultivoLargo(std::vector<Posicion> &parcelasCultivo,
-										const int fila) const{
+void Sistema::_parcelasCultivoLargo(std::vector<Posicion> \&parcelasCultivo, \newline  
+const int fila) const{
 	/* \textcolor{ao}{// Modifica parcelasCultivo}*/	        
     /* \textcolor{ao}{// Estado C1}*/	    
     /* \textcolor{ao}{// Vale parcelasCultivo == pre(parcelasCultivo)}*/      
@@ -90,17 +119,35 @@ void Sistema::_parcelasCultivoLargo(std::vector<Posicion> &parcelasCultivo,
     /* \textcolor{ao}{// Vale PC: j == 0 \&\& parcelasCultivo == parcelasCultivo@C1}*/      
     
     while (j < campo().dimensiones().largo){
+
+	/* \textcolor{ao}{// Estado CC1}*/	    
+    /* \textcolor{ao}{// I: 0$\leq$j$\leq$largo(dimensiones(campo(this))) \&\&}*/        
+    /* \textcolor{ao}{//    parcelasCultivo == [(fila,j)$|$\selector{j}{[0..i)}, \newline
+    contenido(campo(this), fila, j) == Cultivo]}*/ 
+    /* \textcolor{ao}{// B: j $<$ largo(dimensiones(campo(this)))}*/   
+	/* \textcolor{ao}{// Fv: largo(dimensiones(campo(this)))-j. Cota: 0}*/
+	     
         Posicion p;
         p.x = fila;
         p.y = j;
+
+    /* \textcolor{ao}{// Estado CC2}*/   
+	/* \textcolor{ao}{// Vale Pif: p == (fila, j)}*/
+        
         if (campo().contenido(p) == Cultivo){
             parcelasCultivo.push_back(p);
         }
+	/* \textcolor{ao}{// Estado CC3}*/
+	/* \textcolor{ao}{// Vale Qif: parcelasCultivo == [(fila,j)$|$\selector{j}{[0..i]}, \newline
+    contenido(campo(this), fila, j) == Cultivo] \&\&}*/
+	/* \textcolor{ao}{// ($\forall$ \selector{j}{(i..largo(dimensiones(campo(this))))}), (fila, j) $\not\in$ parcelasCultivo}*/
         j++;
+    /* \textcolor{ao}{// Estado CC4}*/   
+	/* \textcolor{ao}{// Vale j == j@CC3+1 \&\& I}*/
     }
 	
 	/* \textcolor{ao}{// Estado C3}*/	    
-    /* \textcolor{ao}{// Vale QC: parcelasCultivo == [(fila,j)|\selector{j}{[0..largo(dimensiones(campo(this)))}, \newline
+    /* \textcolor{ao}{// Vale QC: parcelasCultivo == [(fila,j)$|$\selector{j}{[0..largo(dimensiones(campo(this)))}, \newline
     contenido(campo(this), fila, j) == Cultivo]}*/      
 }
 
