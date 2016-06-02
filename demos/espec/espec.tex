@@ -20,7 +20,7 @@
 
 \begin{problema}{\textunderscore parcelasCultivoLargo}{this: Sistema, (\ent,\ent): parcelasCultivo, \ent: fila}{\ent}
 \modifica{parcelasCultivo}
-\asegura{parcelasCultivo == [(fila,j)$|$\selector{j}{[0..largo(dimensiones(campo(this)))}, \newline
+\asegura{parcelasCultivo == [(fila,j)|\selector{j}{[0..largo(dimensiones(campo(this)))}, \newline
     contenido(campo(this), fila, j) == Cultivo]}
 \end{problema}
 

@@ -35,7 +35,9 @@ int Sistema::_cuentaCosechables() const{
     
     while(i < _parcelasCultivo().size()){
 
-    /* \textcolor{ao}{// I: 0 $\leq$  i $\leq$ $|$parcelasCultivo(campo(this))$|$}*/
+    /* \textcolor{ao}{// I: 0 $\leq$  i $\leq$ $|$parcelasCultivo(campo(this))$|$ \&\&}*/
+    /* \textcolor{ao}{// total == $|$[1|\selector{a}{[0..i)}, \newline
+ estadoDelCultivo(parcelasCultivo[a], this) == ListoParaCosechar]$|$}*/
     /* \textcolor{ao}{// B: i $<$ $|$parcelasCultivo(campo(this))$|$}*/
     /* \textcolor{ao}{// Fv:$|$parcelasCultivo(campo(this))$|$-i Cota: 0}*/    	
     	
@@ -151,5 +153,47 @@ const int fila) const{
     contenido(campo(this), fila, j) == Cultivo]}*/      
 }
 
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+Demostracion de ciclo: _cuentaCosechables.
+
+/* \textcolor{ao}{// Vale PC: i == 0  \&\&  total == 0}*/
+/* \textcolor{ao}{// I: 0 $\leq$  i $\leq$ $|$parcelasCultivo(campo(this))$|$}*/
+/* \textcolor{ao}{// total == |[1|\selector{a}{[0..i)}, \newline
+ estadoDelCultivo(parcelasCultivo[a], this) == ListoParaCosechar]|}*/
+/* \textcolor{ao}{// B: i <|parcelasCultivo(campo(this))|}*/
+/* \textcolor{ao}{// Fv:|parcelasCultivo(campo(this))|-i Cota: 0}*/
+/* \textcolor{ao}{// QC: total == cantCultivosCosechables(this)}*/    
+    
+  -  Pc /* \implica */ I
+  
+i == 0 /*\implica*/ 0 == i /*\implica*/ 0 /*$\leq$*/ i /*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ 0 
+/*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ $|$parcelasCultivo(campo(this))$|$
+
+total == 0 /*\implica*/ total == |[]| /*\implica*/ total == |[1|/*\selector{a}{[0..0)}*/]|
+/*\implica*/ total == |[1|/*\selector{a}{[0..i)}*/]| 
+/*\implica*/ total == |[1|/*\selector{a}{[0..i)}*/, 
+     estadoDelCultivo(parcelasCultivo[a], this) == ListoParaCosechar]|
+
+
+  - I && noB /*\implica*/ Qc
+  
+i /*$\leq$*/ |parcelasCultivo(campo(this))| &&  i /*$\geq$*/ |parcelasCultivo(campo(this))| 
+(invariante y negacion de guarda)
+/*\implica*/ i == |parcelasCultivo(campo(this))|
+
+total == |[1|\selector{a}{[0..i)}, 
+     estadoDelCultivo(parcelasCultivo[a], this) == ListoParaCosechar]|
+/*\implica*/ total == |[1|/*\selector{a}{[0..|parcelasCultivo(campo(this))|)}*/,
+     estadoDelCultivo(parcelasCultivo[a], this) == ListoParaCosechar]|
+(pues i == |parcelasCultivo(campo(this))|)
+/*\implica*/ total == cantCultivosCosechables(this)  (Reemplazo sintactico)
+
+
+
+
 
 \end{lstlisting}
+
+
