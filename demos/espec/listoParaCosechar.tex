@@ -165,7 +165,10 @@ Demostracion de ciclo: _cuentaCosechables.
 /* \textcolor{ao}{// B: i <|parcelasCultivo(campo(this))|}*/
 /* \textcolor{ao}{// Fv:|parcelasCultivo(campo(this))|-i Cota: 0}*/
 /* \textcolor{ao}{// QC: total == cantCultivosCosechables(this)}*/    
-    
+
+
+
+
   -  Pc /* \implica */ I
   
 i == 0 /*\implica*/ 0 == i /*\implica*/ 0 /*$\leq$*/ i /*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ 0 
@@ -191,8 +194,16 @@ total == |[1|\selector{a}{[0..i)},
 /*\implica*/ total == cantCultivosCosechables(this)  (Reemplazo sintactico)
 
 
+  - (I && Fv < cota) /*\implica*/ noB
+
+|parcelasCultivo(campo(this))|-i < 0    (Fv < cota)
+/*\implica*/  |parcelasCultivo(campo(this))| < i    
+/*\implica*/  |parcelasCultivo(campo(this))| /*$\leq$*/ i
+/*\implica*/  noB
 
 
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 \end{lstlisting}
 
