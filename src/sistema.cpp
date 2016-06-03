@@ -236,15 +236,15 @@ int Sistema::_cuentaCosechables() const{
 }
 
 std::vector<Posicion> Sistema::_parcelasCultivo() const{
-    std::vector<Posicion> parcelasCultivo;
+    std::vector<Posicion> listaParcelasCultivo;
 
     int i = 0;
     while (i < campo().dimensiones().ancho){
-        _parcelasCultivoLargo(parcelasCultivo, i);
+        _parcelasCultivoLargo(listaParcelasCultivo, i);
         i++;
     }
 
-    return parcelasCultivo;
+    return listaParcelasCultivo;
 }
 
 void Sistema::_parcelasCultivoLargo(std::vector<Posicion> &parcelasCultivo, int fila) const{

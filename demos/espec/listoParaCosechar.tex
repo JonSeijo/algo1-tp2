@@ -69,29 +69,29 @@ int Sistema::_cuentaCosechables() const{
 }
 
 std::vector<Posicion> Sistema::_parcelasCultivo() const{
-    std::vector<Posicion> parcelasCultivo;
+    std::vector<Posicion> listaParcelasCultivo;
 
 	/* \textcolor{ao}{// Estado B1}*/	    
-    /* \textcolor{ao}{// Vale: parcelasCultivo == []}*/    
+    /* \textcolor{ao}{// Vale: listaParcelasCultivo == []}*/    
     int i = 0;
 	/* \textcolor{ao}{// Estado B2}*/	    
-    /* \textcolor{ao}{// Vale PC: i == 0 \&\& parcelasCultivo == parcelasCultivo@B1}*/    
+    /* \textcolor{ao}{// Vale PC: i == 0 \&\& listaParcelasCultivo == listaParcelasCultivo@B1}*/    
         
     while (i < campo().dimensiones().ancho){ 
     /* \textcolor{ao}{// I: 0$\leq$i$\leq$$|$parcelasCultivo$|$\&\&($\forall$\selector{a}{[0..i)},\selector{j}{[0..largo(dimensiones(campo(this))))},
-    (a,j) == Cultivo)(a,j)$\in$parcelasCultivo)}*/
+    (a,j) == Cultivo)(a,j)$\in$listaParcelasCultivo)}*/
     /* \textcolor{ao}{// B: i < ancho(dimensiones(campo(this)))}*/
     /* \textcolor{ao}{// Fv:ancho(dimensiones(campo(this)))-i.Cota:0}*/
     
     	/* \textcolor{ao}{// Estado BC1}*/   
     	/* \textcolor{ao}{// Vale I \&\& B}*/       	    
         
-        _parcelasCultivoLargo(parcelasCultivo, i);
+        _parcelasCultivoLargo(listaParcelasCultivo, i);
 
     	/* \textcolor{ao}{// Estado BC2}*/   
     	/* \textcolor{ao}{// Vale $\forall$\selector{a}{[0..i]},\selector{j}{[0..largo(dimensiones(campo(this)))},
-    	(a,j) == Cultivo)(a,j)$\in$parcelasCultivo) \&\& }*/
-    	/* \textcolor{ao}{$\forall$\selector{a}{(i..$|$ancho(dimensiones(campo))$|$)},\selector{j}{[0..largo(dimensiones(campo(this)))})(a,j)$\not\in$parcelasCultivo)}*/
+    	(a,j) == Cultivo)(a,j)$\in$listaParcelasCultivo) \&\& }*/
+    	/* \textcolor{ao}{$\forall$\selector{a}{(i..$|$ancho(dimensiones(campo))$|$)},\selector{j}{[0..largo(dimensiones(campo(this)))})(a,j)$\not\in$listaParcelasCultivo)}*/
     	/* \textcolor{ao}{\&\& i == i@BC1}*/
 
         i++;
@@ -100,12 +100,12 @@ std::vector<Posicion> Sistema::_parcelasCultivo() const{
     }
     
     /* \textcolor{ao}{// Estado B3}*/	    
-    /* \textcolor{ao}{// Vale QC: parcelasCultivo == parcelasCultivo(campo(this))}*/    
+    /* \textcolor{ao}{// Vale QC: listaParcelasCultivo == parcelasCultivo(campo(this))}*/    
     
-    return parcelasCultivo;
+    return listaParcelasCultivo;
     
     /* \textcolor{ao}{// Estado B4}*/	    
-    /* \textcolor{ao}{// Vale res == parcelasCultivo@B3}*/    
+    /* \textcolor{ao}{// Vale res == listaParcelasCultivo@B3}*/    
     
 }
 
@@ -207,12 +207,12 @@ total == |[1|\selector{a}{[0..i)},
 
 Demostracion de ciclo _parcelasCultivo.
 
-    /* \textcolor{ao}{// Pc: i == 0 \&\& parcelasCultivo == []}*/        
+    /* \textcolor{ao}{// Pc: i == 0 \&\& listaParcelasCultivo == []}*/        
     /* \textcolor{ao}{// I: 0$\leq$i$\leq$$|$parcelasCultivo$|$\&\&($\forall$\selector{a}{[0..i)},\selector{j}{[0..largo(dimensiones(campo(this))))},
-    (a,j) == Cultivo)(a,j)$\in$parcelasCultivo)}*/
+    (a,j) == Cultivo)(a,j)$\in$listaParcelasCultivo)}*/
     /* \textcolor{ao}{// B: i < ancho(dimensiones(campo(this)))}*/
     /* \textcolor{ao}{// Fv:ancho(dimensiones(campo(this)))-i.Cota:0}*/
-    /* \textcolor{ao}{// Qc: parcelasCultivo == parcelasCultivo(campo(this))}*/    
+    /* \textcolor{ao}{// Qc: listaParcelasCultivo == parcelasCultivo(campo(this))}*/    
 
 
     - Pc /*\implica*/ I
@@ -220,20 +220,52 @@ Demostracion de ciclo _parcelasCultivo.
 i == 0 /*\implica*/ 0 == i /*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ 0
 /*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ |[]| /*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ |parcelasCultivo|
 
-parcelasCultivo == [] /*\implica*/ (/*$\forall$*//*\selector{a}{[]}*/, /*\selector{j}{[0..largo(dimensiones(campo(this))))}*/,
-    (a,j) == Cultivo)(a,j)/*$\in$*/parcelasCultivo)}
+listaParcelasCultivo == [] /*\implica*/ (/*$\forall$*//*\selector{a}{[]}*/, /*\selector{j}{[0..largo(dimensiones(campo(this))))}*/,
+    (a,j) == Cultivo)(a,j)/*$\in$*/listaParcelasCultivo)}
     (verdadero por vacuidad del paraTodo)
     
 /*\implica*/ (/*$\forall$*//*\selector{a}{[0..0)}*/, /*\selector{j}{[0..largo(dimensiones(campo(this))))}*/,
-    (a,j) == Cultivo)(a,j)/*$\in$*/parcelasCultivo)}
+    (a,j) == Cultivo)(a,j)/*$\in$*/listaParcelasCultivo)}
 	(Verdadero pues [0..0) es vacio)
 
-/*\implica*/ (/*$\forall$*//*\selector{a}{[0..i)}*/,
-    /*\selector{j}{[0..largo(dimensiones(campo(this))))}*/,
-    (a,j) == Cultivo)(a,j)/*$\in$*/parcelasCultivo)}
+/*\implica*/ (/*$\forall$*//*\selector{a}{[0..i)}*/, /*\selector{j}{[0..largo(dimensiones(campo(this))))}*/,
+    (a,j) == Cultivo)(a,j)/*$\in$*/listaParcelasCultivo)}
     (Verdadero pues i == 0)
     
 
+   - I && noB /*\implica*/ Qc
+   
+i$\leq$|parcelasCultivo| &&  i$\geq$|parcelasCultivo|   (Invariante y NoGuarda)
+/*\implica*/ i == |parcelasCultivo|
+
+(/*$\forall$*//*\selector{a}{[0..i)}*/,/*\selector{j}{[0..largo(dimensiones(campo(this))))}*/,
+    (a,j) == Cultivo)(a,j)/*$\in$*/listaParcelasCultivo)
+    
+    (Verdadero por Invariante)
+    
+/*\implica*/ (/*$\forall$*//*\selector{a}{[0..$|$parcelasCultivo$|$)}*/,/*\selector{j}{[0..largo(dimensiones(campo(this))))}*/,
+    (a,j) == Cultivo)(a,j)/*$\in$*/listaParcelasCultivo)
+	
+	(Vale pues i == |parcelasCultivo|)    
+
+
+	(GALERASO , PENSAR COMO LLEGAR BIEN, PERO VALE EH!!)
+
+/*\implica*/ listaParcelasCultivo == [(a,j)|/*\selector{a}{[0..$|$parcelasCultivo$|$)}*/,/*\selector{j}{[0..largo(dimensiones(campo(this))))}*/,
+    (a,j) == Cultivo]
+
+/*\implica*/ listaParcelasCultivo == parcelasCultivo(campo(this))  /*\implica*/  Qc
+	(Reemplazo sintactico)
+	
+	
+    - (I && Fv < cota) /*\implica*/ noB
+    
+ancho(dimensiones(campo(this)))-i < 0
+/*\implica*/  ancho(dimensiones(campo(this))) < i
+/*\implica*/  i > ancho(dimensiones(campo(this)))
+/*\implica*/  i /*$\geq$*/  ancho(dimensiones(campo(this))) /*\implica*/  noB
+
+	
 
 \end{lstlisting}
 
