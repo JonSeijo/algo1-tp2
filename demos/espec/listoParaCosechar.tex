@@ -266,6 +266,26 @@ ancho(dimensiones(campo(this)))-i < 0
 /*\implica*/  i /*$\geq$*/  ancho(dimensiones(campo(this))) /*\implica*/  noB
 
 	
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+Demostracion del ciclo _parcelasCultivoLargo
+
+    /* \textcolor{ao}{// Pc: j == 0 \&\& parcelasCultivo == parcelasCultivo@C1}*/      
+    /* \textcolor{ao}{// I: 0$\leq$j$\leq$largo(dimensiones(campo(this))) \&\&}*/        
+    /* \textcolor{ao}{//    parcelasCultivo == [(fila,j)$|$\selector{j}{[0..i)}, contenido(campo(this), fila, j) == Cultivo]}*/ 
+    /* \textcolor{ao}{// B: j $<$ largo(dimensiones(campo(this)))}*/   
+	/* \textcolor{ao}{// Fv: largo(dimensiones(campo(this)))-j. Cota: 0}*/     
+    /* \textcolor{ao}{// Qc: parcelasCultivo == [(fila,j)$|$\selector{j}{[0..largo(dimensiones(campo(this)))}, \newline
+    contenido(campo(this), fila, j) == Cultivo]}*/      
+
+
+    - Pc /*\implica*/ I
+
+    - I && noB /*\implica*/ Qc
+
+    - (I && Fv < cota) /*\implica*/ noB
+    
 
 \end{lstlisting}
 
