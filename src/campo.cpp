@@ -124,8 +124,6 @@ void Campo::guardar(std::ostream & os) const{
 // NO MODIFICAR NI TOCAR NADA PORQUE ESTA HECHO EN BASE AL 'GUARDAR'
 // SI SE TOCA, HAY TABLA
 void Campo::cargar(std::istream & is){
-    // Obtiene todo lo del tipo entre '{' y '}'.
-    // Aca no es tan util, puede servir mucho hacer algo asi en el de sistema
     std::string datosCampo;
     std::string dDimension;
     std::string dGrilla;
@@ -135,17 +133,6 @@ void Campo::cargar(std::istream & is){
 
     _cargarDimension(dDimension);
     _cargarGrilla(dGrilla);
-
-    /*char var;
-    while (is >> var){
-        if (var == '{'){
-            getline(is, datosCampo,'}');
-            break;
-        }
-    }*/
-    // std::cout << infoDelCampo << std::endl;
-    //_leerYCargarDatos(datosCampo, _dimension, _grilla);
-
 }
 
 void Campo::_leerSepararDatos(std::string &datos,
@@ -175,89 +162,58 @@ void Campo::_cargarDimension(std::string &dDimension){
 }
 
 void Campo::_cargarGrilla(std::string &dGrilla){
-    std::cout << "GRILLA:" << dGrilla << std::endl;
-}
+    _grilla.parcelas.resize(0, std::vector<Parcela>(0));
+    _grilla.parcelas.resize(dimensiones().ancho, std::vector<Parcela>(dimensiones().largo, Cultivo));
 
-// Recibe el string de datos SIN LAS LLAVES
-// NO TOCAR PORQUE ESTO LO USA EL CARGAR
-void Campo::_leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela> &grilla){
-    std::string datoDimension = _dameStringConDato(datos, false);
-    std::string datoContenido = _dameStringConDato(datos, true);
-
-    // Como ahora tengo los datos separados, y se que forma tienen,
-    // A mano rescato los valores y los asigno
-
-    // Para dimension hago substrings quitando corchetes y separando con la coma
-    int posSeparador = datoDimension.find(',');
-    dim.ancho = atoi(datoDimension.substr(1, posSeparador - 1).c_str());
-    dim.largo = atoi(datoDimension.substr(posSeparador + 1, datoDimension.length() - posSeparador - 2).c_str());
-
-    // Resize todo con cultivo. Lo pongo en 0 primero para borrar granero y casa viejas
-    grilla.parcelas.resize(0, std::vector<Parcela>(0, Cultivo));
-    grilla.parcelas.resize(dim.ancho, std::vector<Parcela>(dim.largo, Cultivo));
-
-    int indexGranero = datoContenido.find("Granero");
-    int indexCasa = datoContenido.find("Casa");
-
-    // String con todo el texto anterior a lo que quiero ubicar
-    std::string textoAnteriorGranero = datoContenido.substr(1, indexGranero - 1);
-    std::string textoAnteriorCasa = datoContenido.substr(1, indexCasa - 1);
-
-    // Busca y ubica la parcela en la posicion correspondiente
-    _setearParcelaEnCarga(textoAnteriorGranero, grilla, dim.ancho, Granero);
-    _setearParcelaEnCarga(textoAnteriorCasa, grilla, dim.ancho, Casa);
-}
-
-void Campo::_setearParcelaEnCarga(std::string textoAnterior, Grilla<Parcela> &grilla, int elementosPorFila, Parcela parcelaCorrespondiente){
-    int y = _contarOcurrencias(textoAnterior, ']');
-    int x = _contarOcurrencias(textoAnterior, ',') - elementosPorFila*y;
-    grilla.parcelas.at(x).at(y) = parcelaCorrespondiente;
-}
-
-int Campo::_contarOcurrencias(std::string cadena, char aBuscar){
-    int contador = 0;
-    unsigned int i = 0;
-    while (i < cadena.length()){
-        if (cadena[i] == aBuscar){
-            contador++;
-        }
-        i++;
-    }
-
-    return contador;
-}
-
-// _dameStringConDato devuelve el primer objeto como string, Y LO ELIMINA del dato original
-// Objeto simple: [x,x,x,x]
-// Objeto compuesto: [ [x,x,x], [x,x,xx] ]
-std::string Campo::_dameStringConDato(std::string &datos, bool objetoCompuesto){
+    int i = 2;
+    int posX = 0;
+    int posY = 0;
     bool terminado = false;
-    bool leer = false;
-    char charAnterior;
-    std::string stringConDato = "";
-    int i = 0;
+    bool necesitaCierre = false;
+    std::string datoActual = "";
+
     while (!terminado){
-        if (datos[i] == '['){
-            leer = true;
+        if (necesitaCierre){
+            if (dGrilla[i] == ','){
+                _cargarParcelaIndividual(posX, posY, datoActual);
+                datoActual = "";
+                posX++;
+            }
+
+            else if (dGrilla[i] == ']'){
+                necesitaCierre = false;
+                _cargarParcelaIndividual(posX, posY, datoActual);
+                datoActual = "";
+                posX = 0;
+                posY++;
+            }
+            else{
+                datoActual += dGrilla[i];
+            }
         }
-        if (leer){
-            if (i > 0)
-                charAnterior = datos[i-1];
-            stringConDato += datos[i];
+
+        // necesitaCierre es util para ignorar la coma entre las listas
+        if (dGrilla[i] == '['){
+            necesitaCierre = true;
         }
-        if (objetoCompuesto){
-            // Objeto termina con "]]" si es compuesto
-            terminado = (datos[i] == ']') && (charAnterior == ']');
-        }else{
-            // Objeto termina con un solo ']' si es simple
-            terminado = (datos[i] == ']');
+
+        if (dGrilla[i] == ']' && dGrilla[i+1] == ']'){
+            terminado = true;
         }
         i++;
     }
+}
 
-    //std::cout << stringConDato << std::endl;
-    datos = datos.substr(i, datos.npos);
-    return stringConDato;
+void Campo::_cargarParcelaIndividual(int posX, int posY, std::string datoActual){
+    _grilla.parcelas.at(posX).at(posY) = _dameParcela(datoActual);
+}
+
+Parcela Campo::_dameParcela(std::string sParcela){
+    Parcela parc = Cultivo;
+    if (sParcela == "Granero") parc = Granero;
+    if (sParcela == "Casa") parc = Casa;
+
+    return parc;
 }
 
 bool Campo::_grillaIgual(const Campo &c) const{

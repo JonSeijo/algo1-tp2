@@ -28,6 +28,8 @@ class Campo {
                                       std::string &dGrilla);
         void _cargarDimension(std::string &dDimension);
         void _cargarGrilla(std::string &dGrilla);
+        void _cargarParcelaIndividual(int posX, int posY, std::string datoActual);
+        Parcela _dameParcela(std::string sParcela);
 
         void _leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela> &grilla);
         std::string _dameStringConDato(std::string &datos, bool objetoCompuesto);
