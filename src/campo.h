@@ -22,6 +22,13 @@ class Campo {
 	private:
 		Dimension _dimension;
 		Grilla<Parcela> _grilla;
+
+        void _leerSepararDatos(std::string &datos,
+                                      std::string &dDimension,
+                                      std::string &dGrilla);
+        void _cargarDimension(std::string &dDimension);
+        void _cargarGrilla(std::string &dGrilla);
+
         void _leerYCargarDatos(std::string datos, Dimension &dim, Grilla<Parcela> &grilla);
         std::string _dameStringConDato(std::string &datos, bool objetoCompuesto);
         int _contarOcurrencias(std::string cadena, char aBuscar);

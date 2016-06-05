@@ -112,7 +112,7 @@ void Campo::guardar(std::ostream & os) const{
 
         j++;
         if (j < _dimension.largo){
-            os << "], ";
+            os << "],";
         }else{
             os << "]";
         }
@@ -126,17 +126,56 @@ void Campo::guardar(std::ostream & os) const{
 void Campo::cargar(std::istream & is){
     // Obtiene todo lo del tipo entre '{' y '}'.
     // Aca no es tan util, puede servir mucho hacer algo asi en el de sistema
-    std::string infoDelCampo;
-    char var;
+    std::string datosCampo;
+    std::string dDimension;
+    std::string dGrilla;
+
+    getline(is, datosCampo,'}');
+    _leerSepararDatos(datosCampo, dDimension, dGrilla);
+
+    _cargarDimension(dDimension);
+    _cargarGrilla(dGrilla);
+
+    /*char var;
     while (is >> var){
         if (var == '{'){
-            getline(is, infoDelCampo,'}');
+            getline(is, datosCampo,'}');
             break;
         }
-    }
+    }*/
     // std::cout << infoDelCampo << std::endl;
-    _leerYCargarDatos(infoDelCampo, _dimension, _grilla);
+    //_leerYCargarDatos(datosCampo, _dimension, _grilla);
 
+}
+
+void Campo::_leerSepararDatos(std::string &datos,
+                              std::string &dDimension,
+                              std::string &dGrilla){
+
+    bool terminado = false;
+    int cantEspacios = 0;
+    int i = 0;
+    while (!terminado){
+        if (datos[i] == ' ') cantEspacios++;
+
+        if (cantEspacios == 2) dDimension += datos[i];
+
+        if (cantEspacios == 3){
+            dGrilla = datos.substr(i, datos.npos);
+            terminado = true;
+        }
+        i++;
+    }
+}
+
+void Campo::_cargarDimension(std::string &dDimension){
+    int posSeparador = dDimension.find(',');
+    _dimension.ancho = atoi(dDimension.substr(2, posSeparador - 2).c_str());
+    _dimension.largo = atoi(dDimension.substr(posSeparador + 1, dDimension.length() - posSeparador - 1).c_str());
+}
+
+void Campo::_cargarGrilla(std::string &dGrilla){
+    std::cout << "GRILLA:" << dGrilla << std::endl;
 }
 
 // Recibe el string de datos SIN LAS LLAVES

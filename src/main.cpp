@@ -18,11 +18,25 @@ int main(){
     posG.y = 0;
 
     Posicion posC;
-    posC.x = 6;
+    posC.x = 2;
     posC.y = 2;
 
     Campo c(posG, posC);
     Campo c2(posG, posC);
+
+/*
+        ofstream archivoCampo("campo.txt");
+        c.guardar(archivoCampo);
+        archivoCampo.close();
+*/
+
+
+       // Prueba cargar campo
+        ifstream archivoLecturaCampo("campo.txt");
+        c.cargar(archivoLecturaCampo);
+        archivoLecturaCampo.close();
+
+        cout << c;
 
     std::vector<Producto> productos1;
     productos1.push_back(Herbicida);
@@ -55,7 +69,7 @@ int main(){
     Sistema sis1(c, sec1);
     Sistema sis2(c, sec2);
 
-    cout << "sistemas iguales: " << (sis1 == sis2) << endl;
+//    cout << "sistemas iguales: " << (sis1 == sis2) << endl;
 /*
     ofstream archivoSistema("sistema.txt");
     sis.guardar(archivoSistema);
@@ -63,18 +77,18 @@ int main(){
 */
 
    // Prueba cargar sistema
-/*   ifstream archivoLecturaSistema("sistema.txt");
+  /*  ifstream archivoLecturaSistema("sistema.txt");
     sis.cargar(archivoLecturaSistema);
     archivoLecturaSistema.close();
 */
     ifstream fileDrone1("drone1.txt");
     d1.cargar(fileDrone1);
     fileDrone1.close();
-    cout << d1;
+   // cout << d1;
     ofstream fileDrone1Bis("drone1-bis.txt");
     d1.guardar(fileDrone1Bis);
     fileDrone1Bis.close();
-    cout << d1;
+    //cout << d1;
 /*
     ifstream fileDrone2("drone2.txt");
     d2.cargar(fileDrone2);

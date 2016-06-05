@@ -247,14 +247,14 @@ std::vector<Posicion> Sistema::_parcelasCultivo() const{
     return listaParcelasCultivo;
 }
 
-void Sistema::_parcelasCultivoLargo(std::vector<Posicion> &parcelasCultivo, int fila) const{
+void Sistema::_parcelasCultivoLargo(std::vector<Posicion> &parcelasCultivoLargo, int fila) const{
     int j = 0;
     while (j < campo().dimensiones().largo){
         Posicion p;
         p.x = fila;
         p.y = j;
         if (campo().contenido(p) == Cultivo){
-            parcelasCultivo.push_back(p);
+            parcelasCultivoLargo.push_back(p);
         }
         j++;
     }

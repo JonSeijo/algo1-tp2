@@ -1,0 +1,1 @@
+{ C [7,3] [[Granero,Cultivo,Cultivo,Cultivo,Cultivo,Cultivo,Cultivo],[Cultivo,Cultivo,Cultivo,Cultivo,Cultivo,Cultivo,Cultivo],[Cultivo,Cultivo,Cultivo,Cultivo,Cultivo,Cultivo,Casa]]}
