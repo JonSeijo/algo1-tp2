@@ -109,22 +109,22 @@ std::vector<Posicion> Sistema::_parcelasCultivo() const{
     
 }
 
-void Sistema::_parcelasCultivoLargo(std::vector<Posicion> \&parcelasCultivo, \newline  
+void Sistema::_parcelasCultivoLargo(std::vector<Posicion> \&parcelasCultivoLargo, \newline  
 const int fila) const{
-	/* \textcolor{ao}{// Modifica parcelasCultivo}*/	        
+	/* \textcolor{ao}{// Modifica parcelasCultivoLargo}*/	        
     /* \textcolor{ao}{// Estado C1}*/	    
-    /* \textcolor{ao}{// Vale parcelasCultivo == pre(parcelasCultivo)}*/      
+    /* \textcolor{ao}{// Vale parcelasCultivoLargo == pre(parcelasCultivoLargo)}*/      
     
     int j = 0;
 	
 	/* \textcolor{ao}{// Estado C2}*/	    
-    /* \textcolor{ao}{// Vale PC: j == 0 \&\& parcelasCultivo == parcelasCultivo@C1}*/      
+    /* \textcolor{ao}{// Vale PC: j == 0 \&\& parcelasCultivoLargo == parcelasCultivoLargo@C1}*/      
     
     while (j < campo().dimensiones().largo){
 
 	/* \textcolor{ao}{// Estado CC1}*/	    
     /* \textcolor{ao}{// I: 0$\leq$j$\leq$largo(dimensiones(campo(this))) \&\&}*/        
-    /* \textcolor{ao}{//    parcelasCultivo == pre(parcelasCultivo) ++ 
+    /* \textcolor{ao}{//    parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
     [(fila,y)$|$\selector{y}{[0..j)},}*/
     /* \textcolor{ao}{//contenido(campo(this), fila, y) == Cultivo]}*/ 
     /* \textcolor{ao}{// B: j $<$ largo(dimensiones(campo(this)))}*/   
@@ -138,10 +138,10 @@ const int fila) const{
 	/* \textcolor{ao}{// Vale Pif: p == (fila, j)}*/
         
         if (campo().contenido(p) == Cultivo){
-            parcelasCultivo.push_back(p);
+            parcelasCultivoLargo.push_back(p);
         }
 	/* \textcolor{ao}{// Estado CC3}*/
-	/* \textcolor{ao}{// Vale Qif: parcelasCultivo == pre(parcelasCultivo) ++ [(fila,y)$|$\selector{y}{[0..j]},}*/
+	/* \textcolor{ao}{// Vale Qif: parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ [(fila,y)$|$\selector{y}{[0..j]},}*/
 	/* \textcolor{ao}{// contenido(campo(this), fila, y) == Cultivo]}*/
 
         j++;
@@ -150,7 +150,7 @@ const int fila) const{
     }
 	
 	/* \textcolor{ao}{// Estado C3}*/	    
-    /* \textcolor{ao}{// Vale QC: parcelasCultivo == pre(parcelasCultivo) ++ 
+    /* \textcolor{ao}{// Vale QC: parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
     [(fila,y)$|$\selector{y}{[0..largo(dimensiones(campo(this)))},}*/
     		/* \textcolor{ao}{//contenido(campo(this), fila, y) == Cultivo]}*/      
 }
@@ -273,27 +273,27 @@ ancho(dimensiones(campo(this)))-i < 0
 
 Demostracion del ciclo _parcelasCultivoLargo
 
-    /* \textcolor{ao}{// Pc: j == 0 \&\& parcelasCultivo == pre(parcelasCultivo)}*/      
+    /* \textcolor{ao}{// Pc: j == 0 \&\& parcelasCultivoLargo == pre(parcelasCultivoLargo)}*/      
     /* \textcolor{ao}{// I: 0$\leq$j$\leq$largo(dimensiones(campo(this))) \&\&}*/        
-    /* \textcolor{ao}{//    parcelasCultivo == pre(parcelasCutivo) ++ 
+    /* \textcolor{ao}{//    parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
     [(fila,y)$|$\selector{y}{[0..j)}, contenido(campo(this), fila, y) == Cultivo]}*/ 
     /* \textcolor{ao}{// B: j $<$ largo(dimensiones(campo(this)))}*/
 	/* \textcolor{ao}{// Fv: largo(dimensiones(campo(this)))-j. Cota: 0}*/     
-    /* \textcolor{ao}{// Qc: parcelasCultivo == pre(parcelasCultivo) ++ [(fila,y)$|$\selector{y}{[0..largo(dimensiones(campo(this)))},}*/
+    /* \textcolor{ao}{// Qc: parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ [(fila,y)$|$\selector{y}{[0..largo(dimensiones(campo(this)))},}*/
     /* \textcolor{ao}{// contenido(campo(this), fila, y) == Cultivo]}*/      
 
 
     - Pc /*\implica*/ I
    
 j == 0 /*\implica*/ 0 == j /*\implica*/ 0 /*$\leq$*/ j /*$\leq$*/ 0
-/*\implica*/ 0 /*$\leq$*/ j /*$\leq$*/ |[]| /*\implica*/ 0 /*$\leq$*/ j /*$\leq$*/ |parcelasCultivo|
+/*\implica*/ 0 /*$\leq$*/ j /*$\leq$*/ |[]| /*\implica*/ 0 /*$\leq$*/ j /*$\leq$*/ largo(dimensiones(campo(this)))
 
-parcelasCultivo == pre(parcelasCutivo) /*\implica*/ parcelasCultivo == pre(parcelasCutivo) ++ []
-/*\implica*/ parcelasCultivo == pre(parcelasCutivo) ++ 
+parcelasCultivoLargo == pre(parcelasCultivoLargo) /*\implica*/ parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ []
+/*\implica*/ parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
 		[(fila,y)|\selector{y}{[0..0)}, contenido(campo(this), fila, y) == Cultivo]
 (Verdadero porque es lista vacia [0..0) )
 
-/*\implica*/ parcelasCultivo == pre(parcelasCutivo) ++ 
+/*\implica*/ parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
 		[(fila,y)|\selector{y}{[0..j)}, contenido(campo(this), fila, y) == Cultivo]    
 (Porque j == 0)
 
@@ -304,12 +304,12 @@ j/*$\leq$*/largo(dimensiones(campo(this))) && j/*$\geq$*/largo(dimensiones(campo
 
 /*\implica*/ j == largo(dimensiones(campo(this)))
 
-parcelasCultivo == pre(parcelasCutivo) ++ 
+parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
     [(fila,y)|\selector{y}{[0..j)}, contenido(campo(this), fila, y) == Cultivo]
   
    (Vale por invariante)
 
-/*\implica*/ parcelasCultivo == pre(parcelasCutivo) ++ 
+/*\implica*/ parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
     [(fila,y)|\selector{y}{[0..largo(dimensiones(campo(this))))}, 
     		contenido(campo(this), fila, y) == Cultivo]
 
