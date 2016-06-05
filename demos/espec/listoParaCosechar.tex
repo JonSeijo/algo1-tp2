@@ -124,8 +124,9 @@ const int fila) const{
 
 	/* \textcolor{ao}{// Estado CC1}*/	    
     /* \textcolor{ao}{// I: 0$\leq$j$\leq$largo(dimensiones(campo(this))) \&\&}*/        
-    /* \textcolor{ao}{//    parcelasCultivo == [(fila,j)$|$\selector{j}{[0..i)}, \newline
-    contenido(campo(this), fila, j) == Cultivo]}*/ 
+    /* \textcolor{ao}{//    parcelasCultivo == pre(parcelasCultivo) ++ 
+    [(fila,y)$|$\selector{y}{[0..j)},}*/
+    /* \textcolor{ao}{//contenido(campo(this), fila, y) == Cultivo]}*/ 
     /* \textcolor{ao}{// B: j $<$ largo(dimensiones(campo(this)))}*/   
 	/* \textcolor{ao}{// Fv: largo(dimensiones(campo(this)))-j. Cota: 0}*/
 	     
@@ -140,17 +141,18 @@ const int fila) const{
             parcelasCultivo.push_back(p);
         }
 	/* \textcolor{ao}{// Estado CC3}*/
-	/* \textcolor{ao}{// Vale Qif: parcelasCultivo == [(fila,j)$|$\selector{j}{[0..i]}, \newline
-    contenido(campo(this), fila, j) == Cultivo] \&\&}*/
-	/* \textcolor{ao}{// ($\forall$ \selector{j}{(i..largo(dimensiones(campo(this))))}), (fila, j) $\not\in$ parcelasCultivo}*/
+	/* \textcolor{ao}{// Vale Qif: parcelasCultivo == pre(parcelasCultivo) ++ [(fila,y)$|$\selector{y}{[0..j]},}*/
+	/* \textcolor{ao}{// contenido(campo(this), fila, y) == Cultivo]}*/
+
         j++;
     /* \textcolor{ao}{// Estado CC4}*/   
 	/* \textcolor{ao}{// Vale j == j@CC3+1 \&\& I}*/
     }
 	
 	/* \textcolor{ao}{// Estado C3}*/	    
-    /* \textcolor{ao}{// Vale QC: parcelasCultivo == [(fila,j)$|$\selector{j}{[0..largo(dimensiones(campo(this)))}, \newline
-    contenido(campo(this), fila, j) == Cultivo]}*/      
+    /* \textcolor{ao}{// Vale QC: parcelasCultivo == pre(parcelasCultivo) ++ 
+    [(fila,y)$|$\selector{y}{[0..largo(dimensiones(campo(this)))},}*/
+    		/* \textcolor{ao}{//contenido(campo(this), fila, y) == Cultivo]}*/      
 }
 
 -----------------------------------------------------------------------
@@ -271,21 +273,59 @@ ancho(dimensiones(campo(this)))-i < 0
 
 Demostracion del ciclo _parcelasCultivoLargo
 
-    /* \textcolor{ao}{// Pc: j == 0 \&\& parcelasCultivo == parcelasCultivo@C1}*/      
+    /* \textcolor{ao}{// Pc: j == 0 \&\& parcelasCultivo == pre(parcelasCultivo)}*/      
     /* \textcolor{ao}{// I: 0$\leq$j$\leq$largo(dimensiones(campo(this))) \&\&}*/        
-    /* \textcolor{ao}{//    parcelasCultivo == [(fila,j)$|$\selector{j}{[0..i)}, contenido(campo(this), fila, j) == Cultivo]}*/ 
-    /* \textcolor{ao}{// B: j $<$ largo(dimensiones(campo(this)))}*/   
+    /* \textcolor{ao}{//    parcelasCultivo == pre(parcelasCutivo) ++ 
+    [(fila,y)$|$\selector{y}{[0..j)}, contenido(campo(this), fila, y) == Cultivo]}*/ 
+    /* \textcolor{ao}{// B: j $<$ largo(dimensiones(campo(this)))}*/
 	/* \textcolor{ao}{// Fv: largo(dimensiones(campo(this)))-j. Cota: 0}*/     
-    /* \textcolor{ao}{// Qc: parcelasCultivo == [(fila,j)$|$\selector{j}{[0..largo(dimensiones(campo(this)))}, \newline
-    contenido(campo(this), fila, j) == Cultivo]}*/      
+    /* \textcolor{ao}{// Qc: parcelasCultivo == pre(parcelasCultivo) ++ [(fila,y)$|$\selector{y}{[0..largo(dimensiones(campo(this)))},}*/
+    /* \textcolor{ao}{// contenido(campo(this), fila, y) == Cultivo]}*/      
 
 
     - Pc /*\implica*/ I
+   
+j == 0 /*\implica*/ 0 == j /*\implica*/ 0 /*$\leq$*/ j /*$\leq$*/ 0
+/*\implica*/ 0 /*$\leq$*/ j /*$\leq$*/ |[]| /*\implica*/ 0 /*$\leq$*/ j /*$\leq$*/ |parcelasCultivo|
+
+parcelasCultivo == pre(parcelasCutivo) /*\implica*/ parcelasCultivo == pre(parcelasCutivo) ++ []
+/*\implica*/ parcelasCultivo == pre(parcelasCutivo) ++ 
+		[(fila,y)|\selector{y}{[0..0)}, contenido(campo(this), fila, y) == Cultivo]
+(Verdadero porque es lista vacia [0..0) )
+
+/*\implica*/ parcelasCultivo == pre(parcelasCutivo) ++ 
+		[(fila,y)|\selector{y}{[0..j)}, contenido(campo(this), fila, y) == Cultivo]    
+(Porque j == 0)
 
     - I && noB /*\implica*/ Qc
 
+j/*$\leq$*/largo(dimensiones(campo(this))) && j/*$\geq$*/largo(dimensiones(campo(this)))
+	(Vale por invariante y noB)
+
+/*\implica*/ j == largo(dimensiones(campo(this)))
+
+parcelasCultivo == pre(parcelasCutivo) ++ 
+    [(fila,y)|\selector{y}{[0..j)}, contenido(campo(this), fila, y) == Cultivo]
+  
+   (Vale por invariante)
+
+/*\implica*/ parcelasCultivo == pre(parcelasCutivo) ++ 
+    [(fila,y)|\selector{y}{[0..largo(dimensiones(campo(this))))}, 
+    		contenido(campo(this), fila, y) == Cultivo]
+
+	(Porque j == largo(dimensiones(campo(this)))  )
+
+/*\implica*/ Qc
+
+	
     - (I && Fv < cota) /*\implica*/ noB
     
+largo(dimensiones(campo(this)))-j < 0
+(Fv < cota)
+
+/*\implica*/ largo(dimensiones(campo(this))) < j
+
+/*\implica*/ largo(dimensiones(campo(this))) /*$\leq$*/ j /*\implica*/ noB
 
 \end{lstlisting}
 
