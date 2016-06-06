@@ -428,6 +428,9 @@ void Sistema::volarYSensar(const Drone & d){
         restarBateria(d.bateria() - 1, d);
     }
     else{
+        if(_estado.parcelas.at(adyacentesvalidas.at(0).x).at(adyacentesvalidas.at(0).y) == ListoParaCosechar){
+            restarBateria(d.bateria() - 1, d);
+        }
         if((_estado.parcelas.at(adyacentesvalidas.at(0).x).at(adyacentesvalidas.at(0).y) == NoSensado)){
             restarBateria(d.bateria() - 1, d);
             cambiaARecienSembrado(adyacentesvalidas.at(0));

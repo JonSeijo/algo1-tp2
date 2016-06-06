@@ -1,7 +1,7 @@
 \begin{problema}{escalerado}{ps: [Posicion]}{bool}
-\asegura{(\exists \selector{x, y}{[1, -1]})(\forall \selector{i}{\rangoca{0}{|ps| - 1}})(prm(ps[i]) - prm(ps[i+2]) == x \lor sgd(ps[i]) - sgd(ps[i+2]) == y )}
+\asegura{(\exists \selector{x, y}{[1, -1]})(\forall \selector{i}{\rangoca{0}{|ps| - 2}})(prm(ps[i]) - prm(ps[i+2]) == x \lor sgd(ps[i]) - sgd(ps[i+2]) == y )}
 \end{problema}
 
 \begin{problema}{esEscalerado}{x, y: \ent}{bool}
-\asegura{(\forall \selector{i}{\rangoca{0}{|ps| - 1}})(prm(ps[i]) - prm(ps[i+2]) == x \lor sgd(ps[i]) - sgd(ps[i+2]) == y )}
+\asegura{(\forall \selector{i}{\rangoca{0}{|ps| - 2}})(prm(ps[i]) - prm(ps[i+2]) == x \lor sgd(ps[i]) - sgd(ps[i+2]) == y )}
 \end{problema}
