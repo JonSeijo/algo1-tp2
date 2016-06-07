@@ -52,7 +52,7 @@ bool Drone::vueloEscalerado() const{
 }
 
 bool Drone::_escalerado(const std::vector<Posicion> ps) const{
-    return _esEscalerado(ps,1,1) || _esEscalerado(ps,1,-1) ||
+    return (ps.size() >= 2) || _esEscalerado(ps,1,1) || _esEscalerado(ps,1,-1) ||
             _esEscalerado(ps,-1,1) || _esEscalerado(ps,-1,-1);
 }
 
