@@ -1,11 +1,22 @@
 \begin{lstlisting}
 bool Drone::vueloEscalerado() const{
     return _enVuelo && _escalerado();
+    /* \textcolor{ao}{// Estado E1:}*/
+    /* \textcolor{ao}{// Vale: res == enVuelo(this) \&\& }*/
+    /* \textcolor{ao}{//     ($\exists$ $\selector{x, y}{[1, -1]})$}*/
+    /* \textcolor{ao}{//       ($\forall$ $\selector{i}{[0..|ps| - 2)}$)}*/
+    /* \textcolor{ao}{//       (prm(ps[i]) - prm(ps[i+2]) == x $||$}*/
+    /* \textcolor{ao}{//       sgd(ps[i]) - sgd(ps[i+2]) == y )}*/
 }
 
 bool Drone::_escalerado(const std::vector<Posicion> ps) const{
     return _esEscalerado(ps,1,1) || _esEscalerado(ps,1,-1) ||
             _esEscalerado(ps,-1,1) || _esEscalerado(ps,-1,-1);
+    /* \textcolor{ao}{// Estado E1:} */
+    /* \textcolor{ao}{// Vale: res == ($\exists$ $\selector{x, y}{[1, -1]})$}*/
+    /* \textcolor{ao}{//   ($\forall$ $\selector{i}{[0..|ps| - 2)}$)}*/
+    /* \textcolor{ao}{//      (prm(ps[i]) - prm(ps[i+2]) == x $||$}*/
+    /* \textcolor{ao}{//      sgd(ps[i]) - sgd(ps[i+2]) == y )}*/
 }
 
 bool Drone::_esEscalerado(const std::vector<Posicion> ps, int X, int Y) const{
@@ -46,5 +57,9 @@ bool Drone::_esEscalerado(const std::vector<Posicion> ps, int X, int Y) const{
     /* \textcolor{ao}{//         sgd(ps[i]) - sgd(ps[i+2]) == y)} */
  
     return cumplenTodos;
+    /* \textcolor{ao}{// Estado E4:} */
+    /* \textcolor{ao}{// Vale: res ==( $\forall$ $\selector{i}{[0..$|ps|-2$)}$ ) } */    
+    /* \textcolor{ao}{//        (prm(ps[i]) - prm(ps[i+2]) == x $||$} */
+    /* \textcolor{ao}{//         sgd(ps[i]) - sgd(ps[i+2]) == y)} */
 }
 \end{lstlisting}
