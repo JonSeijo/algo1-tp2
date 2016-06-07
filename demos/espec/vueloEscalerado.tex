@@ -62,4 +62,66 @@ bool Drone::_esEscalerado(const std::vector<Posicion> ps, int X, int Y) const{
     /* \textcolor{ao}{//        (prm(ps[i]) - prm(ps[i+2]) == x $||$} */
     /* \textcolor{ao}{//         sgd(ps[i]) - sgd(ps[i+2]) == y)} */
 }
+
+
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+Demostracion de ciclo: _esEscalerado.
+
+/* \textcolor{ao}{// Vale PC: (i == 0)  \&\&  (cumplenTodos == True) \&\& ($|$vueloRealizado(this)$|$ $\geq$ 2)}*/
+/* \textcolor{ao}{// I: (0 $\leq$  i $\leq$ $|$vueloRealizado(this)$|$ - 2) \&\& \newline
+(cumplenTodos == ($\forall$ \selector{j}{[0..i)}) ((prm(vueloRealizado(this)$_{[j]}$) - (prm(vueloRealizado(this)$_{[j + 2]}$) == X) \&\& \newline
+((sgd(vueloRealizado(this)$_{[j]}$) - (sgd(vueloRealizado(this)$_{[j + 2]}$) == Y))) }*/
+/* \textcolor{ao}{// B: i $<$ $|$vueloRealizado(this)$|$ - 2}*/
+/* \textcolor{ao}{// Fv: $|$vueloRealizado(this)$|$ - 2 - i}*/
+/* \textcolor{ao}{// Cota: 0}*/
+/* \textcolor{ao}{// QC: cumplenTodos == ($\forall$ \selector{j}{[0..$|$vueloRealizado(this)$|$ - 2)})\newline
+((prm(vueloRealizado(this)$_{[j]}$) - (prm(vueloRealizado(this)$_{[j + 2]}$) == X) \&\& \newline
+((sgd(vueloRealizado(this)$_{[j]}$) - (sgd(vueloRealizado(this)$_{[j + 2]}$) == Y))}*/    
+
+  -  Pc /* \implica */ I
+(i == 0) /* \implica */  (0 /*$\leq$*/  i /*$\leq$*/ 0)
+(|vueloRealizado(this)| /*$\geq$*/ 2) /* \implica */ (|vueloRealizado(this)| - 2 /*$\geq$*/ 0)
+(0 /*$\leq$*/  i /*$\geq$*/ 0) && (|vueloRealizado(this)| - 2 /*$\geq$*/ 0) /* \implica */
+(0 /*$\leq$*/  i /*$\leq$*/ |vueloRealizado(this)| - 2) 
+
+(i == 0) /* \implica */ (/*$\forall$*/ /*\selector{j}{[0..i)}*/) ((prm(vueloRealizado(this)/*$_{[j]}$*/) - (prm(vueloRealizado(this)/*$_{[j + 2]}$*/) == X) && \newline
+((sgd(vueloRealizado(this)/*$_{[j]}$*/) - (sgd(vueloRealizado(this)/*$_{[j + 2]}$*/) == Y)) == True
+
+Reemplazando i==0, queda (/*$\forall$*/ /*\selector{j}{[0..0)}*/ (Verdadero por vacuidad del selector [0..0) )
+
+cumplenTodos == True && ((/*$\forall$*/ /*\selector{j}{[0..i)}*/) ((prm(vueloRealizado(this)/*$_{[j]}$*/) - (prm(vueloRealizado(this)/*$_{[j + 2]}$*/) == X) && \newline
+((sgd(vueloRealizado(this)/*$_{[j]}$*/) - (sgd(vueloRealizado(this)/*$_{[j + 2]}$*/) == Y)) == True)
+
+/* \implica */ cumplenTodos == ((/*$\forall$*/ /*\selector{j}{[0..i)}*/) ((prm(vueloRealizado(this)/*$_{[j]}$*/) - (prm(vueloRealizado(this)/*$_{[j + 2]}$*/) == X) && \newline
+((sgd(vueloRealizado(this)/*$_{[j]}$*/) - (sgd(vueloRealizado(this)/*$_{[j + 2]}$*/) == Y)) == True)
+
+Vale por transitividad
+
+	- I && noB /*\implica*/ Qc
+
+(0 /*$\leq$*/  i /*$\leq$*/ |vueloRealizado(this)| - 2) && \newline
+(cumplenTodos == (/*$\forall$*/ /*\selector{j}{[0..i)}*/) ((prm(vueloRealizado(this)/*$_{[j]}$*/) - (prm(vueloRealizado(this)/*$_{[j + 2]}$*/) == X) && \newline
+((sgd(vueloRealizado(this)/*$_{[j]}$*/) - (sgd(vueloRealizado(this)/*$_{[j + 2]}$*/) == Y))) && (i /*$geq$*/ |vueloRealizado(this)| - 2)
+
+(0 /*$\leq$*/  i /*$\leq$*/ |vueloRealizado(this)| - 2) && (i /*$geq$*/ |vueloRealizado(this)| - 2) /*\implica*/ 
+i == (|vueloRealizado(this)| - 2)
+
+i == (|vueloRealizado(this)| - 2) && (/*$\forall$*/ /*\selector{j}{[0..i)}*/) ((prm(vueloRealizado(this)/*$_{[j]}$*/) - (prm(vueloRealizado(this)/*$_{[j + 2]}$*/) == X) && \newline
+((sgd(vueloRealizado(this)/*$_{[j]}$*/) - (sgd(vueloRealizado(this)/*$_{[j + 2]}$*/) == Y)))
+/*\implica*/ 
+ (/*$\forall$*/ /*\selector{j}{[0..|vueloRealizado(this)| - 2)}*/) ((prm(vueloRealizado(this)/*$_{[j]}$*/) - (prm(vueloRealizado(this)/*$_{[j + 2]}$*/) == X) && \newline
+((sgd(vueloRealizado(this)/*$_{[j]}$*/) - (sgd(vueloRealizado(this)/*$_{[j + 2]}$*/) == Y)))
+
+	- (I && Fv < cota) /*\implica*/ noB
+
+(0 /*$\leq$*/  i /*$\leq$*/ |vueloRealizado(this)| - 2) && \newline
+(cumplenTodos == (/*$\forall$*/ /*\selector{j}{[0..i)}*/) ((prm(vueloRealizado(this)/*$_{[j]}$*/) - (prm(vueloRealizado(this)/*$_{[j + 2]}$*/) == X) && \newline
+((sgd(vueloRealizado(this)/*$_{[j]}$*/) - (sgd(vueloRealizado(this)/*$_{[j + 2]}$*/) == Y))) && (|vueloRealizado(this)| -2 - i) <= 0) 
+
+(|vueloRealizado(this)| -2 - i) /*$\leq$*/ 0) /*\implica*/
+(|vueloRealizado(this)| -2) /*$\leq$*/ i), que es noB
+
+
 \end{lstlisting}
