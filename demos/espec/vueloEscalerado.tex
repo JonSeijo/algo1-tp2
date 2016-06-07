@@ -31,7 +31,9 @@ bool Drone::_esEscalerado(const std::vector<Posicion> ps, int X, int Y) const{
     /* \textcolor{ao}{// Vale: i == 0 \&\& cumplenTodos == cumplenTodos@E1 } */
     while (i < ps.size()-2){
     
-    /* \textcolor{ao}{// I: }*/
+    /* \textcolor{ao}{// I: (0 $\leq$  i $\leq$ $|$vueloRealizado(this)$|$ - 2) \&\& } */
+    /* \textcolor{ao}{// (cumplenTodos == ($\forall$ \selector{j}{[0..i)}) ((prm(vueloRealizado(this)$_{[j]}$) - (prm(vueloRealizado(this)$_{[j + 2]}$) == X) \&\& } */ 
+    /* \textcolor{ao}{// ((sgd(vueloRealizado(this)$_{[j]}$) - (sgd(vueloRealizado(this)$_{[j + 2]}$) == Y))) }*/
      
     /* \textcolor{ao}{// B: i $<$ $ps.size()-2$}*/
     /* \textcolor{ao}{// Fv:$ ps.size()-2 -i$ Cota: 0}*/
