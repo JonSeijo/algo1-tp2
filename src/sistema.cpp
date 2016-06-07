@@ -1,5 +1,5 @@
 #include "sistema.h"
-#include "aux.h"
+#include "auxiliares.h"
 #include <algorithm>
 #include <sstream>
 
