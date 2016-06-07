@@ -24,7 +24,7 @@ Drone::Drone(ID i, const std::vector<Producto>& ps){
 }
 
 ID Drone::id() const{
-	return _id;
+    return _id;
 }
 
 Carga Drone::bateria() const{
@@ -52,7 +52,7 @@ bool Drone::vueloEscalerado() const{
 }
 
 bool Drone::_escalerado(const std::vector<Posicion> ps) const{
-    return (ps.size() >= 2) || _esEscalerado(ps,1,1) || _esEscalerado(ps,1,-1) ||
+    return (ps.size() <= 2) || _esEscalerado(ps,1,1) || _esEscalerado(ps,1,-1) ||
             _esEscalerado(ps,-1,1) || _esEscalerado(ps,-1,-1);
 }
 
