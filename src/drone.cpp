@@ -48,22 +48,22 @@ const Secuencia<Producto>& Drone::productosDisponibles() const{
 }
 
 bool Drone::vueloEscalerado() const{
-    return _enVuelo && _escalerado();
+    return _enVuelo && _escalerado(_trayectoria);
 }
 
-bool Drone::_escalerado() const{
-    return _esEscalerado(1,1) || _esEscalerado(1,-1) ||
-            _esEscalerado(-1,1) || _esEscalerado(-1,-1);
+bool Drone::_escalerado(const std::vector<Posicion> ps) const{
+    return _esEscalerado(ps,1,1) || _esEscalerado(ps,1,-1) ||
+            _esEscalerado(ps,-1,1) || _esEscalerado(ps,-1,-1);
 }
 
-bool Drone::_esEscalerado(int X, int Y) const{
+bool Drone::_esEscalerado(const std::vector<Posicion> ps, int X, int Y) const{
     std::cout << "_esEscalerado    x " << X << " y " << Y << "\n";
     bool cumplenTodos = true;
     unsigned int i = 0;
-    while (i < _trayectoria.size()-2){
+    while (i < ps.size()-2){
 
-        if ((_trayectoria.at(i).x - _trayectoria.at(i+2).x) != X ||
-                (_trayectoria.at(i).y - _trayectoria.at(i+2).y) != Y ){
+        if ((ps.at(i).x - ps.at(i+2).x) != X ||
+            (ps.at(i).y - ps.at(i+2).y) != Y ){
             cumplenTodos = false;
         }
         i++;

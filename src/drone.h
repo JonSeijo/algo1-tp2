@@ -37,8 +37,8 @@ class Drone{
 		Secuencia<int> damePrimeros(const Secuencia<Posicion> ps) const;
 		Secuencia<int> dameSegundos(const Secuencia<Posicion> ps) const;
 
-        bool _escalerado() const;
-        bool _esEscalerado(int X, int Y) const;
+        bool _escalerado(const std::vector<Posicion> ps) const;
+        bool _esEscalerado(const std::vector<Posicion> ps, int X, int Y) const;
 
 		ID _id;
 		Carga _bateria;

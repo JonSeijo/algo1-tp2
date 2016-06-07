@@ -3,23 +3,48 @@ bool Drone::vueloEscalerado() const{
     return _enVuelo && _escalerado();
 }
 
-bool Drone::_escalerado() const{
-    return _esEscalerado(1,1) || _esEscalerado(1,-1) ||
-            _esEscalerado(-1,1) || _esEscalerado(-1,-1);
+bool Drone::_escalerado(const std::vector<Posicion> ps) const{
+    return _esEscalerado(ps,1,1) || _esEscalerado(ps,1,-1) ||
+            _esEscalerado(ps,-1,1) || _esEscalerado(ps,-1,-1);
 }
 
-bool Drone::_esEscalerado(int X, int Y) const{
+bool Drone::_esEscalerado(const std::vector<Posicion> ps, int X, int Y) const{
 
     bool cumplenTodos = true;
-    unsigned int i = 0;
-    while (i < _trayectoria.size()-2){
+    /* \textcolor{ao}{// Estado E1: } */
+    /* \textcolor{ao}{// Vale: cumplenTodos == true } */
 
-        if ((_trayectoria.at(i).x - _trayectoria.at(i+2).x) != X ||
-                (_trayectoria.at(i).y - _trayectoria.at(i+2).y) != Y ){
+
+    unsigned int i = 0;
+    /* \textcolor{ao}{// Estado E2: } */
+    /* \textcolor{ao}{// Vale: i == 0 \&\& cumplenTodos == cumplenTodos@E1 } */
+    while (i < ps.size()-2){
+    
+    /* \textcolor{ao}{// I: }*/
+     
+    /* \textcolor{ao}{// B: i $<$ $ps.size()-2$}*/
+    /* \textcolor{ao}{// Fv:$ ps.size()-2 -i$ Cota: 0}*/
+
+        if ((ps.at(i).x - ps.at(i+2).x) != X ||
+                (ps.at(i).y - ps.at(i+2).y) != Y ){
             cumplenTodos = false;
         }
+        /* \textcolor{ao}{// Estado C1: } */
+        /* \textcolor{ao}{// Vale: (  ps.at(i).x -  ps.at(i+2).x) != X $||$ } */ 
+        /* \textcolor{ao}{// ($  ps.at(i).y - ps.at(i+2).y$) != Y  \&\& cumplenTodos == false  $||$   } */ 
+        /* \textcolor{ao}{//($  ps.at(i).x - ps.at(i+2).x$) = X \&\& } */ 
+        /* \textcolor{ao}{// ($  ps.at(i).y -  ps.at(i+2).y$) = Y  \&\& cumplenTodos == true } */
         i++;
+        /* \textcolor{ao}{// Estado C2: } */
+        /* \textcolor{ao}{// Vale: i == i@C1 $+$ 1 \&\& I} */
+
     }
+    
+    /* \textcolor{ao}{// Estado E3: } */
+    /* \textcolor{ao}{// Vale: cumplenTodos == ( $\forall$ $\selector{i}{[0..$|ps|-2$)}$ )  }*/
+    /* \textcolor{ao}{//        (prm(ps[i]) - prm(ps[i+2]) == x $||$} */
+    /* \textcolor{ao}{//         sgd(ps[i]) - sgd(ps[i+2]) == y)} */
+ 
     return cumplenTodos;
 }
 \end{lstlisting}
