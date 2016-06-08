@@ -113,7 +113,7 @@ std::vector<Posicion> Sistema::_parcelasCultivo() const{
     
 }
 
-void Sistema::_parcelasCultivoLargo(std::vector<Posicion> \&parcelasCultivoLargo, \newline  
+void Sistema::_parcelasCultivoLargo(std::vector<Posicion> \&parcelasCultivoLargo, 
 const int fila) const{
 	/* \textcolor{ao}{// Modifica parcelasCultivoLargo}*/	        
     /* \textcolor{ao}{// Estado C1}*/	    
@@ -127,7 +127,7 @@ const int fila) const{
     while (j < campo().dimensiones().largo){
 
 	/* \textcolor{ao}{// Estado CC1}*/	    
-    /* \textcolor{ao}{// I: 0$\leq$j$\leq$largo(dimensiones(campo(this))) \&\&}*/        
+    /* \textcolor{ao}{// I: 0 $\leq$ j $\leq$ largo(dimensiones(campo(this))) \&\&}*/        
     /* \textcolor{ao}{//    parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
     [(fila,y)$|$\selector{y}{[0..j)},}*/
     /* \textcolor{ao}{//contenido(campo(this), fila, y) == Cultivo]}*/ 
@@ -178,7 +178,7 @@ Demostracion de ciclo: _cuentaCosechables.
   -  Pc /* \implica */ I
   
 i == 0 /*\implica*/ 0 == i /*\implica*/ 0 /*$\leq$*/ i /*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ 0 
-/*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ $|$parcelasCultivo(campo(this))$|$
+/*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ |parcelasCultivo(campo(this))|
 
 total == 0 /*\implica*/ total == |[]| /*\implica*/ total == |[1|/*\selector{a}{[0..0)}*/]|
 /*\implica*/ total == |[1|/*\selector{a}{[0..i)}*/]| 
@@ -214,12 +214,12 @@ total == |[1|\selector{a}{[0..i)},
 Demostracion de ciclo _parcelasCultivo.
 
     /* \textcolor{ao}{// Pc: i == 0 \&\& listaParcelasCultivo == []}*/        
-  	/* \textcolor{ao}{// I: 0$\leq$i$\leq$$|$ancho(dimensiones(campo(this)))$|$\&\& }*/
+  	/* \textcolor{ao}{// I: 0 $\leq$ i $\leq$ $|$ancho(dimensiones(campo(this)))$|$\&\& }*/
     	/* \textcolor{ao}{listaParcelasCultivo = [(x,y)$|$\selector{x}{([0..i))}, }*/		
   		  /* \textcolor{ao}{ \selector{y}{([0..largo(dimensiones(campo(this)))},}*/		
     		  /* \textcolor{ao}{ contenido(campo(this), x, y) == Cultivo]}*/
-    /* \textcolor{ao}{// B: i < ancho(dimensiones(campo(this)))}*/
-    /* \textcolor{ao}{// Fv:ancho(dimensiones(campo(this)))-i.Cota:0}*/
+    /* \textcolor{ao}{// B: i $<$ ancho(dimensiones(campo(this)))}*/
+    /* \textcolor{ao}{// Fv: ancho(dimensiones(campo(this)))-i.Cota:0}*/
     /* \textcolor{ao}{// Qc: listaParcelasCultivo == parcelasCultivo(campo(this))}*/    
 
 
@@ -290,13 +290,14 @@ Demostracion del ciclo _parcelasCultivoLargo
 j == 0 /*\implica*/ 0 == j /*\implica*/ 0 /*$\leq$*/ j /*$\leq$*/ 0
 /*\implica*/ 0 /*$\leq$*/ j /*$\leq$*/ |[]| /*\implica*/ 0 /*$\leq$*/ j /*$\leq$*/ largo(dimensiones(campo(this)))
 
-parcelasCultivoLargo == pre(parcelasCultivoLargo) /*\implica*/ parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ []
+parcelasCultivoLargo == pre(parcelasCultivoLargo) /*\implica*/ 
+parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ []
 /*\implica*/ parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
 		[(fila,y)|\selector{y}{[0..0)}, contenido(campo(this), fila, y) == Cultivo]
 (Verdadero porque es lista vacia [0..0) )
 
 /*\implica*/ parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
-		[(fila,y)|\selector{y}{[0..j)}, contenido(campo(this), fila, y) == Cultivo]    
+		[(fila,y)|\selector{y}{[0..j)}, contenido(campo(this), fila, y) == Cultivo]
 (Porque j == 0)
 
     - I && noB /*\implica*/ Qc
