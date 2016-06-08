@@ -18,8 +18,6 @@ Campo::Campo(const Posicion &posG, const Posicion &posC, Dimension dimension) {
     _grilla.parcelas[posC.x][posC.y] = Casa;
 }
 
-
-// Propiedad de jonathan
 Campo::Campo(const Posicion &posG, const Posicion &posC){
    // La dimension es +1 porque vendria a ser "el largo de la lista"
    // Si el mas lejano esta en el 0, no quiero dimension 0 porque no podria entrar
@@ -27,19 +25,18 @@ Campo::Campo(const Posicion &posG, const Posicion &posC){
     _dimension.ancho = std::max(posG.x, posC.x) + 1;
     _dimension.largo = std::max(posG.y, posC.y) + 1;
 
-    // Si las dimensiones son 2x1, no va a haber espacio para cultivos.
-    // Para solucionarlo, lo convierto en un 2x2
+    // Si las dimensiones son 2x1, no hay espacio para cultivos.
+    // Para solucionarlo, lo conviertimos en un 2x2
     if ((_dimension.ancho == 1 && _dimension.largo == 2)
             || (_dimension.ancho == 2 && _dimension.largo == 1)){
         _dimension.ancho = 2;
         _dimension.largo = 2;
     }
 
-    // Esto hace que la grilla tenga dimensiones _dimension
-    // Y que TODAS las posiciones se seteen con Cultivo
+    // Todas las parcelas son de cultivo
     _grilla.parcelas.resize(_dimension.ancho, std::vector<Parcela>(_dimension.largo, Cultivo));
 
-    // Manualmente seteo las otras dos posiciones
+    // Manualmente seteo el granero y la casa donde corresponde
     _grilla.parcelas.at(posG.x).at(posG.y) = Granero;
     _grilla.parcelas.at(posC.x).at(posC.y) = Casa;
 }
@@ -52,8 +49,9 @@ Parcela Campo::contenido(const Posicion & p) const{
 	return _grilla.parcelas.at(p.x).at(p.y);
 }
 
+// Muestra el campo en consola
 void Campo::mostrar(std::ostream & os) const{
-   // os << "Campo" << std::endl;
+    os << "Campo" << std::endl;
     os << "Dimensiones: " << std::endl;
     os << "    " << "Ancho: " << _dimension.ancho << std::endl;
     os << "    " << "Largo: " << _dimension.largo << std::endl;
@@ -61,15 +59,11 @@ void Campo::mostrar(std::ostream & os) const{
 
     int j = 0;
     while (j < _dimension.largo){
-        // Muestro contenido de parcela
         os << "    ";
         int i = 0;
         while (i < _dimension.ancho){
-            Posicion p;
-            p.x = i;
-            p.y = j;
-            os << contenido(p);
-
+            // Muestro contenido de parcela
+            os << contenido({i,j});
             i++;
 
             if (i < _dimension.ancho){
@@ -78,14 +72,13 @@ void Campo::mostrar(std::ostream & os) const{
                 os << std::endl;
             }
         }
-
         j++;
     }
     os << std::endl;
 }
 
-// NO MODIFICAR ESPACIOS NI NADA PORQUE ROMPE EL 'CARGAR'
-// SI SE TOCA, HAY TABLA
+// Guarda la informacion del campo en un archivo de texto
+// Mientras queden cosas por guardar, pongo una coma al final del dato
 void Campo::guardar(std::ostream & os) const{
     os << "{ C ";
     os << "[" << _dimension.ancho << "," << _dimension.largo << "] ";
@@ -96,18 +89,13 @@ void Campo::guardar(std::ostream & os) const{
         os << "[";
         int i = 0;
         while (i < _dimension.ancho){
-            // Muestro contenido de parcela
-            Posicion p;
-            p.x = i;
-            p.y = j;
-            os << contenido(p);
-
+            // Guardo contenido de parcela
+            os << contenido({i,j});
             i++;
 
             if (i < _dimension.ancho){
                 os << ",";
             }
-
         }
 
         j++;
@@ -121,16 +109,19 @@ void Campo::guardar(std::ostream & os) const{
     os << "]}";
 }
 
-// NO MODIFICAR NI TOCAR NADA PORQUE ESTA HECHO EN BASE AL 'GUARDAR'
-// SI SE TOCA, HAY TABLA
+// Carga el campo de acuerdo a la forma de almacenar info de la funcion 'guardar()'
 void Campo::cargar(std::istream & is){
     std::string datosCampo;
     std::string dDimension;
     std::string dGrilla;
 
+    // Guarda todo el string de texto en 'datosCampo'
     getline(is, datosCampo,'}');
+
+    // Divide el string en las partes correspondientes a cada dato
     _leerSepararDatos(datosCampo, dDimension, dGrilla);
 
+    // Carga los datos como correspondam
     _cargarDimension(dDimension);
     _cargarGrilla(dGrilla);
 }
