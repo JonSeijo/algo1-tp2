@@ -201,7 +201,8 @@ bool Sistema::_esLibreDeDrones(Posicion p) const{
     bool libre = true;
     while (i < _enjambre.size()){
         if (_enjambre.at(i).posicionActual().x == p.x &&
-                _enjambre.at(i).posicionActual().y == p.y){
+                _enjambre.at(i).posicionActual().y == p.y &&
+                _enjambre.at(i).enVuelo()){
             libre = false;
         }
         i++;
