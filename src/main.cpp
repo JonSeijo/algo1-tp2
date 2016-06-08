@@ -4,7 +4,7 @@
 #include "drone.h"
 #include "sistema.h"
 #include "tipos.h"
-#include "aux.h"
+#include "auxiliares.h"
 
 using namespace std;
 
