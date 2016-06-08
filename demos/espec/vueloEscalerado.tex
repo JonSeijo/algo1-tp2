@@ -125,14 +125,14 @@ i == |vueloRealizado(this)| - 2 && (/*$\forall$*/ /*\selector{j}{[0..i)}*/)
 
 	- I && Fv < cota /*\implica*/ noB
 
-0 /*$\leq$*/  i /*$\leq$*/ |vueloRealizado(this)| - 2 && |vueloRealizado(this)| -2 - i) /*$\leq$*/ 0 &&
+0 /*$\leq$*/  i /*$\leq$*/ |vueloRealizado(this)| - 2 && |vueloRealizado(this)| -2 - i) < 0 &&
 cumplenTodos == (/*$\forall$*/ /*\selector{j}{[0..i)}*/)
 ((prm(vueloRealizado(this)/*$_{[j]}$*/) - (prm(vueloRealizado(this)/*$_{[j + 2]}$*/) == X) &&
 ((sgd(vueloRealizado(this)/*$_{[j]}$*/) - (sgd(vueloRealizado(this)/*$_{[j + 2]}$*/) == Y))  
 
 Estos son el invariante y la funcion variante menor a la cota
 
-|vueloRealizado(this)| - 2 - i /*$\leq$*/ 0 /*\implica*/ |vueloRealizado(this)| - 2 < i 
+|vueloRealizado(this)| - 2 - i < 0 /*\implica*/ |vueloRealizado(this)| - 2 < i 
 /*\implica*/ |vueloRealizado(this)| - 2 /*$\leq$*/ i 
 
 
