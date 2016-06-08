@@ -24,7 +24,7 @@ Drone::Drone(ID i, const std::vector<Producto>& ps){
 }
 
 ID Drone::id() const{
-	return _id;
+    return _id;
 }
 
 Carga Drone::bateria() const{
