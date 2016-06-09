@@ -75,9 +75,9 @@ int main(){
 
 //    cout << "sistemas iguales: " << (sis1 == sis2) << endl;
 
-//    ofstream archivoSistema("sistema.txt");
-//    sis.guardar(archivoSistema);
-//    archivoSistema.close();
+    ofstream archivoSistema("sistema.txt");
+    sis.guardar(archivoSistema);
+    archivoSistema.close();
 
 
    // Prueba cargar sistema

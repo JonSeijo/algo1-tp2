@@ -171,6 +171,8 @@ void Sistema::despegar(const Drone & d){
     }
 }
 
+// Cualquier parcela de cultivo libre es correcta
+// En particular, la primera que encuentra es correcta
 Posicion Sistema::_parcelaCultivoLibre() const{
     Posicion res;
 
@@ -182,6 +184,7 @@ Posicion Sistema::_parcelaCultivoLibre() const{
             p.x = i;
             p.y = j;
 
+            // Es libre si la parcela adyacente es cultivo y no tiene drones
             if (_esAdyacente(p, posGranero()) &&
                     _campo.contenido(p) == Cultivo &&
                     _esLibreDeDrones(p)){
@@ -193,9 +196,7 @@ Posicion Sistema::_parcelaCultivoLibre() const{
         i++;
     }
 
-
     return res;
-
 }
 
 bool Sistema::_esLibreDeDrones(Posicion p) const{
@@ -716,7 +717,7 @@ void Sistema::_guardarEstadosCultivos(std::ostream &os) const{
 
         j++;
         if (j < _campo.dimensiones().largo){
-            os << "], ";
+            os << "],";
         }else{
             os << "]";
         }
