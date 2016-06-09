@@ -32,11 +32,6 @@ class Drone{
         void sacarProducto(const Producto p);
 
 	private:
-		bool dosOMenos(const Secuencia<int>) const;
-		bool ordenada(const Secuencia<int>) const;
-		Secuencia<int> damePrimeros(const Secuencia<Posicion> ps) const;
-		Secuencia<int> dameSegundos(const Secuencia<Posicion> ps) const;
-
         bool _escalerado(const std::vector<Posicion> ps) const;
         bool _esEscalerado(const std::vector<Posicion> ps, int X, int Y) const;
 
@@ -67,9 +62,6 @@ class Drone{
         void _cargarProductoIndividual(std::string dProd);
         void _cargarPosActual(std::string dPosActual);
         void _cargarEnVuelo(std::string dEnVuelo);
-
-        bool _igualTrayectoria(Secuencia<Posicion> trA, Secuencia<Posicion> trB) const;
-        bool _mismosProductos(Secuencia<Producto> secuA, Secuencia<Producto> secuB) const;
 
         template<class T>
         unsigned int cuenta(const T &x, const std::vector<T> &v) const;
