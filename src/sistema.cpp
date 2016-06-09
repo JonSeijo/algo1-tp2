@@ -271,6 +271,7 @@ void Sistema::aterrizarYCargarBaterias(Carga b){
         if(_enjambre.at(i).bateria() < b){
             _enjambre.at(i).setBateria(100);
             _enjambre.at(i).borrarVueloRealizado();
+            // borrarVueloRealizado pone enVuelo en false, puedo usar cambiarPosicionActual
             _enjambre.at(i).cambiarPosicionActual(posGranero());
         }
     }
@@ -314,6 +315,7 @@ void Sistema::_moverDrone(std::vector<Posicion> recorridoDrone, Drone &d){
     }
 }
 
+// Devuelve una lista con todas las posiciones por las que el drone pasa
 std::vector<Posicion> Sistema::_recorridoDrone(Drone d, int recorridoMaximo){
     std::vector<Posicion> posRecorridas;
     int i = 1;
@@ -329,23 +331,27 @@ std::vector<Posicion> Sistema::_recorridoDrone(Drone d, int recorridoMaximo){
     return posRecorridas;
 }
 
+// La cantidad maxima de posiciones que puede recorrer, esta limitado por
+// su bateria, la cantidad de fertilizante y las parcelas libres en su direccion
 int Sistema::_recorridoMaximo(Drone d){
-    // Identico a la especificacion
     return _minimo(_minimo(_fertAplicable(d), d.bateria()), _parcelasLibres(d));
 }
 
+// Devuelve la cantidad de parcelas validad a su izquierda
 int Sistema::_parcelasLibres(Drone d){
     int posMasAlejada = 0;
     bool terminado = false;
     int i = 0;
     while (!terminado){
 
-        bool todoEsCultivo = true;
         int j = i;
+        bool todoEsCultivo = true;
+        // Devuelve verdadero si desde i hasta la posActual, todo es cultivo
         while (j <= d.posicionActual().x){
             Posicion p;
             p.x = j;
             p.y = d.posicionActual().y;
+
             if (_campo.contenido(p) != Cultivo){
                 todoEsCultivo = false;
             }
@@ -359,16 +365,18 @@ int Sistema::_parcelasLibres(Drone d){
 
         i++;
 
-        if ( i <= d.posicionActual().x){
+        // Si i es mayor a la coordenada x de la posicion,
+        // cuando se haga la resta con la posicionMasAlejada
+        // puede ocurrir que el drone se salga del borde, por eso para de contar aca
+        if ( i >= d.posicionActual().x){
             terminado = true;
         }
     }
-    std::cout << "_PARCELAS LIBRES: " << d.posicionActual().x - posMasAlejada << std::endl;
     return d.posicionActual().x - posMasAlejada;
 }
 
+// Cuenta cuanto fertilizante puede aplicar el drone. Ver auxiliar en especificacion.
 int Sistema::_fertAplicable(Drone d){
-    // Crease o no, estoy cumpliendo la especificacion tal cual
     int primeraAlcanzable = 0;
     bool terminado = false;
     int i = 0;
@@ -382,7 +390,6 @@ int Sistema::_fertAplicable(Drone d){
             terminado = true;
         }
     }
-    std::cout << "FERT APLICABLE: " << (d.posicionActual().x - primeraAlcanzable) << std::endl;
     return (d.posicionActual().x - primeraAlcanzable);
 }
 
