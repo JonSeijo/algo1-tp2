@@ -301,10 +301,9 @@ void Sistema::_fertilizar(std::vector<Posicion> recorridoDrone){
     }
 }
 
-void Sistema::_moverDrone(std::vector<Posicion> recorridoDrone, Drone d){
+void Sistema::_moverDrone(std::vector<Posicion> recorridoDrone, Drone &d){
     unsigned int i = 0;
     while (i < recorridoDrone.size()){
-        // moverA actualiza la posicionActual y la trayectoria
         d.moverA(recorridoDrone.at(i));
         d.setBateria(d.bateria() - 1);
         d.sacarProducto(Fertilizante);

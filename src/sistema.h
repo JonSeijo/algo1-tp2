@@ -88,7 +88,7 @@ class Sistema {
         bool _enRango(Posicion p);
 
         void _fertilizar(std::vector<Posicion> recorridoDrone);
-        void _moverDrone(std::vector<Posicion> recorridoDrone, Drone d);
+        void _moverDrone(std::vector<Posicion> recorridoDrone, Drone &d);
         std::vector<Posicion> _recorridoDrone(Drone d, int recorridoMaximo);
         int _recorridoMaximo(Drone d);
         int _minimo(int a, int b);

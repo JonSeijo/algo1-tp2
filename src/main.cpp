@@ -32,11 +32,11 @@ int main(){
 
 
        // Prueba cargar campo
-        ifstream archivoLecturaCampo("campo.txt");
-        c.cargar(archivoLecturaCampo);
-        archivoLecturaCampo.close();
+     //   ifstream archivoLecturaCampo("campo.txt");
+     //   c.cargar(archivoLecturaCampo);
+     //   archivoLecturaCampo.close();
 
-        cout << c;
+   //     cout << c;
 
     std::vector<Producto> productos1;
     productos1.push_back(Herbicida);
@@ -69,22 +69,22 @@ int main(){
 
     //Sistema sis2(c, sec);
       // Prueba guardar sistema
-
+    Sistema sis(c, sec1);
     Sistema sis1(c, sec1);
     Sistema sis2(c, sec2);
 
 //    cout << "sistemas iguales: " << (sis1 == sis2) << endl;
-/*
-    ofstream archivoSistema("sistema.txt");
-    sis.guardar(archivoSistema);
-    archivoSistema.close();
-*/
+
+//    ofstream archivoSistema("sistema.txt");
+//    sis.guardar(archivoSistema);
+//    archivoSistema.close();
+
 
    // Prueba cargar sistema
-  /*  ifstream archivoLecturaSistema("sistema.txt");
+    ifstream archivoLecturaSistema("sistema.txt");
     sis.cargar(archivoLecturaSistema);
     archivoLecturaSistema.close();
-*/
+
     ifstream fileDrone1("drone1.txt");
     d1.cargar(fileDrone1);
     fileDrone1.close();
@@ -131,9 +131,12 @@ int main(){
    // cout << sis;
     // cout << "sis == sis2: " << (sis == sis2) << endl;
    // sis.seExpandePlaga();
-    //sis.fertilizarPorFilas();
-    //cout << sis;
+   // sis.fertilizarPorFilas();
+    cout << sis;
 
+    sis.fertilizarPorFilas();
+
+    cout << sis;
 
     return 0;
 }
