@@ -103,15 +103,15 @@ bool Drone::_esEscalerado(const std::vector<Posicion> ps, int X, int Y) const{
 }
 
 Secuencia<InfoVueloCruzado> Drone::vuelosCruzados(const Secuencia<Drone>& ds){
-	Secuencia<Secuencia<Posicion> > pss = dameTrayectorias(ds);
-    Secuencia<Secuencia<Posicion> > tss = agruparPosiciones(pss);
-    Secuencia<Secuencia<InfoVueloCruzado> > xss = agruparRepetidas(tss);
-    Secuencia<InfoVueloCruzado> yss = borrarSobrantesYOrdenar(xss);
+    Secuencia<Secuencia<Posicion> > trayectoriasDrones = dameTrayectorias(ds);
+    Secuencia<Secuencia<Posicion> > matrizPosiciones = agruparPosiciones(trayectoriasDrones);
+    Secuencia<Secuencia<InfoVueloCruzado> > infoCruces = agruparRepetidas(matrizPosiciones);
+    Secuencia<InfoVueloCruzado> res = borrarSobrantesYOrdenar(infoCruces);
 
-    return yss;
+    return res;
 }
 
-//Toma una secuencia de Drones y devuelve una secuencia de secuencias de posiciones con las trayectorias de esos Drones
+// Toma una secuencia de Drones y devuelve una secuencia de secuencias de posiciones con las trayectorias de esos Drones
 Secuencia<Secuencia<Posicion> > Drone::dameTrayectorias(const Secuencia<Drone>& ds){
     Secuencia<Secuencia<Posicion> > res;
     unsigned int i = 0;
@@ -122,7 +122,7 @@ Secuencia<Secuencia<Posicion> > Drone::dameTrayectorias(const Secuencia<Drone>& 
     return res;
 }
 
-//Rearma la matriz agrupando las posiciones de los Drones de acuerdo al índice en la trayectoria
+// Rearma la matriz agrupando las posiciones de los Drones de acuerdo al índice en la trayectoria
 Secuencia<Secuencia<Posicion> > Drone::agruparPosiciones(const Secuencia<Secuencia<Posicion> > pss){
     Secuencia<Secuencia<Posicion> > res;
     unsigned int j = 0;
@@ -209,9 +209,8 @@ Secuencia<Secuencia<InfoVueloCruzado> > Drone::agruparRepetidas(const Secuencia<
 //Borra aquellos elementos en los que haya 1 solo cruce y ordena a los demás de menor a mayor
 Secuencia<InfoVueloCruzado> Drone::borrarSobrantesYOrdenar(const Secuencia<Secuencia<InfoVueloCruzado> > xss){
 
-    // 'Aplano' la secuencia de secuencias
-    // Todos tienen cruces > 1 porque los filtre antes
-    // by: jon
+    // 'Aplana' la secuencia de secuencias
+    // Todos tienen cruces > 1 porque fueron filtrados antes
     Secuencia<InfoVueloCruzado> res;
     unsigned int i = 0;
     while (i < xss.size()){
@@ -224,7 +223,7 @@ Secuencia<InfoVueloCruzado> Drone::borrarSobrantesYOrdenar(const Secuencia<Secue
     }
 
     // Ordena de forma creciente por cantidadCruces
-    // by: lucasB
+    // Algoritmo de ordenamiento:
     unsigned int k = 0;
     while(k < res.size()){
         unsigned int l = k + 1;
@@ -248,8 +247,7 @@ Secuencia<InfoVueloCruzado> Drone::borrarSobrantesYOrdenar(const Secuencia<Secue
 }
 
 
-// La posicion actual es el final de trayectoria.
-// Ver si lo mostramos aparte. En ese caso, que hacer cuando no esta en vuelo? no mostrarlo?
+// Muestra la informacion del drone
 void Drone::mostrar(std::ostream & os) const{
     os << "Drone" << std::endl;
     os << "    Id: " << _id << std::endl;
@@ -276,9 +274,6 @@ void Drone::mostrar(std::ostream & os) const{
         j++;
     }
     os << std::endl;
-
-
-
 }
 
 void Drone::guardar(std::ostream & os) const{
@@ -304,7 +299,7 @@ void Drone::cargar(std::istream & is){
     // Uso getLine porque preserva los espacios
     getline(is, datosDrone,'}');
     // datosDrone:
-    //{ D 12 100 [[0,0],[1,0]] [Herbicida, Plaguicida]
+    //{ D 12 100 [[0,0],[1,0]] [Herbicida,Plaguicida]
 
     _leerSepararDatos(datosDrone, dId, dBateria, dTrayectoria, dProductos, dEnVuelo, dPosActual);
     _cargarId(dId);
