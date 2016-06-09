@@ -69,15 +69,18 @@ void Sistema::seVinoLaMaleza(const Secuencia<Posicion>& ps){
 }
 
 void Sistema::seExpandePlaga(){
+    // posicionesPlaga es una lista con todas las posiciones que tienen plaga antes de modificar el sistema
     std::vector<Posicion> posicionesPlaga = _posicionesConPlaga();
     unsigned int i = 0;
     while (i < posicionesPlaga.size()) {
+        // para cada posicion con plaga, expandir la plaga a todos los cultivos vecinos
         _plaguizarVecinos(posicionesPlaga.at(i));
         i++;
     }
 
 }
 
+// Dada una posicion, devuelve una lista pon las 4 posiciones adyacentes (No chequea rango)
 std::vector<Posicion> Sistema::_adyacentes(Posicion p){
     std::vector<Posicion> adyacentes;
 
@@ -105,7 +108,10 @@ std::vector<Posicion> Sistema::_adyacentes(Posicion p){
     return adyacentes;
 }
 
+
 void Sistema::_plaguizarVecinos(Posicion p) {
+    // vecinosConCultivos sonlas nuevas parcelas que deben tener plaga,
+    // es decir, los cultivos adyacentes que esten en rango
     std::vector<Posicion> vecinosConCultivos = _vecinosConCultivos(p);
     unsigned int i = 0;
     while (i < vecinosConCultivos.size()){
@@ -117,6 +123,7 @@ void Sistema::_plaguizarVecinos(Posicion p) {
     }
 }
 
+// Devuelve una lista con los cultivos adyacentes que esten en rango
 std::vector<Posicion> Sistema::_vecinosConCultivos(Posicion p){
     std::vector<Posicion> vecinosConCultivos;
     std::vector<Posicion> vecinosAChequear = _adyacentes(p);
@@ -140,15 +147,11 @@ bool Sistema::_enRango(Posicion p){
 std::vector<Posicion> Sistema::_posicionesConPlaga(){
     std::vector<Posicion> posicionesPlaga;
     int i = 0;
-
     while (i < _campo.dimensiones().ancho){
         int j = 0;
         while (j < _campo.dimensiones().largo){
             if (_estado.parcelas.at(i).at(j) == ConPlaga){
-                Posicion p;
-                p.x = i;
-                p.y = j;
-                posicionesPlaga.push_back(p);
+                posicionesPlaga.push_back({i,j});
             }
             j++;
         }

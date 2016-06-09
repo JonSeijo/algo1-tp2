@@ -257,7 +257,7 @@ void Drone::mostrar(std::ostream & os) const{
     if (_enVuelo) os << "Si" << std::endl;
     else os << "No" << std::endl;
 
-    os << "    PosActual: " << _posicionActual.x << " " << _posicionActual.y << std::endl;
+    os << "    PosActual: [" << _posicionActual.x << "," << _posicionActual.y << "]"<< std::endl;
 
     os << "    Vuelos realizados: ";
     unsigned int i = 0;
