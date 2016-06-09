@@ -270,9 +270,8 @@ void Sistema::aterrizarYCargarBaterias(Carga b){
     while(i < _enjambre.size()){
         if(_enjambre.at(i).bateria() < b){
             _enjambre.at(i).setBateria(100);
-            _enjambre.at(i).moverA(posGranero());
             _enjambre.at(i).borrarVueloRealizado();
-
+            _enjambre.at(i).cambiarPosicionActual(posGranero());
         }
     }
 }
