@@ -320,25 +320,9 @@ void Drone::_cargarPosActual(std::string dPosActual){
 }
 
 void Drone::_cargarEnVuelo(std::string dEnVuelo){
-    bool leyoEstado = false;
-    bool terminado = false;
-    unsigned int i = 0;
-    while (!terminado){
-        if (dEnVuelo[i] == 't'){
-            leyoEstado = true;
-            _enVuelo = true;
-        }
-
-        i++;
-        if (i >= dEnVuelo.size()){
-            terminado = true;
-        }
-    }
-
-    if (!leyoEstado){
-        _enVuelo = false;
-    }
-
+    // dEnVuelo tiene un espacio inicial
+    if (dEnVuelo[1] == 't') _enVuelo = true;
+    else _enVuelo = false;
 }
 
 // Dado unn string de datos con los productos, los cargo al drone
