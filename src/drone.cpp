@@ -341,24 +341,26 @@ void Drone::_cargarEnVuelo(std::string dEnVuelo){
 
 }
 
+// Dado unn string de datos con los productos, los cargo al drone
 void Drone::_cargarProductos(std::string dProductos){
     // Vaciar el vector de productos y cargar los nuevos
-    // dProductos:_[Herbicida,Plaguicida]
     _productos.resize(0);
-
     // Separo los productos uno a uno y los voy cargando
     std::string dActual;
     bool terminar = false;
-    int i = 2;
+    int i = 2;  // i = 2 por el espacio y el corchete iniciales
 
     while (!terminar){
+        // Si hay una coma, se termino de leer el producto actual y hay uno nuevo
         if (dProductos[i] == ','){
             _cargarProductoIndividual(dActual);
             dActual = "";
             i++;
         }
+        // Si hay un cierre de corchete, se terminaron los productos
         if (dProductos[i] == ']'){
             if(dActual != ""){
+                // Si habia algun producto, lo carga (puede pasar que la lista a cargar sea vacia)
                 _cargarProductoIndividual(dActual);
             }
             terminar = true;
@@ -372,7 +374,6 @@ void Drone::_cargarProductos(std::string dProductos){
 }
 
 void Drone::_cargarProductoIndividual(std::string dProd){
-    // Fertilizante, Plaguicida, PlaguicidaBajoConsumo, Herbicida, HerbicidaLargoAlcance ;
     if (dProd == "Herbicida") _productos.push_back(Herbicida);
     if (dProd == "HerbicidaLargoAlcance") _productos.push_back(HerbicidaLargoAlcance);
     if (dProd == "Plaguicida") _productos.push_back(Plaguicida);
@@ -381,20 +382,20 @@ void Drone::_cargarProductoIndividual(std::string dProd){
 }
 
 void Drone::_cargarTrayectoria(std::string dTrayectoria){
-
     // Vacio la trayectoria antigua del drone
     _trayectoria.resize(0);
 
     if (dTrayectoria[1] == '[' && dTrayectoria[2] == ']'){
-        // La trayectoria es vacia
+        // La trayectoria a agregar es vacia
         _enVuelo = false;
     }else{
-        // La trayectoria NO es vacia
+        // La trayectoria a agregar NO es vacia
         bool terminado = false;
         std::string dActual = "";
         int i = 2;
 
         while (!terminado){
+            // Si termina de leer una posicion (un ',[' es que comienza otro)
             if ((dTrayectoria[i] == ',') && (dTrayectoria[i+1] == '[')){
                 Posicion p = _cargarPosicionIndividual(dActual);
                 _trayectoria.push_back(p);
@@ -402,6 +403,7 @@ void Drone::_cargarTrayectoria(std::string dTrayectoria){
                 i++;
             }
 
+            // Si termina de leer la ultima posicion (un ']]' es que no hay mas posiciones para leer)
             if((dTrayectoria[i] == ']') && (dTrayectoria[i-1] == ']')){
                 Posicion p = _cargarPosicionIndividual(dActual);
                 _trayectoria.push_back(p);
@@ -414,13 +416,17 @@ void Drone::_cargarTrayectoria(std::string dTrayectoria){
 
         _enVuelo = true;
         _posicionActual = _trayectoria.back();
-
     }
 }
 
+// Dada una string con el dato de una posicion,
+// devuelve un objeto Posicion con los datos correspondientes
 Posicion Drone::_cargarPosicionIndividual(std::string dPos){
     int posSeparador = dPos.find(',');
     int x = 0;
+
+    // Esta funcion usa en lugares donde el primer caracter es un espacio, y en otros no lo es,
+    // necesita hacer este condicional para saber desde donde leer.
     if(dPos[0] == '['){
         x = atoi(dPos.substr(1, posSeparador - 1).c_str());
     }else{
@@ -433,32 +439,27 @@ Posicion Drone::_cargarPosicionIndividual(std::string dPos){
     p.y = y;
 
     return p;
-    //_trayectoria.push_back(p);
-    //std::cout << "x: " << x << " y: " << y << std::endl;
 }
 
 void Drone::_cargarBateria(std::string dBateria){
-    // bateria:_BATERIA
-    // Quito el espacio del principio
+    // Quito el espacio inicial y lo guardo como int
     dBateria = dBateria.substr(1, dBateria.npos);
     int newBateria = atoi(dBateria.c_str());
     _bateria = newBateria;
 }
 
 void Drone::_cargarId(std::string dId){
-    // id:_ID
-    // Quito el espacio del principio
+    // Quito el espacio inicial y lo guardo como int
     dId = dId.substr(1, dId.npos);
     int newId = atoi(dId.c_str());
     _id = newId;
 }
 
-/* Separa la string con todos los datos en las categorias correspondientes*/
+// Separa el string con datos en las categorias correspondientes
+// Cada espacio representa una nueva categoria para separar.
 void Drone::_leerSepararDatos(std::string &datos, std::string &dId, std::string &dBateria,
                               std::string &dTrayectoria, std::string &dProductos,
                               std::string &dEnVuelo, std::string &dPosActual){
-    // Leo los datos y los separo
-
     bool terminado = false;
     int cantEspacios = 0;
     int i = 0;
@@ -482,7 +483,6 @@ void Drone::_leerSepararDatos(std::string &datos, std::string &dId, std::string 
 
         i++;
     }
-
 }
 
 std::string Drone::_dameStringEnVuelo() const{
@@ -497,7 +497,7 @@ std::string Drone::_dameStringPosActual() const{
     return _dameStringPosicion(posicionActual());
 }
 
-/* Devuelve un string con la trayectora del drone, de la forma [[x1,y1], [x2,y2]]*/
+/* Devuelve un string con la trayectora del drone, de la forma [[x1,y1],[x2,y2]]*/
 std::string Drone::_dameStringVueloRealizado() const{
     std::string cadenaVuelo = "";
     cadenaVuelo += '[';
@@ -513,7 +513,7 @@ std::string Drone::_dameStringVueloRealizado() const{
     return cadenaVuelo;
 }
 
-/* Dado una posicion, devuelve una string en la forma [x, y] */
+/* Dado una posicion, devuelve una string en la forma [x,y] */
 std::string Drone::_dameStringPosicion(Posicion p) const{
     std::string cadena = "";
     std::stringstream sx;
