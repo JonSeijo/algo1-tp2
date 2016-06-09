@@ -11,13 +11,15 @@
     	escapeinside={/*}{*/},
     backgroundcolor=\color{black!5}, % set backgroundcolor
 }
+\usepackage{blindtext}
+
 \definecolor{ao}{rgb}{0.0, 0.5, 0.0}
 % Aca solo vamos a poner el esqueleto del documento, pero no vamos a especificar nada.
 
 \begin{document} % Todo lo que escribamos a partir de aca va a aparecer en el documento.
 
 % Completar los datos de la caratula
-\titulo{TPI - Demostraciones} 
+\titulo{TPI - Informe} 
 \fecha{\today}
 \materia{Algoritmos y Estructuras de Datos I}
 \grupo{Grupo 13}
@@ -29,6 +31,11 @@
 \integrante{Galli, Luciano Mart\'in}{534/15}{lucianogalli@outlook.com}
 
 \maketitle
+
+\section{Informe}
+\input{espec/informe}
+
+\newpage
 
 \section{Vuelo Escalerado}
 

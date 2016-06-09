@@ -1,0 +1,35 @@
+\subsection{Campo}
+
+\begin{itemize}
+\item{En el constructor vacio de campo creamos una Grilla de tres parcela,
+unGranero,
+una Casa y un Cultivo, lo cual cumple elinvariante del tipo Campo.}
+	
+	
+\end{itemize}
+ 
+\subsection{Drone}
+ 
+\begin{itemize}
+ 
+\item{En el constructor vacio de Drone ponemos posicionActual en (0, 0),
+ bateria 100, enVuelo false y dejamos vacia la trayectoria,
+  lo cual cumple el invariante.} 
+
+\item{En el constructor con parametros de Drone, y teniendo en cuenta que no toma un Posicion para posicionActual decidimos ponerlo en (0, 0),
+  lo cual cumple el invariante.} 
+  
+\item{En vueloEscalerado decidimos, por simplicidad, hacer explicito el echo de que toda trayectoria de dos posiciones o menos es escalerada.}
+ 
+\end{itemize}
+
+
+\subsection{Sistema}
+
+\begin{itemize}
+
+\item{En el contructor vacio de Sistema decidioms, por declaratividad, crear explicitamente un Campo de 3 Parcela y una lista vacia de drones y asiganrlos a las correspondintes variables de Sistema.}
+
+\item{En volarYSensar, si el dDrone llega a una Parcela en NoSensado, decidimos cambiarla a RecienSembrado, ya que la esecificacion solo dice que deja de ser NoSensado. }
+
+\end{itemize}
