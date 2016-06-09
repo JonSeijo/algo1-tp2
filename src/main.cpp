@@ -47,14 +47,18 @@ int main(){
 
     std::vector<Producto> productos2;
     productos2.push_back(Herbicida);
-    productos2.push_back(Herbicida);
     productos2.push_back(Plaguicida);
+    productos2.push_back(Herbicida);
 
     Drone d1(5, productos2);
-  /*  Drone d2(78, productos);
-    Drone d3(43, productos);
-    Drone d4(10, productos);
-*/
+    Drone d2(5, productos1);
+    d2.moverA({1,1});
+    d1.moverA({1,1});
+
+    cout << "igualDrones: " << (d1 == d2) << endl;
+//    Drone d3(43, productos);
+//    Drone d4(10, productos);
+
     Secuencia<Drone> sec1;
     sec1.push_back(d);
     sec1.push_back(d1);

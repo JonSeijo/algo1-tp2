@@ -9,7 +9,7 @@ Drone::Drone(){
     // Si lo pongo en (0,0) cumple la especificacion
     // Le defino una posicion valida porque sino se rompe en otro lado
     _posicionActual.x = 0;
-    _posicionActual.x = 0;
+    _posicionActual.y = 0;
 }
 
 Drone::Drone(ID i, const std::vector<Producto>& ps){
@@ -31,6 +31,10 @@ Carga Drone::bateria() const{
 	return _bateria;
 }
 
+void Drone::setBateria(const Carga c){
+    _bateria = c;
+}
+
 bool Drone::enVuelo() const{
 	return _enVuelo;
 }
@@ -39,12 +43,39 @@ const Secuencia<Posicion>& Drone::vueloRealizado() const{
 	return _trayectoria;
 }
 
+void Drone::borrarVueloRealizado(){
+    _enVuelo = false;
+    _trayectoria.clear();
+}
+
 Posicion Drone::posicionActual() const{
 	return _posicionActual;
 }
 
+void Drone::cambiarPosicionActual(const Posicion p){
+    _posicionActual = p;
+}
+
 const Secuencia<Producto>& Drone::productosDisponibles() const{
-	return _productos;
+    return _productos;
+}
+
+void Drone::sacarProducto(const Producto p){
+    unsigned int i = 0;
+    while(i < _productos.size()){
+        if(_productos.at(i) == p){
+            _productos.erase(_productos.begin() + i);
+            break;
+        }
+        i++;
+    }
+}
+
+// Requiere que la nueva posicion sea adyacente a la ultima de la trayectoria
+void Drone::moverA(const Posicion pos){
+    _enVuelo = true;
+    _trayectoria.push_back(pos);
+    _posicionActual = pos;
 }
 
 bool Drone::vueloEscalerado() const{
@@ -529,9 +560,8 @@ bool Drone::operator==(const Drone & otroDrone) const{
            _bateria == otroDrone.bateria() &&
            _enVuelo == otroDrone.enVuelo() &&
            _posicionActual == otroDrone.posicionActual() &&
-           _igualTrayectoria(_trayectoria, otroDrone.vueloRealizado()) &&
+           _trayectoria == otroDrone.vueloRealizado() &&
            mismos(_productos, otroDrone.productosDisponibles());
-            // _mismosProductos(_productos, otroDrone.productosDisponibles());
 }
 
 template<class T>
@@ -552,156 +582,8 @@ bool Drone::mismos(const std::vector<T> &a, const std::vector<T> &b) const {
     return res;
 }
 
-bool Drone::_igualTrayectoria(Secuencia<Posicion> trA, Secuencia<Posicion> trB) const{
-    Posicion posA;
-    Posicion posB;
-
-    bool iguales = true;
-    if (trA.size() == trB.size()){
-        unsigned int i = 0;
-        while (i < trA.size()){
-            posA.x = trA.at(i).x;
-            posA.y = trA.at(i).y;
-
-            posB.x = trB.at(i).x;
-            posB.y = trB.at(i).y;
-
-            if ((posA.x != posB.x) || (posA.y != posB.y)){
-                iguales = false;
-            }
-            i++;
-        }
-
-    }else{
-        iguales = false;
-    }
-
-    return iguales;
-}
-
-
-bool Drone::_mismosProductos(Secuencia<Producto> secuA, Secuencia<Producto> secuB) const{
-    bool tienenMismos = true;
-    if (secuA.size() == secuB.size()){
-        unsigned int i = 0;
-        int cuentaA;
-        int cuentaB;
-        while (i < secuA.size()){
-            cuentaA = std::count(secuA.begin(), secuA.end() - 1, secuA.at(i));
-            cuentaB = std::count(secuB.begin(), secuB.end() - 1, secuB.at(i));
-            if (cuentaA != cuentaB){
-                tienenMismos = false;
-            }
-            i++;
-        }
-    }else{
-        tienenMismos = false;
-    }
-
-    return tienenMismos;
-}
-
 std::ostream & operator<<(std::ostream & os, const Drone & d){
     d.mostrar(os);
     return os;
 }
 
-/*
-* Toma un Secuencia<Posicion> y devuelve la secuencia de los elementos x
-* de cada posicion
-* n = xs.size()
-* O(n)
-*/
-Secuencia<int> Drone::damePrimeros(const Secuencia<Posicion> ps) const{
-	Secuencia<int> res;
-	unsigned int i = 0;
-	while(i < ps.size()){
-		res.at(i) = ps.at(i).x;
-		i++;
-	}
-	return res;
-}
-
-/*
-* Toma un Secuencia<Posicion> y devuelve la secuencia de los elementos y
-* de cada posicion
- * n = xs.size()
- * O(n²)
-*/
-Secuencia<int> Drone::dameSegundos(const Secuencia<Posicion> ps) const{
-	Secuencia<int> res;
-	unsigned int i = 0;
-	while(i < ps.size()){
-		res.at(i) = ps.at(i).y;
-		i++;
-	}
-	return res;
-
-}
-
-/*
- * Toma un Secuencia<int> y devuelve true si ningun 
- * elemento aparece mas de dos veces, false en caso contrario
- * n = xs.size()
- * O(n²)
-*/
-
-bool Drone::dosOMenos(const Secuencia<int> xs) const{
-	bool res = true;
-	unsigned int i = 0;
-	while(i < xs.size()){
-		int cuenta = std::count(xs.begin(), xs.end() - 1, xs.at(i));
-		if(cuenta > 2){
-			res = false;
-		}
-		i++;
-	}
-
-	return res;
-}
-/*
-* Toma un Secuencia<int> y devuelve un bool de si esta ordenada o no
-* n = xs.size()
-* O( n * log n )
-*/
-bool Drone::ordenada(const Secuencia<int> xs) const{
-	Secuencia<int> r = xs;
-	std::sort(r.begin(), r.end());
-	return r == xs;
-}
-
-
-
-void Drone::moverA(const Posicion pos){
-    _enVuelo = true;
-    _trayectoria.push_back(pos);
-    _posicionActual = pos;
-}
-
-void Drone::setBateria(const Carga c){
-    _bateria = c;
-}           
-
-void Drone::borrarVueloRealizado(){
-    //lean la especificacion de esta
-    //no estoy seguro de que este bien especificada
-    _enVuelo = false;
-    _trayectoria.clear();
-}
-            
-void Drone::cambiarPosicionActual(const Posicion p){
-    _posicionActual = p;
-}
-            
-void Drone::sacarProducto(const Producto p){
-    unsigned int i = 0;
-    while(i < _productos.size()){
-        if(_productos.at(i) == p){
-            _productos.erase(_productos.begin() + i);
-            break;
-        }
-
-        i++;
-    }
-    
-}
