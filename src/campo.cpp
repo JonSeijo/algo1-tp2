@@ -126,6 +126,7 @@ void Campo::cargar(std::istream & is){
     _cargarGrilla(dGrilla);
 }
 
+// Los parametros son tomados por referencia
 void Campo::_leerSepararDatos(std::string &datos,
                               std::string &dDimension,
                               std::string &dGrilla){
@@ -133,11 +134,15 @@ void Campo::_leerSepararDatos(std::string &datos,
     bool terminado = false;
     int cantEspacios = 0;
     int i = 0;
+
+    // Distingue la categoria de los datos correspondiente de acuerdo a la cantidad de espacios.
+    // Solamente hay espacios cuando se cambia la categoria (dimension, contenidosParcelas)
     while (!terminado){
         if (datos[i] == ' ') cantEspacios++;
 
         if (cantEspacios == 2) dDimension += datos[i];
 
+        // Si llega al ultimo espacio, toma todo lo que queda en el ultimo dato
         if (cantEspacios == 3){
             dGrilla = datos.substr(i, datos.npos);
             terminado = true;
@@ -146,6 +151,8 @@ void Campo::_leerSepararDatos(std::string &datos,
     }
 }
 
+// Usa la posicion del separador para dividir,
+// porque no sabe de antemano cuantas cifras tiene la dimension
 void Campo::_cargarDimension(std::string &dDimension){
     int posSeparador = dDimension.find(',');
     _dimension.ancho = atoi(dDimension.substr(2, posSeparador - 2).c_str());
@@ -164,13 +171,16 @@ void Campo::_cargarGrilla(std::string &dGrilla){
     std::string datoActual = "";
 
     while (!terminado){
+        // necesitaCierre es util para ignorar la coma entre las listas
         if (necesitaCierre){
+            // Si llega a una coma, es porque termino de leer la palabra actual, pero la fila continua
             if (dGrilla[i] == ','){
                 _cargarParcelaIndividual(posX, posY, datoActual);
                 datoActual = "";
                 posX++;
             }
 
+            // Si llega a un cierre, se termino de leer la fila actual y paso a la siguiente
             else if (dGrilla[i] == ']'){
                 necesitaCierre = false;
                 _cargarParcelaIndividual(posX, posY, datoActual);
@@ -188,6 +198,7 @@ void Campo::_cargarGrilla(std::string &dGrilla){
             necesitaCierre = true;
         }
 
+        // El doble ']]' solo ocurre al final
         if (dGrilla[i] == ']' && dGrilla[i+1] == ']'){
             terminado = true;
         }
@@ -195,10 +206,12 @@ void Campo::_cargarGrilla(std::string &dGrilla){
     }
 }
 
+// Dada una posicion y un dato (String) que contiene una parcela, la carga donde corresponde
 void Campo::_cargarParcelaIndividual(int posX, int posY, std::string datoActual){
     _grilla.parcelas.at(posX).at(posY) = _dameParcela(datoActual);
 }
 
+// Dada una string con el nombre, devuelve la parcela correspondiente
 Parcela Campo::_dameParcela(std::string sParcela){
     Parcela parc = Cultivo;
     if (sParcela == "Granero") parc = Granero;
@@ -207,16 +220,25 @@ Parcela Campo::_dameParcela(std::string sParcela){
     return parc;
 }
 
+
+bool Campo::operator==(const Campo & otroCampo) const{
+    return _dimension.ancho == otroCampo.dimensiones().ancho
+            && _dimension.largo == otroCampo.dimensiones().largo
+            && _grillaIgual(otroCampo);
+}
+
+// Asume que los campos tienen la misma dimension
+// Devuelve verdadero si tienen parcelas iguales en las mismas posiciones
 bool Campo::_grillaIgual(const Campo &c) const{
+
+    // CHEQUEAR ANTES SI TIENEN EL MISMO TAMAÑO PORQUE ROMPE. O ACLARAR QUE LO ASUMO DE ANTEMANO
+
     bool iguales = true;
     int i = 0;
-    int j = 0;
     while (i < _dimension.ancho){
+        int j = 0;
         while (j < _dimension.largo){
-            Posicion p;
-            p.x = i;
-            p.y = j;
-            if (contenido(p) != c.contenido(p)){
+            if (contenido({i,j}) != c.contenido({i,j})){
                 iguales = false;
             }
             j++;
@@ -225,13 +247,6 @@ bool Campo::_grillaIgual(const Campo &c) const{
     }
 
     return iguales;
-}
-
-
-bool Campo::operator==(const Campo & otroCampo) const{
-    return _dimension.ancho == otroCampo.dimensiones().ancho
-            && _dimension.largo == otroCampo.dimensiones().largo
-            && _grillaIgual(otroCampo);
 }
 
 std::ostream & operator<<(std::ostream & os, const Campo & c){
