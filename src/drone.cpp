@@ -189,6 +189,7 @@ Secuencia<Secuencia<InfoVueloCruzado> > Drone::agruparRepetidas(const Secuencia<
 
             int cantCruces = _cuentaPos(posMomento, tss.at(i));
 
+            // Con esto nos aseguramos que la lista final no tenga repetidos
             if (!_perteneceInfoPos(posMomento, crucesEnPos)){
                 if (cantCruces > 1){
                     InfoVueloCruzado info;
