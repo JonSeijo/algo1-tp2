@@ -50,8 +50,9 @@ TEST(test_sistema_despegar, si_hay_drone_o_casa_al_lado_del_granero_comienza_vue
     Posicion posCasaALaDerechaDelGranero = {1, 2};
     Campo el_campo(posG, posCasaALaDerechaDelGranero);
 
+    // Cambio en el test, consulta por mail con leandro
     Sistema s1(el_campo, {elDrone, otroDrone});
-    otroDrone.moverA({1,0});
+    //otroDrone.moverA({1,0});
     s1.despegar(elDrone);
 
     Drone elDroneEnElSistema = buscarDroneEnSistema(elDrone, s1);
@@ -60,9 +61,11 @@ TEST(test_sistema_despegar, si_hay_drone_o_casa_al_lado_del_granero_comienza_vue
 
     Posicion arribaDelGranero = {0, 1};
     Posicion abajoDelGranero = {2, 1};
+    Posicion izquierdaDelGranero = {1, 0};
     bool estaContiguoAlGranero =
             elDroneEnElSistema.posicionActual() == arribaDelGranero ||
-            elDroneEnElSistema.posicionActual() == abajoDelGranero;
+            elDroneEnElSistema.posicionActual() == abajoDelGranero ||
+	    elDroneEnElSistema.posicionActual() == izquierdaDelGranero;
     EXPECT_TRUE(estaContiguoAlGranero);
 
     EXPECT_EQ(el_campo, s1.campo());
