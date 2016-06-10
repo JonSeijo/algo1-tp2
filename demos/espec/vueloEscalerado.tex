@@ -13,8 +13,8 @@ bool Drone::_escalerado(const std::vector<Posicion> ps) const{
     return (ps.size() /*$\leq$*/ 2) || _esEscalerado(ps,1,1) || _esEscalerado(ps,1,-1) ||
             _esEscalerado(ps,-1,1) || _esEscalerado(ps,-1,-1);
     /* \textcolor{ao}{// Estado E1:} */
-    /* \textcolor{ao}{// Vale: res == (ps.size() >= 2) $||$ ($\exists$ $\selector{x, y}{[1, -1]})$}*/
-    /* \textcolor{ao}{//   ($\forall$ $\selector{i}{[0..|ps| - 2)}$)}*/
+    /* \textcolor{ao}{// Vale: res == (ps.size() $\geq$ 2) $||$ ($\exists$ $\selector{x, y}{[1, -1]})$}*/
+    /* \textcolor{ao}{//   ($\forall$ $\selector{i}{[0..$|$ps$|$ - 2)}$)}*/
     /* \textcolor{ao}{//      (prm(ps[i]) - prm(ps[i+2]) == x $||$}*/
     /* \textcolor{ao}{//      sgd(ps[i]) - sgd(ps[i+2]) == y )}*/
 }
