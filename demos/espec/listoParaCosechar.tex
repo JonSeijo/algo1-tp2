@@ -1,13 +1,12 @@
 \begin{lstlisting}
 
 Transformaciones de estados.
-Ciclos y demostraciones despues.
 
 bool Sistema::listoParaCosechar() const{
      
     float cantCosechable = _cuentaCosechables();
 
-	/* \textcolor{ao}{// Estado E1: } */
+    /* \textcolor{ao}{// Estado E1: } */
     /* \textcolor{ao}{// Vale: cantCosechable == cantCultivosCosechables(campo(this))  } */
 
     float totalCultivos = _parcelasCultivo().size();
@@ -36,8 +35,8 @@ int Sistema::_cuentaCosechables() const{
     while(i < _parcelasCultivo().size()){
 
     /* \textcolor{ao}{// I: 0 $\leq$  i $\leq$ $|$parcelasCultivo(campo(this))$|$ \&\&}*/
-    /* \textcolor{ao}{// total == $|$[1|\selector{a}{[0..i)}, \newline
- estadoDelCultivo(parcelasCultivo[a], this) == ListoParaCosechar]$|$}*/
+    /* \textcolor{ao}{// total == $|$[1|\selector{a}{[0..i)}, }*/
+	/* \textcolor{ao}{estadoDelCultivo(parcelasCultivo[a], this) == ListoParaCosechar]$|$}*/
     /* \textcolor{ao}{// B: i $<$ $|$parcelasCultivo(campo(this))$|$}*/
     /* \textcolor{ao}{// Fv:$|$parcelasCultivo(campo(this))$|$-i Cota: 0}*/    	
     	
@@ -49,8 +48,8 @@ int Sistema::_cuentaCosechables() const{
         }
 
     /* \textcolor{ao}{// Estado AC2}*/
-    /* \textcolor{ao}{// Vale Qif: total ==$|$[1$|$\selector{p}{parcelasCultivo}, \newline  
-            estadoDelCultivo(p, this) == ListoParaCosechar]$|$\&\& i == i@AC2}*/
+    /* \textcolor{ao}{// Vale Qif: total ==$|$[1$|$\selector{p}{parcelasCultivo},}*/  
+    /* \textcolor{ao}{estadoDelCultivo(p, this) == ListoParaCosechar]$|$\&\& i == i@AC2}*/
 
         i++;
     
@@ -71,10 +70,10 @@ int Sistema::_cuentaCosechables() const{
 std::vector<Posicion> Sistema::_parcelasCultivo() const{
     std::vector<Posicion> listaParcelasCultivo;
 
-	/* \textcolor{ao}{// Estado B1}*/	    
+    /* \textcolor{ao}{// Estado B1}*/	    
     /* \textcolor{ao}{// Vale: listaParcelasCultivo == []}*/    
     int i = 0;
-	/* \textcolor{ao}{// Estado B2}*/	    
+    /* \textcolor{ao}{// Estado B2}*/	    
     /* \textcolor{ao}{// Vale PC: i == 0 \&\& listaParcelasCultivo == listaParcelasCultivo@B1}*/    
         
     while (i < campo().dimensiones().ancho){ 
@@ -90,11 +89,10 @@ std::vector<Posicion> Sistema::_parcelasCultivo() const{
         
         _parcelasCultivoLargo(listaParcelasCultivo, i);
 
-    	/* \textcolor{ao}{// Estado BC2}*/   
-    	
+    /* \textcolor{ao}{// Estado BC2}*/   	
     /* \textcolor{ao}{//Vale: listaParcelasCultivo = [(x,y)$|$\selector{x}{([0..i])}, }*/		
-    		/* \textcolor{ao}{ \selector{y}{([0..largo(dimensiones(campo(this)))},}*/		
-    		/* \textcolor{ao}{ contenido(campo(this), x, y) == Cultivo]}*/    	
+    	/* \textcolor{ao}{ \selector{y}{([0..largo(dimensiones(campo(this)))},}*/		
+    	/* \textcolor{ao}{ contenido(campo(this), x, y) == Cultivo]}*/    	
     	/* \textcolor{ao}{\&\& i == i@BC1}*/
 
         i++;
@@ -115,59 +113,67 @@ std::vector<Posicion> Sistema::_parcelasCultivo() const{
 
 void Sistema::_parcelasCultivoLargo(std::vector<Posicion> \&parcelasCultivoLargo, 
 const int fila) const{
-	/* \textcolor{ao}{// Modifica parcelasCultivoLargo}*/	        
+    /* \textcolor{ao}{// Modifica parcelasCultivoLargo}*/	        
     /* \textcolor{ao}{// Estado C1}*/	    
     /* \textcolor{ao}{// Vale parcelasCultivoLargo == pre(parcelasCultivoLargo)}*/      
     
     int j = 0;
 	
-	/* \textcolor{ao}{// Estado C2}*/	    
+    /* \textcolor{ao}{// Estado C2}*/	    
     /* \textcolor{ao}{// Vale PC: j == 0 \&\& parcelasCultivoLargo == parcelasCultivoLargo@C1}*/      
     
     while (j < campo().dimensiones().largo){
 
-	/* \textcolor{ao}{// Estado CC1}*/	    
-    /* \textcolor{ao}{// I: 0 $\leq$ j $\leq$ largo(dimensiones(campo(this))) \&\&}*/        
-    /* \textcolor{ao}{//    parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
+    	/* \textcolor{ao}{// Estado CC1}*/	    
+    	/* \textcolor{ao}{// I: 0 $\leq$ j $\leq$ largo(dimensiones(campo(this))) \&\&}*/        
+    	/* \textcolor{ao}{//    parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
     [(fila,y)$|$\selector{y}{[0..j)},}*/
-    /* \textcolor{ao}{//contenido(campo(this), fila, y) == Cultivo]}*/ 
-    /* \textcolor{ao}{// B: j $<$ largo(dimensiones(campo(this)))}*/   
-	/* \textcolor{ao}{// Fv: largo(dimensiones(campo(this)))-j. Cota: 0}*/
+    	/* \textcolor{ao}{//contenido(campo(this), fila, y) == Cultivo]}*/ 
+    	/* \textcolor{ao}{// B: j $<$ largo(dimensiones(campo(this)))}*/   
+    	/* \textcolor{ao}{// Fv: largo(dimensiones(campo(this)))-j. Cota: 0}*/
 	     
         Posicion p;
         p.x = fila;
         p.y = j;
 
-    /* \textcolor{ao}{// Estado CC2}*/   
-	/* \textcolor{ao}{// Vale Pif: p == (fila, j)}*/
+    	/* \textcolor{ao}{// Estado CC2}*/   
+    	/* \textcolor{ao}{// Vale Pif: p == (fila, j)}*/
         
         if (campo().contenido(p) == Cultivo){
             parcelasCultivoLargo.push_back(p);
         }
-	/* \textcolor{ao}{// Estado CC3}*/
-	/* \textcolor{ao}{// Vale Qif: parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ [(fila,y)$|$\selector{y}{[0..j]},}*/
-	/* \textcolor{ao}{// contenido(campo(this), fila, y) == Cultivo]}*/
+    	/* \textcolor{ao}{// Estado CC3}*/
+    	/* \textcolor{ao}{// Vale Qif: parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ [(fila,y)$|$\selector{y}{[0..j]},}*/
+    	/* \textcolor{ao}{// contenido(campo(this), fila, y) == Cultivo]}*/
 
         j++;
-    /* \textcolor{ao}{// Estado CC4}*/   
-	/* \textcolor{ao}{// Vale j == j@CC3+1 \&\& I}*/
+    	/* \textcolor{ao}{// Estado CC4}*/   
+    	/* \textcolor{ao}{// Vale j == j@CC3+1 \&\& I}*/
     }
 	
-	/* \textcolor{ao}{// Estado C3}*/	    
+    /* \textcolor{ao}{// Estado C3}*/	    
     /* \textcolor{ao}{// Vale QC: parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
     [(fila,y)$|$\selector{y}{[0..largo(dimensiones(campo(this)))},}*/
-    		/* \textcolor{ao}{//contenido(campo(this), fila, y) == Cultivo]}*/      
+    	    /* \textcolor{ao}{//contenido(campo(this), fila, y) == Cultivo]}*/      
 }
 
 -----------------------------------------------------------------------
 -----------------------------------------------------------------------
 
+
+
+
+
+
+
+
+
 Demostracion de ciclo: _cuentaCosechables.
 
 /* \textcolor{ao}{// Vale PC: i == 0  \&\&  total == 0}*/
 /* \textcolor{ao}{// I: 0 $\leq$  i $\leq$ $|$parcelasCultivo(campo(this))$|$}*/
-/* \textcolor{ao}{// total == $|$[1|\selector{a}{[0..i)}, \newline
- estadoDelCultivo(parcelasCultivo[a], this) == ListoParaCosechar]$|$}*/
+/* \textcolor{ao}{// total == $|$[1|\selector{a}{[0..i)},}*/
+/* \textcolor{ao}{ estadoDelCultivo(parcelasCultivo[a], this) == ListoParaCosechar]$|$}*/
 /* \textcolor{ao}{// B: i $<$ $|$parcelasCultivo(campo(this))$|$}*/
 /* \textcolor{ao}{// Fv:$|$parcelasCultivo(campo(this))$|$-i Cota: 0}*/
 /* \textcolor{ao}{// QC: total == cantCultivosCosechables(this)}*/    
@@ -223,6 +229,8 @@ Demostracion de ciclo _parcelasCultivo.
     /* \textcolor{ao}{// Qc: listaParcelasCultivo == parcelasCultivo(campo(this))}*/    
 
 
+
+
     - Pc /*\implica*/ I
     
 i == 0 /*\implica*/ 0 == i /*\implica*/ 0 /*$\leq$*/ i /*$\leq$*/ 0
@@ -275,10 +283,11 @@ ancho(dimensiones(campo(this)))-i < 0
 
 Demostracion del ciclo _parcelasCultivoLargo
 
-    /* \textcolor{ao}{// Pc: j == 0 \&\& parcelasCultivoLargo == pre(parcelasCultivoLargo)}*/      
-    /* \textcolor{ao}{// I: 0$\leq$j$\leq$largo(dimensiones(campo(this))) \&\&}*/        
-    /* \textcolor{ao}{//    parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
-    [(fila,y)$|$\selector{y}{[0..j)}, contenido(campo(this), fila, y) == Cultivo]}*/ 
+	/* \textcolor{ao}{// Pc: j == 0 \&\& parcelasCultivoLargo == pre(parcelasCultivoLargo)}*/      
+	/* \textcolor{ao}{// I: 0$\leq$j$\leq$largo(dimensiones(campo(this))) \&\&}*/        
+	/* \textcolor{ao}{//    parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ 
+    [(fila,y)$|$\selector{y}{[0..j)},}*/
+    /* \textcolor{ao}{contenido(campo(this), fila, y) == Cultivo]}*/ 
     /* \textcolor{ao}{// B: j $<$ largo(dimensiones(campo(this)))}*/
 	/* \textcolor{ao}{// Fv: largo(dimensiones(campo(this)))-j. Cota: 0}*/     
     /* \textcolor{ao}{// Qc: parcelasCultivoLargo == pre(parcelasCultivoLargo) ++ [(fila,y)$|$\selector{y}{[0..largo(dimensiones(campo(this)))},}*/
