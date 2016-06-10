@@ -55,13 +55,13 @@ bool Drone::_esEscalerado(const std::vector<Posicion> ps, int X, int Y) const{
     }
     
     /* \textcolor{ao}{// Estado E3: } */
-    /* \textcolor{ao}{// Vale: cumplenTodos == ( $\forall$ $\selector{i}{[0..$|ps|-2$)}$ )  }*/
+    /* \textcolor{ao}{// Vale: cumplenTodos == ( $\forall$ $\selector{i}{[0..|ps|-2)}$ )  }*/
     /* \textcolor{ao}{//        (prm(ps[i]) - prm(ps[i+2]) == x $||$} */
     /* \textcolor{ao}{//         sgd(ps[i]) - sgd(ps[i+2]) == y)} */
  
     return cumplenTodos;
     /* \textcolor{ao}{// Estado E4:} */
-    /* \textcolor{ao}{// Vale: res ==( $\forall$ $\selector{i}{[0..$|ps|-2$)}$ ) } */    
+    /* \textcolor{ao}{// Vale: res ==( $\forall$ $\selector{i}{[0..|ps|-2)}$ ) } */    
     /* \textcolor{ao}{//        (prm(ps[i]) - prm(ps[i+2]) == x $||$} */
     /* \textcolor{ao}{//         sgd(ps[i]) - sgd(ps[i+2]) == y)} */
 }
