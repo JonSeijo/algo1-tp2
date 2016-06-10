@@ -1,1 +1,0 @@
-{ S { C [3,3] [[Granero,Cultivo,Cultivo],[Cultivo,Cultivo,Cultivo],[Cultivo,Cultivo,Casa]]} [{ D 5 100 [[2,0]] [Fertilizante,Fertilizante,Fertilizante] true [2,0]},{ D 5 100 [[1,1]] [Fertilizante,Fertilizante,Fertilizante] true [1,1]}] [[RecienSembrado,RecienSembrado,RecienSembrado],[RecienSembrado,RecienSembrado,RecienSembrado],[RecienSembrado,RecienSembrado,RecienSembrado]]}
